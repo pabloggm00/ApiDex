@@ -15,7 +15,7 @@ class Pokemon(
     var pc: Int,
 
     @ManyToOne
-    var pokedex: Pokedex,
+    var generacion: Pokedex,
 
     @ManyToOne
     var primerTipo: Tipo,
@@ -34,5 +34,8 @@ class Pokemon(
     )
     var usuarioFavs: MutableList<Usuario> = mutableListOf(),
 
-) {
+    @Id @GeneratedValue
+    val id: Long? = null
+
+    ) {
 }

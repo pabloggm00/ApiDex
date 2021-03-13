@@ -15,7 +15,7 @@ class PokemonService: BaseServiceImpl<Pokemon, Long, PokemonRepository>() {
             lista = lista?.filter { it.primerTipo.nombreTipo.toLowerCase() == primerTipo.toLowerCase() }
         }
         if (generacion != "todas"){
-            lista = lista?.filter { it.pokedex.nombre.toLowerCase() == generacion.toLowerCase() }
+            lista = lista?.filter { it.generacion.nombre.toLowerCase() == generacion.toLowerCase() }
         }
         return lista
     }
