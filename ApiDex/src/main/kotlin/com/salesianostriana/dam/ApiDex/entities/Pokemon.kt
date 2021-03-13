@@ -6,6 +6,14 @@ import javax.persistence.*
 class Pokemon(
     var nombre: String,
 
+    var estrellas: Int,
+
+    var ataqueRapido: String,
+
+    var ataqueCargado: String,
+
+    var pc: Int,
+
     @ManyToOne
     var pokedex: Pokedex,
 
@@ -13,7 +21,7 @@ class Pokemon(
     var primerTipo: Tipo,
 
     @ManyToOne
-    var segundoTipo: Tipo,
+    var segundoTipo: Tipo? = null,
 
     @OneToOne(cascade = arrayOf(CascadeType.ALL))
     @JoinColumn(name = "imagen_id", referencedColumnName = "id")
@@ -25,16 +33,6 @@ class Pokemon(
         inverseJoinColumns = [JoinColumn(name="usuario_id")]
     )
     var usuarioFavs: MutableList<Usuario> = mutableListOf(),
-
-    @ManyToMany
-    @JoinTable(name = "capturados",
-        joinColumns = [JoinColumn(name="pokemon_id")],
-        inverseJoinColumns = [JoinColumn(name="usuario_id")]
-    )
-    var usuarioCapturados: MutableList<Usuario> = mutableListOf(),
-
-
-    var vulnerableTo: MutableList<Tipo>
 
 ) {
 }
