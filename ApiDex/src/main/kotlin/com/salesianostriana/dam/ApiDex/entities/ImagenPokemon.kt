@@ -8,7 +8,7 @@ class ImagenPokemon(
     var deleteHash: String?,
 
     @OneToOne(mappedBy = "pokemon")
-    var pokemon: Pokemon,
+    var pokemon: Pokemon? = null,
 
     @Id @GeneratedValue
     val id: Long? = null
