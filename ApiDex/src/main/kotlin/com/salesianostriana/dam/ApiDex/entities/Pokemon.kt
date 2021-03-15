@@ -14,6 +14,15 @@ class Pokemon(
 
     var pc: Int,
 
+    var isUltimo: Boolean,
+
+    @OneToOne(cascade = arrayOf(CascadeType.ALL))
+    @JoinColumn(name="evolucion_id", referencedColumnName = "id")
+    var evolucion: Evolucion,
+
+    @ManyToOne
+    var equipo: Equipo,
+
     @ManyToOne
     var generacion: Pokedex,
 
@@ -33,6 +42,13 @@ class Pokemon(
         inverseJoinColumns = [JoinColumn(name="usuario_id")]
     )
     var usuarioFavs: MutableList<Usuario> = mutableListOf(),
+
+    @ManyToMany
+    @JoinTable(name = "capturados",
+        joinColumns = [JoinColumn(name="pokemon_id")],
+        inverseJoinColumns = [JoinColumn(name="usuario_id")]
+    )
+    var usuarioCapturados: MutableList<Usuario> = mutableListOf(),
 
     @Id @GeneratedValue
     val id: Long? = null
