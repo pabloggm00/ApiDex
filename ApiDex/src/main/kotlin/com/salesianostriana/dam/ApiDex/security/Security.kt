@@ -65,12 +65,7 @@ class WebSecurityConfiguration(
             .and()
             .authorizeRequests()
             .antMatchers("/h2-console/**").permitAll()
-            /*.antMatchers(HttpMethod.POST, "/auth/login", "/auth/token", "/auth/register").permitAll()
-            .antMatchers(HttpMethod.GET, "/viviendas", "/viviendas/{id}").permitAll()
-            .antMatchers(HttpMethod.GET, "/viviendas/mine", "/viviendas/favs").hasRole("USER")
-            .antMatchers(HttpMethod.POST, "/viviendas", "/viviendas/favs/{id}", "/viviendas/{id}/img").hasRole("USER")
-            .antMatchers(HttpMethod.PUT, "/viviendas/{id}").hasRole("USER")
-            .antMatchers(HttpMethod.DELETE, "/viviendas/{id}", "/viviendas/favs/{id}", "/viviendas/{id}/img/{hash}").hasRole("USER")*/
+            
 
         http.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter::class.java)
 
