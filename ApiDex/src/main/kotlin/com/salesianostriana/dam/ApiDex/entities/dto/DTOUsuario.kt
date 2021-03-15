@@ -10,7 +10,8 @@ data class GetUsuarioDto(
     var avatar: String
 )
 
-fun Usuario.toGetUsuairoDto(): GetUsuarioDto = GetUsuarioDto(id,username,email,pass,avatar)
+fun Usuario.toGetUsuairoDto(): GetUsuarioDto =
+    GetUsuarioDto(id,username,email,pass,"https://robohash.org/${username}")
 
 data class GetUsuarioRegistradoDto(
     var id: Long?,
@@ -34,7 +35,8 @@ data class GetPerfilUsuarioDto(
     var avatar: String
 )
 
-fun Usuario.toGetPerfilUsuarioDto(): GetPerfilUsuarioDto = GetPerfilUsuarioDto(username, email)
+fun Usuario.toGetPerfilUsuarioDto(): GetPerfilUsuarioDto =
+    GetPerfilUsuarioDto(username, email, "https://robohash.org/${username}")
 
 data class UsuarioDto(
     var username: String,
