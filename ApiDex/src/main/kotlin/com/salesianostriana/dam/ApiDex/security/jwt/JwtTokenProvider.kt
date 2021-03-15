@@ -61,7 +61,7 @@ class JwtTokenProvider(
 
         if (!isRefreshToken){
             builder
-                .claim("username", usuario.username)
+                //.claim("username", usuario.username)
                 .claim("roles", usuario.roles.joinToString())
         }
 

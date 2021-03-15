@@ -11,8 +11,7 @@ class Usuario(
     var email: String,
     private var username: String,
     var pass: String,
-    var avatar: String,
-
+    //var avatar: String,
 
     @ElementCollection(fetch = FetchType.EAGER)
     val roles: MutableSet<String> = HashSet(),
@@ -32,13 +31,20 @@ class Usuario(
     )
     var pokemonsFavs: MutableList<Pokemon> = mutableListOf(),
 
+    @ManyToMany
+    @JoinTable(name = "capturado",
+        joinColumns = [JoinColumn(name="usuario_id")],
+        inverseJoinColumns = [JoinColumn(name="pokemon_id")]
+    )
+    var pokemonsCapturados: MutableList<Pokemon> = mutableListOf(),
+
 
     @Id @GeneratedValue
     val id: Long? = null
 ) : UserDetails {
 
-    constructor(email: String, username: String, pass: String, avatar: String, role: String) :
-            this(email, username, pass, avatar, mutableSetOf(role),true, true, true, true)
+    constructor(email: String, username: String, pass: String, /*avatar: String,*/ role: String) :
+            this(email, username, pass, /*avatar,*/ mutableSetOf(role),true, true, true, true)
 
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {

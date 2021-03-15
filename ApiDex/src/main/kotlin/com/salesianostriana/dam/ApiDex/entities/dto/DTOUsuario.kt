@@ -2,6 +2,14 @@ package com.salesianostriana.dam.ApiDex.entities.dto
 
 import com.salesianostriana.dam.ApiDex.entities.Usuario
 
+data class EditUsuarioDto(
+    var email: String,
+    var username: String,
+    var roles: String,
+    var pass: String,
+    var avatar: String
+)
+
 data class GetUsuarioDto(
     var id: Long?,
     var username: String,
