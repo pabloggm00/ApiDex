@@ -12,7 +12,7 @@ class Pokemon(
 
     var ataqueCargado: String,
 
-    var pc: Int,
+    var pC: Int,
 
     var isUltimo: Boolean,
 

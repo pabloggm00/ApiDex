@@ -7,6 +7,8 @@ class Equipo(
 
     var nombre: String,
 
+    var totalPC: Int,
+
     @OneToMany(mappedBy = "equipo")
     var listaPokemon: MutableList<Pokemon> = mutableListOf(),
 

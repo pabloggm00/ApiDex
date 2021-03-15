@@ -4,11 +4,10 @@ import com.salesianostriana.dam.ApiDex.entities.*
 
 
 data class EditPokemonDto(
-    var nombre: String,
     var estrellas: Int,
     var ataqueRapido: String,
     var ataqueCargado: String,
-    var pc: Int
+    var pC: Int
 )
 
 data class GetPokemonDto(
@@ -17,7 +16,7 @@ data class GetPokemonDto(
     var estrellas: Int,
     var ataqueRapido: String,
     var ataqueCargado: String,
-    var pc: Int,
+    var pC: Int,
     var fav: Boolean
 )
 
@@ -27,13 +26,27 @@ data class GetPokemoDetalleDto(
     var estrellas: Int,
     var ataqueRapido: String,
     var ataqueCargado: String,
-    var pc: Int,
+    var pC: Int,
     var imagen: String?,
     var generacion: String,
     var primerTipo: String,
     var segundoTipo: String?,
     var fav: Boolean
 )
+
+data class GetPokemonEquipoDto(
+    var id: Long?,
+    var imagen: String?,
+    var pC: Int
+)
+
+fun Pokemon.toGetPokemonEquipo(): GetPokemonEquipoDto {
+
+    lateinit var imagenPokemon: ImagenPokemon
+    var url: String = "http://10.0.2.2:9000/files/"
+
+    return GetPokemonEquipoDto(id, "${url}${imagenPokemon.dataId}",pC)
+}
 
 fun Pokemon.toGetPokemonDto(usuario: Usuario): GetPokemonDto{
 
@@ -53,7 +66,7 @@ fun Pokemon.toGetPokemonDto(usuario: Usuario): GetPokemonDto{
             estrellas,
             ataqueRapido,
             ataqueCargado,
-            pc,
+            pC,
             favorito
         )
 }
@@ -80,7 +93,7 @@ fun Pokemon.toGetPokemonDetalleDto(usuario: Usuario): GetPokemoDetalleDto {
             estrellas,
             ataqueRapido,
             ataqueCargado,
-            pc,
+            pC,
             "${url}${imagenPokemon.dataId}",
             generacion.nombre,
             primerTipo.nombreTipo,
@@ -94,7 +107,7 @@ fun Pokemon.toGetPokemonDetalleDto(usuario: Usuario): GetPokemoDetalleDto {
             estrellas,
             ataqueRapido,
             ataqueCargado,
-            pc,
+            pC,
             "",
             generacion.nombre,
             primerTipo.nombreTipo,
