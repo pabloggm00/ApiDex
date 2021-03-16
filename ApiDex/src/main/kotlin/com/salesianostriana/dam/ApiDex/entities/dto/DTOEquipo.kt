@@ -17,6 +17,7 @@ data class GetEquipoDetalleDto(
     var totalPC: Int
 )
 
+/*
 fun Equipo.toGetEquipoDetalleDto(): GetEquipoDetalleDto {
 
     var listaPokemon: MutableList<GetPokemonEquipoDto> = mutableListOf()
@@ -30,4 +31,4 @@ fun Equipo.toGetEquipoDetalleDto(): GetEquipoDetalleDto {
         totalPC
     )
 
-}
+}*/

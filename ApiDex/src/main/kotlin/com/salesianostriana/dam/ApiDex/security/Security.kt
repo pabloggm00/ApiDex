@@ -4,7 +4,7 @@ import com.salesianostriana.dam.ApiDex.security.jwt.JwtAuthenticationEntryPoint
 import com.salesianostriana.dam.ApiDex.security.jwt.JwtAuthorizationFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.http.HttpMethod
+import org.springframework.http.HttpMethod.*
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
@@ -66,7 +66,13 @@ class WebSecurityConfiguration(
             .and()
             .authorizeRequests()
             .antMatchers("/h2-console/**").permitAll()
-            
+            .antMatchers(POST, "/auth/login", "/auth/token", "/auth/register").permitAll()
+            .antMatchers(GET, "/pokemon", "/pokemon/{id}", "/pokemon/favs",
+                "/pokemon/capturados").hasRole("USER")
+            .antMatchers(POST, "/pokemon/favs/{id}", "/pokemon/capturados/{id}" ).hasRole("USER")
+            .antMatchers(PUT, "/pokemon/{id}").hasRole("USER")
+            .antMatchers(DELETE, "/pokemon/favs/{id}", "/pokemon/capturados/{id}").hasRole("USER")
+
 
         http.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter::class.java)
 

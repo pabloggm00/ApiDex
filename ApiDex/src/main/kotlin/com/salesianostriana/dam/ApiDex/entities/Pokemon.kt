@@ -36,9 +36,9 @@ class Pokemon(
     @ManyToOne
     var segundoTipo: Tipo?,
 
-    @OneToOne(cascade = arrayOf(CascadeType.ALL))
-    @JoinColumn(name = "imagen_id", referencedColumnName = "id")
-    var imagen: ImagenPokemon? = null,
+    //@OneToOne(cascade = arrayOf(CascadeType.ALL))
+    //@JoinColumn(name = "imagen_id", referencedColumnName = "id")
+    //var imagen: ImagenPokemon? = null,
 
     @ManyToMany
     @JoinTable(name = "favoritos",

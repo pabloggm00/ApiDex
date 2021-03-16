@@ -3,21 +3,20 @@ package com.salesianostriana.dam.ApiDex.controllers
 import com.salesianostriana.dam.ApiDex.entities.Pokemon
 import com.salesianostriana.dam.ApiDex.entities.Usuario
 import com.salesianostriana.dam.ApiDex.entities.dto.*
+import com.salesianostriana.dam.ApiDex.error.CapturadoNotFoundException
 import com.salesianostriana.dam.ApiDex.error.FavoriteNotFoundException
 import com.salesianostriana.dam.ApiDex.error.ListEntityNotFoundException
 import com.salesianostriana.dam.ApiDex.error.SingleEntityNotFoundException
-import com.salesianostriana.dam.ApiDex.services.ImagenPokemonService
+/*import com.salesianostriana.dam.ApiDex.services.ImagenPokemonService*/
 import com.salesianostriana.dam.ApiDex.services.PokemonService
 import com.salesianostriana.dam.ApiDex.services.UsuarioService
-import com.salesianostriana.dam.ApiDex.upload.ImgurBadRequest
-import org.apache.coyote.Response
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.multipart.MultipartFile
-import org.springframework.web.server.ResponseStatusException
+import java.util.*
 
 @RestController
 @RequestMapping("/pokemon")
@@ -26,37 +25,51 @@ class PokemonController {
     @Autowired
     lateinit var pokemonService: PokemonService
 
-    @Autowired
-    lateinit var imagenService: ImagenPokemonService
+    /*@Autowired
+    lateinit var imagenService: ImagenPokemonService*/
 
     @Autowired
     lateinit var usuarioService: UsuarioService
 
     @GetMapping
-    fun getAllPokemon(@AuthenticationPrincipal usuario: Usuario,
-        @RequestParam(name="tipo", required = false, defaultValue = "Todos") tipo: String,
-        @RequestParam(name="generacion", required = false, defaultValue = "Todas") generacion: String
+    fun getAllPokemon(/*@AuthenticationPrincipal usuario: Usuario*/
+        @RequestParam(name="tipo", required = false, defaultValue = "todos") tipo: String,
+        @RequestParam(name="generacion", required = false, defaultValue = "todas") generacion: String
     ) : List<GetPokemonPokedexDto>{
 
-        return pokemonService.getPokemonFiltrados(tipo, generacion)?.map { it.toGetPokemonDto(usuario) }
+        var auth : String = SecurityContextHolder.getContext().authentication.name
+        var usuario : Optional<Usuario>? = usuarioService.findByUsername(auth)
+
+
+        return pokemonService.getPokemonFiltrados(tipo, generacion)?.map { it.toGetPokemonDto(usuario!!.get()) }
             .takeIf { it!!.isNotEmpty() } ?: throw ListEntityNotFoundException(Pokemon::class.java)
+
     }
 
+
     @GetMapping("/{id}")
-    fun getPokemonById(@AuthenticationPrincipal usuario: Usuario, @PathVariable id: Long): GetPokemoDetalleDto {
+    fun getPokemonById(@PathVariable id: Long): GetPokemoDetalleDto {
+
+        var auth: String = SecurityContextHolder.getContext().authentication.name
+        var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
+
         return pokemonService.findById(id)
-            .map { it.toGetPokemonDetalleDto(usuario) }
+            .map { it.toGetPokemonDetalleDto(usuario!!.get()) }
             .orElseThrow {
                 SingleEntityNotFoundException(id.toString(), Pokemon::class.java)
             }
+
     }
 
     @PutMapping("/{id}")
     fun editPokemon(
-        @AuthenticationPrincipal usuario: Usuario,
         @RequestBody editarPokemon: EditPokemonDto,
         @PathVariable id: Long
         ): GetPokemoDetalleDto {
+
+        var auth: String = SecurityContextHolder.getContext().authentication.name
+        var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
+
         return pokemonService.findById(id)
             .map { pokemonEncontrado ->
                 pokemonEncontrado.pC = editarPokemon.pC
@@ -64,10 +77,12 @@ class PokemonController {
                 pokemonEncontrado.ataqueRapido = editarPokemon.ataqueRapido
                 pokemonEncontrado.ataqueCargado = editarPokemon.ataqueCargado
 
-                pokemonService.save(pokemonEncontrado).toGetPokemonDetalleDto(usuario)
+
+                pokemonService.save(pokemonEncontrado).toGetPokemonDetalleDto(usuario!!.get())
             }
             .orElseThrow { SingleEntityNotFoundException(id.toString(), Pokemon::class.java) }
     }
+
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: Long) : ResponseEntity<Any> {
@@ -76,7 +91,7 @@ class PokemonController {
         return ResponseEntity.noContent().build()
     }
 
-    @PostMapping("/{id}/img")
+    /*@PostMapping("/{id}/img")
     fun createImage(
         @AuthenticationPrincipal usuario: Usuario,
         @PathVariable id:Long,
@@ -95,10 +110,10 @@ class PokemonController {
         } else {
             throw SingleEntityNotFoundException(id.toString(), Pokemon::class.java)
         }
-    }
+    }*/
 
     //Este método no estará en el final, solo es para testear
-    @DeleteMapping("/{id}/img/{hash}")
+   /* @DeleteMapping("/{id}/img/{hash}")
     fun deleteImage(@PathVariable id: Long, @PathVariable hash: String): ResponseEntity<Any>{
         var pokemon: Pokemon = pokemonService.findById(id).orElse(null)
 
@@ -111,36 +126,47 @@ class PokemonController {
 
         }
         return ResponseEntity.noContent().build()
-    }
+    }*/
 
     /*POKEMON FAVORITOS*/
 
     @GetMapping("/favs")
-    fun getPokemonFavs(@AuthenticationPrincipal usuario: Usuario): List<GetPokemonPokedexDto> {
-        return pokemonService.getPokemonFavs(usuario)
-            .map { it.toGetPokemonDto(usuario) }
+    fun getPokemonFavs(): List<GetPokemonPokedexDto> {
+
+        var auth: String = SecurityContextHolder.getContext().authentication.name
+        var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
+
+        return pokemonService.getPokemonFavs(usuario!!.get())
+            .map { it.toGetPokemonDto(usuario!!.get()) }
             .takeIf { it.isNotEmpty() } ?: throw FavoriteNotFoundException(Pokemon::class.java)
     }
 
     @PostMapping("/favs/{id}")
-    fun addPokemonFav(@AuthenticationPrincipal usuario: Usuario, @PathVariable id: Long): ResponseEntity<GetPokemonPokedexDto> {
+    fun addPokemonFav(@PathVariable id: Long): ResponseEntity<GetPokemonPokedexDto> {
+
         var pokemon = pokemonService.findById(id).orElse(null)
+        var auth: String = SecurityContextHolder.getContext().authentication.name
+        var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
 
         if (pokemon != null){
-            usuario.pokemonsFavs.add(pokemon)
-            usuarioService.save(usuario)
-            return ResponseEntity.status(HttpStatus.CREATED).body(pokemon.toGetPokemonDto(usuario))
+            usuario!!.get().pokemonsFavs.add(pokemon)
+            usuarioService.save(usuario!!.get())
+            return ResponseEntity.status(HttpStatus.CREATED).body(pokemon.toGetPokemonDto(usuario!!.get()))
         }else{
             throw SingleEntityNotFoundException(id.toString(), Pokemon::class.java)
         }
     }
 
     @DeleteMapping("/favs/{id}")
-    fun deletePokemonFav(@AuthenticationPrincipal usuario: Usuario, @PathVariable id: Long): ResponseEntity<Any>{
-        usuario.pokemonsFavs.forEach { pokemon ->
+    fun deletePokemonFav(@PathVariable id: Long): ResponseEntity<Any>{
+
+        var auth: String = SecurityContextHolder.getContext().authentication.name
+        var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
+
+        usuario!!.get().pokemonsFavs.forEach { pokemon ->
             if (pokemon.id == id){
-                usuario.pokemonsFavs.remove(pokemon)
-                usuarioService.save(usuario)
+                usuario!!.get().pokemonsFavs.remove(pokemon)
+                usuarioService.save(usuario!!.get())
             }
         }
         return ResponseEntity.noContent().build()
@@ -149,31 +175,42 @@ class PokemonController {
     /*POKEMON CAPTURADOS*/
 
     @GetMapping("/capturados")
-    fun getPokemonCapturados(@AuthenticationPrincipal usuario: Usuario): List<GetPokemonPokedexDto> {
-        return pokemonService.getPokemonCapturados(usuario)
-            .map { it.toGetPokemonDto(usuario) }
-            .takeIf { it.isNotEmpty() } ?: throw FavoriteNotFoundException(Pokemon::class.java)
+    fun getPokemonCapturados(): List<GetPokemonPokedexDto> {
+
+        var auth: String = SecurityContextHolder.getContext().authentication.name
+        var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
+
+        return pokemonService.getPokemonCapturados(usuario!!.get())
+            .map { it.toGetPokemonDto(usuario!!.get()) }
+            .takeIf { it.isNotEmpty() } ?: throw CapturadoNotFoundException(Pokemon::class.java)
     }
 
     @PostMapping("/capturados/{id}")
-    fun addPokemonCapturados(@AuthenticationPrincipal usuario: Usuario, @PathVariable id: Long): ResponseEntity<GetPokemonPokedexDto> {
+    fun addPokemonCapturados(@PathVariable id: Long): ResponseEntity<GetPokemonPokedexDto> {
+
         var pokemon = pokemonService.findById(id).orElse(null)
+        var auth: String = SecurityContextHolder.getContext().authentication.name
+        var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
 
         if (pokemon != null){
-            usuario.pokemonsCapturados.add(pokemon)
-            usuarioService.save(usuario)
-            return ResponseEntity.status(HttpStatus.CREATED).body(pokemon.toGetPokemonDto(usuario))
+            usuario!!.get().pokemonsCapturados.add(pokemon)
+            usuarioService.save(usuario!!.get())
+            return ResponseEntity.status(HttpStatus.CREATED).body(pokemon.toGetPokemonDto(usuario!!.get()))
         }else{
             throw SingleEntityNotFoundException(id.toString(), Pokemon::class.java)
         }
     }
 
     @DeleteMapping("/capturados/{id}")
-    fun deletePokemonCapturados(@AuthenticationPrincipal usuario: Usuario, @PathVariable id: Long): ResponseEntity<Any>{
-        usuario.pokemonsCapturados.forEach { pokemon ->
+    fun deletePokemonCapturados(@PathVariable id: Long): ResponseEntity<Any>{
+
+        var auth: String = SecurityContextHolder.getContext().authentication.name
+        var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
+
+        usuario!!.get().pokemonsCapturados.forEach { pokemon ->
             if (pokemon.id == id){
-                usuario.pokemonsCapturados.remove(pokemon)
-                usuarioService.save(usuario)
+                usuario!!.get().pokemonsCapturados.remove(pokemon)
+                usuarioService.save(usuario!!.get())
             }
         }
         return ResponseEntity.noContent().build()

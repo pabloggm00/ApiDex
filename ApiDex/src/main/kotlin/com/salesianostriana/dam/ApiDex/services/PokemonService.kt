@@ -15,13 +15,15 @@ class PokemonService: BaseServiceImpl<Pokemon, Long, PokemonRepository>() {
         var lista: List<Pokemon>? = repositorio?.findAll()
 
         if(tipo != "todos"){
-            lista = lista?.filter { it.primerTipo.nombreTipo == tipo.toLowerCase() }
+            lista = lista?.filter { it.primerTipo.nombreTipo.toLowerCase() == tipo.toLowerCase() || it.segundoTipo?.nombreTipo?.toLowerCase() == tipo.toLowerCase() }
         }
         if (generacion != "todas"){
             lista = lista?.filter { it.generacion?.nombre?.toLowerCase() == generacion.toLowerCase() }
         }
         return lista
     }
+
+    fun getAll(): MutableList<Pokemon>? = repositorio?.findAll()
 
     fun getPokemonFavs (usuario: Usuario) : List<Pokemon> = usuario.pokemonsFavs
 
