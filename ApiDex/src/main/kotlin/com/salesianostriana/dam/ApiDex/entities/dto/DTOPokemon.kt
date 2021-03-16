@@ -10,25 +10,24 @@ data class EditPokemonDto(
     var pC: Int
 )
 
-data class GetPokemonDto(
+data class GetPokemonPokedexDto(
     var id: Long?,
+    var idPokedex: String,
     var nombre: String,
-    var estrellas: Int,
-    var ataqueRapido: String,
-    var ataqueCargado: String,
-    var pC: Int,
-    var fav: Boolean
+    var isFav: Boolean,
+    var isCapturado: Boolean,
+    var imagen: String
 )
 
 data class GetPokemoDetalleDto(
     var id: Long?,
     var nombre: String,
-    var estrellas: Int,
-    var ataqueRapido: String,
-    var ataqueCargado: String,
-    var pC: Int,
+    var estrellas: Int?,
+    var ataqueRapido: String?,
+    var ataqueCargado: String?,
+    var pC: Int?,
     var imagen: String?,
-    var generacion: String,
+    var generacion: String?,
     var primerTipo: String,
     var segundoTipo: String?,
     var fav: Boolean
@@ -37,7 +36,7 @@ data class GetPokemoDetalleDto(
 data class GetPokemonEquipoDto(
     var id: Long?,
     var imagen: String?,
-    var pC: Int
+    var pC: Int?
 )
 
 fun Pokemon.toGetPokemonEquipo(): GetPokemonEquipoDto {
@@ -48,9 +47,10 @@ fun Pokemon.toGetPokemonEquipo(): GetPokemonEquipoDto {
     return GetPokemonEquipoDto(id, "${url}${imagenPokemon.dataId}",pC)
 }
 
-fun Pokemon.toGetPokemonDto(usuario: Usuario): GetPokemonDto{
+fun Pokemon.toGetPokemonDto(usuario: Usuario): GetPokemonPokedexDto{
 
     var favorito = false
+    var capturado = false
 
     if (usuario != null){
         for(pokemon in usuario.pokemonsFavs){
@@ -60,15 +60,21 @@ fun Pokemon.toGetPokemonDto(usuario: Usuario): GetPokemonDto{
         }
     }
 
-    return GetPokemonDto(
-            id,
-            nombre,
-            estrellas,
-            ataqueRapido,
-            ataqueCargado,
-            pC,
-            favorito
-        )
+    if (usuario != null){
+        for( pokemon in usuario.pokemonsCapturados){
+            if (pokemon.id == id){
+                capturado =  true
+            }
+        }
+    }
+
+
+    lateinit var imagenPokemon: ImagenPokemon
+    var url: String = "http://10.0.2.2:9000/files/"
+
+    return GetPokemonPokedexDto(
+        id,idPokedex, nombre, favorito, capturado, "${url}${imagenPokemon.dataId}"
+    )
 }
 
 fun Pokemon.toGetPokemonDetalleDto(usuario: Usuario): GetPokemoDetalleDto {
@@ -95,7 +101,7 @@ fun Pokemon.toGetPokemonDetalleDto(usuario: Usuario): GetPokemoDetalleDto {
             ataqueCargado,
             pC,
             "${url}${imagenPokemon.dataId}",
-            generacion.nombre,
+            generacion?.nombre,
             primerTipo.nombreTipo,
             segundoTipo?.nombreTipo,
             favorito
@@ -109,7 +115,7 @@ fun Pokemon.toGetPokemonDetalleDto(usuario: Usuario): GetPokemoDetalleDto {
             ataqueCargado,
             pC,
             "",
-            generacion.nombre,
+            generacion?.nombre,
             primerTipo.nombreTipo,
             segundoTipo?.nombreTipo,
             favorito

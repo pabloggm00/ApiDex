@@ -35,7 +35,7 @@ class AuthController(
 
         val authentication = authenticationManager.authenticate(
             UsernamePasswordAuthenticationToken(
-                loginRequest.username, loginRequest.password
+                loginRequest.username, loginRequest.pass
             )
         )
 
@@ -87,7 +87,7 @@ class AuthController(
 
 data class LoginRequest(
     @NotBlank val username : String,
-    @NotBlank val password: String
+    @NotBlank val pass: String
 )
 
 data class JwtUserResponseLogin(

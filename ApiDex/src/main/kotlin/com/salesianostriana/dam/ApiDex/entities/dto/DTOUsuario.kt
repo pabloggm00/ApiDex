@@ -5,10 +5,14 @@ import com.salesianostriana.dam.ApiDex.entities.Usuario
 data class EditUsuarioDto(
     var email: String,
     var username: String,
-    var roles: String,
     var pass: String,
-    var avatar: String
+    //var avatar: String,
+    var roles: String?,
+    val id: Long? = null
 )
+
+fun Usuario.editUsuarioDto(): EditUsuarioDto =
+    EditUsuarioDto(email, username, pass, roles.joinToString(), id)
 
 data class GetUsuarioDto(
     var id: Long?,

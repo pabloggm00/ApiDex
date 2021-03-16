@@ -12,7 +12,7 @@ class Evolucion(
 
     var estadoEvolucionMax: Int,
 
-    @OneToOne(mappedBy = "pokemon")
+    @OneToOne(mappedBy = "evolucion")
     var pokemon: Pokemon,
 
     @Id @GeneratedValue

@@ -6,38 +6,42 @@ import javax.persistence.*
 class Pokemon(
     var nombre: String,
 
-    var estrellas: Int,
+    var estrellas: Int?,
 
-    var ataqueRapido: String,
+    var ataqueRapido: String?,
 
-    var ataqueCargado: String,
+    var ataqueCargado: String?,
 
-    var pC: Int,
+    var pC: Int?,
+
+    var idPokedex: String,
 
     var isUltimo: Boolean,
 
+    var isCapturado: Boolean,
+
     @OneToOne(cascade = arrayOf(CascadeType.ALL))
     @JoinColumn(name="evolucion_id", referencedColumnName = "id")
-    var evolucion: Evolucion,
+    var evolucion: Evolucion?= null,
 
     @ManyToOne
-    var equipo: Equipo,
+    var equipo: Equipo?=null,
 
     @ManyToOne
-    var generacion: Pokedex,
+    var generacion: Pokedex?,
 
     @ManyToOne
     var primerTipo: Tipo,
 
     @ManyToOne
-    var segundoTipo: Tipo? = null,
+    var segundoTipo: Tipo?,
 
     @OneToOne(cascade = arrayOf(CascadeType.ALL))
     @JoinColumn(name = "imagen_id", referencedColumnName = "id")
-    var imagen: ImagenPokemon,
+    var imagen: ImagenPokemon? = null,
 
     @ManyToMany
-    @JoinTable(name = "favorito",
+    @JoinTable(name = "favoritos",
         joinColumns = [JoinColumn(name="pokemon_id")],
         inverseJoinColumns = [JoinColumn(name="usuario_id")]
     )
