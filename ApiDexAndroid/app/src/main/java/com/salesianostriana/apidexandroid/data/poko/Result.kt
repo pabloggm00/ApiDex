@@ -1,4 +1,4 @@
-package com.salesianostriana.apidexandroid.data
+package com.salesianostriana.apidexandroid.data.poko
 
 /**
  * A generic class that holds a value with its loading status.

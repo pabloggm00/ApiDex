@@ -281,7 +281,7 @@ class PokemonController {
             .orElseThrow { SingleEntityNotFoundException(id.toString(), Equipo::class.java) }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/equipos/{id}")
     fun deleteEquipo(@PathVariable id: Long): ResponseEntity<Any>{
 
         var auth: String = SecurityContextHolder.getContext().authentication.name
