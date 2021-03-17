@@ -1,4 +1,4 @@
-package com.salesianostriana.apidexandroid.ui.home
+package com.salesianostriana.apidexandroid.ui.favoritos
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.salesianostriana.apidexandroid.R
 
-class HomeFragment : Fragment() {
+class FavoritosFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var favoritosViewModel: FavoritosViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_pokedex, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
+        favoritosViewModel =
+            ViewModelProvider(this).get(FavoritosViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_favoritos, container, false)
+        val textView: TextView = root.findViewById(R.id.text_gallery)
+        favoritosViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

@@ -31,7 +31,6 @@ class LoginActivity : AppCompatActivity() {
 
     var baseUrl = "http://10.0.2.2:9000/"
 
-
     lateinit var retrofit: Retrofit
     lateinit var service: AuthService
     val context = this

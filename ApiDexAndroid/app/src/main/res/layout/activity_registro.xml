@@ -85,6 +85,7 @@
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="88dp"
+        android:backgroundTint="#F91515"
         android:text="@string/send_reg"
         app:layout_constraintEnd_toEndOf="@+id/edit_text_email"
         app:layout_constraintStart_toStartOf="@+id/edit_text_email"

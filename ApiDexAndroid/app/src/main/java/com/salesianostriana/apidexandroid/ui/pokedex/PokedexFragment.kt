@@ -1,4 +1,4 @@
-package com.salesianostriana.apidexandroid.ui.gallery
+package com.salesianostriana.apidexandroid.ui.pokedex
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.salesianostriana.apidexandroid.R
 
-class GalleryFragment : Fragment() {
+class PokedexFragment : Fragment() {
 
-    private lateinit var galleryViewModel: GalleryViewModel
+    private lateinit var pokedexViewModel: PokedexViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        galleryViewModel =
-            ViewModelProvider(this).get(GalleryViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_favoritos, container, false)
-        val textView: TextView = root.findViewById(R.id.text_gallery)
-        galleryViewModel.text.observe(viewLifecycleOwner, Observer {
+        pokedexViewModel =
+            ViewModelProvider(this).get(PokedexViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_pokedex, container, false)
+        val textView: TextView = root.findViewById(R.id.text_home)
+        pokedexViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
