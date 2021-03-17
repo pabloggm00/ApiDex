@@ -42,3 +42,8 @@ data class FavoriteNotFoundException(
 data class CapturadoNotFoundException(
     val javaClass: Class<out Any>
 ) : EntityNotFoundException("No tiene ningún Pokémon capturado")
+
+data class EquipoNotFoundException(
+    val javaClass: Class<out Any>
+) : EntityNotFoundException("No se ha encontrado ningún equipo")
+

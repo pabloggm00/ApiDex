@@ -30,6 +30,9 @@ class Usuario(
     )
     var pokemonsFavs: MutableList<Pokemon> = mutableListOf(),
 
+    @OneToMany(mappedBy = "usuario")
+    var listaEquipos: MutableList<Equipo> = mutableListOf(),
+
     @ManyToMany
     @JoinTable(name = "capturados",
         joinColumns = [JoinColumn(name="usuario_id")],

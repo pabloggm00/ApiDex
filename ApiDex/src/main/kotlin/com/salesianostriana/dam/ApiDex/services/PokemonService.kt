@@ -23,7 +23,7 @@ class PokemonService: BaseServiceImpl<Pokemon, Long, PokemonRepository>() {
         return lista
     }
 
-    fun getAll(): MutableList<Pokemon>? = repositorio?.findAll()
+    //fun getAll(): MutableList<Pokemon>? = repositorio?.findAll()
 
     fun getPokemonFavs (usuario: Usuario) : List<Pokemon> = usuario.pokemonsFavs
 

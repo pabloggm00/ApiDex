@@ -9,11 +9,14 @@ class Equipo(
 
     var totalPC: Int,
 
-    @OneToMany(mappedBy = "equipo")
-    var listaPokemon: MutableList<Pokemon> = mutableListOf(),
+    @ManyToOne
+    var usuario: Usuario,
 
     @ManyToOne
     var liga: Liga,
+
+    @OneToMany(mappedBy = "equipo")
+    var listaPokemon: MutableList<Pokemon> = mutableListOf(),
 
     @Id @GeneratedValue
     val id: Long? = null
