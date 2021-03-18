@@ -12,10 +12,25 @@ class Evolucion(
 
     var estadoEvolucionMax: Int,
 
-    @OneToOne(mappedBy = "pokemon")
-    var pokemon: Pokemon,
+    /*@OneToOne(mappedBy = "evolucion")
+    var pokemon: Pokemon,*/
 
     @Id @GeneratedValue
     val id: Long? = null
 ) {
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || javaClass != other.javaClass) return false
+        val that = other as Evolucion
+        if (id != that.id) return false
+        return true
+    }
+
+
+    override fun hashCode(): Int {
+        return if (id != null)
+            id.hashCode()
+        else 0
+    }
 }
