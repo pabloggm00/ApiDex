@@ -68,10 +68,10 @@ class WebSecurityConfiguration(
             .antMatchers("/h2-console/**").permitAll()
             .antMatchers(POST, "/auth/login", "/auth/token", "/auth/register").permitAll()
             .antMatchers(GET, "/pokemon", "/pokemon/{id}", "/pokemon/favs",
-                "/pokemon/capturados").hasRole("USER")
-            .antMatchers(POST, "/pokemon/favs/{id}", "/pokemon/capturados/{id}" ).hasRole("USER")
-            .antMatchers(PUT, "/pokemon/{id}").hasRole("USER")
-            .antMatchers(DELETE, "/pokemon/favs/{id}", "/pokemon/capturados/{id}").hasRole("USER")
+                "/pokemon/capturados", "/pokemon/equipos", "/pokemon/equipos/{id}").hasRole("USER")
+            .antMatchers(POST, "/pokemon/favs/{id}", "/pokemon/capturados/{id}", "/pokemon/equipos").hasRole("USER")
+            .antMatchers(PUT, "/pokemon/{id}", "/pokemon/equipos/{id}").hasRole("USER")
+            .antMatchers(DELETE, "/pokemon/favs/{id}", "/pokemon/capturados/{id}", "/pokemon/equipos/{id}").hasRole("USER")
 
 
         http.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter::class.java)

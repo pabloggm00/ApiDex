@@ -1,7 +1,9 @@
 package com.salesianostriana.dam.ApiDex.services
 
+import com.salesianostriana.dam.ApiDex.entities.Pokemon
 import com.salesianostriana.dam.ApiDex.entities.Usuario
 import com.salesianostriana.dam.ApiDex.entities.dto.EditUsuarioDto
+import com.salesianostriana.dam.ApiDex.entities.dto.GetPokemonDetalleDto
 import com.salesianostriana.dam.ApiDex.repositories.UsuarioRepository
 import com.salesianostriana.dam.ApiDex.services.base.BaseServiceImpl
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -24,4 +26,6 @@ class UsuarioService(private val encoder: PasswordEncoder): BaseServiceImpl<Usua
     }
 
     fun findByUsername(username: String) = repositorio?.findByUsername(username)
+
+
 }

@@ -7,7 +7,8 @@ data class EditPokemonDto(
     var estrellas: Int,
     var ataqueRapido: String,
     var ataqueCargado: String,
-    var pC: Int
+    var pC: Int,
+    var isOriginal: Boolean = false
 )
 
 data class GetPokemonPokedexDto(
@@ -19,7 +20,7 @@ data class GetPokemonPokedexDto(
    // var imagen: String
 )
 
-data class GetPokemoDetalleDto(
+data class GetPokemonDetalleDto(
     var id: Long?,
     var nombre: String,
     var idPokedex: String,
@@ -31,7 +32,8 @@ data class GetPokemoDetalleDto(
     var generacion: String?,
     var primerTipo: String,
     var segundoTipo: String?,
-    var fav: Boolean
+    var fav: Boolean,
+    var capturado: Boolean
 )
 
 data class GetPokemonEquipoDto(
@@ -78,13 +80,22 @@ fun Pokemon.toGetPokemonDto(usuario: Usuario?): GetPokemonPokedexDto{
     )
 }
 
-fun Pokemon.toGetPokemonDetalleDto(usuario: Usuario?): GetPokemoDetalleDto {
+fun Pokemon.toGetPokemonDetalleDto(usuario: Usuario?): GetPokemonDetalleDto {
     var favorito = false
+    var capturado = false
 
     if (usuario != null){
         for(pokemon in usuario.pokemonsFavs){
             if(pokemon.id == id){
                 favorito = true
+            }
+        }
+    }
+
+    if (usuario != null){
+        for( pokemon in usuario.pokemonsCapturados){
+            if (pokemon.id == id){
+                capturado =  true
             }
         }
     }
@@ -108,7 +119,7 @@ fun Pokemon.toGetPokemonDetalleDto(usuario: Usuario?): GetPokemoDetalleDto {
             favorito
         )
     }else{*/
-        return GetPokemoDetalleDto(
+        return GetPokemonDetalleDto(
             id,
             nombre,
             idPokedex,
@@ -120,7 +131,8 @@ fun Pokemon.toGetPokemonDetalleDto(usuario: Usuario?): GetPokemoDetalleDto {
             generacion?.nombre,
             primerTipo.nombreTipo,
             segundoTipo?.nombreTipo,
-            favorito
+            favorito,
+            capturado
         )
     //}
 }

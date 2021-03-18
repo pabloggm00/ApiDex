@@ -20,9 +20,12 @@ class Pokemon(
 
     var isCapturado: Boolean,
 
-    @OneToOne(cascade = arrayOf(CascadeType.ALL))
+    //Para que no se pueda borrar ni editar el pokemon original de la base de datos
+    var isOriginal: Boolean = false,
+
+    /*@OneToOne(cascade = arrayOf(CascadeType.ALL))
     @JoinColumn(name="evolucion_id", referencedColumnName = "id")
-    var evolucion: Evolucion?= null,
+    var evolucion: Evolucion?= null,*/
 
     @ManyToOne
     var equipo: Equipo?=null,
@@ -58,4 +61,20 @@ class Pokemon(
     val id: Long? = null
 
     ) {
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || javaClass != other.javaClass) return false
+        val that = other as Pokemon
+        if (id != that.id) return false
+        return true
+    }
+
+
+    override fun hashCode(): Int {
+        return if (id != null)
+            id.hashCode()
+        else 0
+    }
+
 }

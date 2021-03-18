@@ -8,11 +8,11 @@ data class EditUsuarioDto(
     var pass: String,
     //var avatar: String,
     var roles: String?,
-    val id: Long? = null
+
 )
 
 fun Usuario.editUsuarioDto(): EditUsuarioDto =
-    EditUsuarioDto(email, username, pass, roles.joinToString(), id)
+    EditUsuarioDto(email, username, pass, roles.joinToString())
 
 data class GetUsuarioDto(
     var id: Long?,
@@ -31,7 +31,9 @@ data class GetUsuarioRegistradoDto(
     var email:String,
 )
 
-fun Usuario.toGetUsuarioRegistradoDto(): GetUsuarioRegistradoDto = GetUsuarioRegistradoDto(id, username,email)
+fun Usuario.toGetUsuarioRegistradoDto(): GetUsuarioRegistradoDto =
+      GetUsuarioRegistradoDto(id, username, email)
+
 
 data class GetLoginDto(
     var id: Long?,
@@ -40,6 +42,7 @@ data class GetLoginDto(
 )
 
 fun Usuario.toGetLoginDto(): GetLoginDto = GetLoginDto(id, username, email)
+
 
 data class GetPerfilUsuarioDto(
     var username: String,
@@ -54,7 +57,7 @@ data class UsuarioDto(
     var username: String,
     var email: String,
     var roles: String,
-    var id: Long? = null
+    val id: Long? = null
 )
 
 fun Usuario.toUsuarioDto() : UsuarioDto = UsuarioDto(username, email, roles.joinToString(), id)
