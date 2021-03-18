@@ -18,6 +18,8 @@ class Pokemon(
 
     var isUltimo: Boolean,
 
+    var isFav: Boolean,
+
     var isCapturado: Boolean,
 
     //Para que no se pueda borrar ni editar el pokemon original de la base de datos

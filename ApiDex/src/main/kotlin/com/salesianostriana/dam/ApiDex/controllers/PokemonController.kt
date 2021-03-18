@@ -84,6 +84,7 @@ class PokemonController {
                         pokemonDuplicado.pC,
                         pokemon!!.get().idPokedex,
                         pokemon!!.get().isUltimo,
+                        pokemon!!.get().isFav,
                         pokemon!!.get().isCapturado,
                         pokemonDuplicado.isOriginal,
                         /*pokemon!!.get().evolucion,*/
@@ -155,6 +156,7 @@ class PokemonController {
                                 pokemonEvolucionado.pC,
                                 pokemonEvolucionado.idPokedex,
                                 pokemonEvolucionado.isUltimo,
+                                pokemon.get().isFav,
                                 pokemon.get().isCapturado,
                                 pokemon.get().isOriginal,
                                 pokemon.get().equipo,
