@@ -1,6 +1,8 @@
 package com.salesianostriana.apidexandroid.ui.capturados
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +10,17 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.salesianostriana.apidexandroid.R
+import com.salesianostriana.apidexandroid.data.poko.response.Pokemon
+import com.salesianostriana.apidexandroid.ui.favoritos.MyFavoritosRecyclerViewAdapter
 
 class CapturadosFragment : Fragment() {
 
     private lateinit var capturadosViewModel: CapturadosViewModel
+    var pokemonCapturadosList: List<Pokemon> = listOf()
+    lateinit var listAdapter: MyCapturadosRecyclerViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,11 +29,19 @@ class CapturadosFragment : Fragment() {
     ): View? {
         capturadosViewModel =
             ViewModelProvider(this).get(CapturadosViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_capturados, container, false)
-        val textView: TextView = root.findViewById(R.id.text_slideshow)
-        capturadosViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+        val view = inflater.inflate(R.layout.fragment_capturados_list, container, false)
+
+        val v = view as RecyclerView
+
+        v.layoutManager = LinearLayoutManager(context)
+        listAdapter = MyCapturadosRecyclerViewAdapter(activity as Context, capturadosViewModel, pokemonCapturadosList)
+        v.adapter = listAdapter
+
+        capturadosViewModel.pokemon.observe(viewLifecycleOwner, Observer {
+            pokemons -> pokemonCapturadosList = pokemons
+            listAdapter.setData(pokemons)
         })
-        return root
+
+        return view
     }
 }

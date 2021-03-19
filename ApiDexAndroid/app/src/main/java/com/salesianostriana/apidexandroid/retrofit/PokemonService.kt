@@ -15,9 +15,17 @@ interface PokemonService {
     @GET("pokemon/favs")
     fun getPokemonFavs(@Header("Authorization") token: String?) : Call<List<Pokemon>>
 
+    @GET("pokemon/capturados")
+    fun getPokemonCapturados(@Header("Authorization") token: String?) : Call<List<Pokemon>>
 
     @POST("pokemon/favs/{id}")
     fun addPokemonFav(@Header("Authorization") token: String?, @Path("id") idPokemon: Long) : Call<Pokemon>
+
+    @POST("pokemon/capturados/{id}")
+    fun addPokemonCapturado(@Header("Authorization") token: String?, @Path("id") idPokemon: Long): Call<Pokemon>
+
+    @DELETE("pokemon/capturados/{id}")
+    fun deleteCapturadoPokemon(@Header("Authorization") token: String?, @Path("id") idPokemon: Long): Call<Any>
 
     @DELETE("pokemon/favs/{id}")
     fun deleteFavPokemon(@Header("Authorization") token: String?, @Path("id") idPokemon: Long) : Call<Any>

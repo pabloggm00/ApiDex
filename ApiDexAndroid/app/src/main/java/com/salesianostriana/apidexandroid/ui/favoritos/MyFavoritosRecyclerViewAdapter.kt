@@ -30,7 +30,7 @@ class MyFavoritosRecyclerViewAdapter(
         val idPokedex: TextView = view.findViewById(R.id.textView_idPokedex)
         val fav: ImageView = view.findViewById(R.id.imageView_favorito)
         val fotoPokemon: ImageView = view.findViewById(R.id.imageView_fotoPokemon)
-        val rootView: View = view.findViewById(R.id.pokedex_view)
+        val rootView: View = view.findViewById(R.id.favoritos_view)
         val capturado: ImageView = view.findViewById(R.id.imageView_noCapturado)
     }
 
@@ -63,6 +63,10 @@ class MyFavoritosRecyclerViewAdapter(
         })*/
         holder.fav.setOnClickListener(View.OnClickListener {
             viewModel.addPokemonFav(item.id, item.isFav)
+        })
+
+        holder.capturado.setOnClickListener(View.OnClickListener {
+            viewModel.addPokemonCapturado(item.id, item.isCapturado)
         })
 
     }

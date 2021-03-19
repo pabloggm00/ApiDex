@@ -1,4 +1,4 @@
-package com.salesianostriana.apidexandroid.ui.pokedex
+package com.salesianostriana.apidexandroid.ui.capturados
 
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
@@ -13,15 +13,15 @@ import com.salesianostriana.apidexandroid.R
 import com.salesianostriana.apidexandroid.data.poko.response.Pokemon
 
 
-class MyPokedexRecyclerViewAdapter(
+class MyCapturadosRecyclerViewAdapter(
     private val activity: Context,
-    private val viewModel: PokedexViewModel,
+    private val viewModel: CapturadosViewModel,
     private var values: List<Pokemon>
-) : RecyclerView.Adapter<MyPokedexRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<MyCapturadosRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_pokedex, parent, false)
+            .inflate(R.layout.fragment_capturados, parent, false)
         return ViewHolder(view)
     }
 
@@ -30,7 +30,7 @@ class MyPokedexRecyclerViewAdapter(
         val idPokedex: TextView = view.findViewById(R.id.textView_idPokedex)
         val fav: ImageView = view.findViewById(R.id.imageView_favorito)
         val fotoPokemon: ImageView = view.findViewById(R.id.imageView_fotoPokemon)
-        val rootView: View = view.findViewById(R.id.pokedex_view)
+        val rootView: View = view.findViewById(R.id.capturados_view)
         val capturado: ImageView = view.findViewById(R.id.imageView_noCapturado)
     }
 

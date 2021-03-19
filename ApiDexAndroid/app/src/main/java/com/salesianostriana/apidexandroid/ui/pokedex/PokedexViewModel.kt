@@ -98,4 +98,36 @@ class PokedexViewModel(application: Application) : AndroidViewModel(application)
             })
         }
     }
+
+    fun addPokemonCapturado(pokemonId: Long, isCapturado: Boolean) {
+
+        if (!isCapturado) {
+            service.addPokemonCapturado("Bearer ${token}", pokemonId).enqueue(object : Callback<Pokemon> {
+                override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
+                    if (response.code() == 204) {
+                        getPokemonList()
+                    }
+                }
+
+                override fun onFailure(call: Call<Pokemon>, t: Throwable) {
+                    Log.e("Error", t.message.toString())
+                }
+
+
+            })
+        } else {
+            service.deleteCapturadoPokemon("Bearer ${token}", pokemonId).enqueue(object : Callback<Any> {
+                override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                    if (response.code() == 204) {
+                        getPokemonList()
+                    }
+                }
+
+                override fun onFailure(call: Call<Any>, t: Throwable) {
+                    Log.e("Error", t.message.toString())
+                }
+
+            })
+        }
+    }
 }

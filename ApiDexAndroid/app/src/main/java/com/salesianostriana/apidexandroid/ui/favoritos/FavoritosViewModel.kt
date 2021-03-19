@@ -58,7 +58,7 @@ class FavoritosViewModel(application: Application) : AndroidViewModel(applicatio
             }
 
             override fun onFailure(call: Call<List<Pokemon>>, t: Throwable) {
-                Toast.makeText(context, "No se ha encontrado ningun pokemon favorito", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "No se ha encontrado ningún Pokemon favorito", Toast.LENGTH_SHORT).show()
             }
 
         })
@@ -84,6 +84,40 @@ class FavoritosViewModel(application: Application) : AndroidViewModel(applicatio
             service.deleteFavPokemon("Bearer ${token}", pokemonId).enqueue(object : Callback<Any>{
                 override fun onResponse(call: Call<Any>, response: Response<Any>) {
                     if (response.code() == 204){
+                        getPokemonFavs()
+                    }
+                }
+
+                override fun onFailure(call: Call<Any>, t: Throwable) {
+                    Log.e("Error", t.message.toString())
+                }
+
+            })
+        }
+
+
+    }
+
+    fun addPokemonCapturado(pokemonId: Long, isCapturado: Boolean) {
+
+        if (!isCapturado) {
+            service.addPokemonCapturado("Bearer ${token}", pokemonId).enqueue(object : Callback<Pokemon> {
+                override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
+                    if (response.code() == 204) {
+                        getPokemonFavs()
+                    }
+                }
+
+                override fun onFailure(call: Call<Pokemon>, t: Throwable) {
+                    Log.e("Error", t.message.toString())
+                }
+
+
+            })
+        } else {
+            service.deleteCapturadoPokemon("Bearer ${token}", pokemonId).enqueue(object : Callback<Any> {
+                override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                    if (response.code() == 204) {
                         getPokemonFavs()
                     }
                 }
