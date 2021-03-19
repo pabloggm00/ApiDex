@@ -49,7 +49,8 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="#FFFFFF" />
 
             <TextView
                 android:id="@+id/textView_nombrePokemon"
@@ -58,7 +59,8 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="#FFFFFF" />
 
             <ImageView
                 android:id="@+id/imageView_fotoPokemon"

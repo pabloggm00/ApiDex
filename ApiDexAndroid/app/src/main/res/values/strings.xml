@@ -34,4 +34,6 @@
     <string name="profile_email">Email</string>
     <string name="eliminar_cuenta">Eliminar Cuenta</string>
     <string name="menu_username">Username</string>
+    <string name="idPokedex">#001</string>
+    <string name="nombre_pokemon">Bulbasaur</string>
 </resources>

@@ -11,6 +11,10 @@ interface PokemonService {
                        @Query("tipo") paramTipo: String?,
                        @Query("generacion") paramGeneracion: String?) : Call<List<Pokemon>>
 
+    //Habrá que poner un filtro también en la lista de Pokemon favoritos en la API
+    @GET("pokemon/favs")
+    fun getPokemonFavs(@Header("Authorization") token: String?) : Call<List<Pokemon>>
+
 
     @POST("pokemon/favs/{id}")
     fun addPokemonFav(@Header("Authorization") token: String?, @Path("id") idPokemon: Long) : Call<Pokemon>
