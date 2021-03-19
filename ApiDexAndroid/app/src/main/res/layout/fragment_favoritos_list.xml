@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grease">
+
+<androidx.recyclerview.widget.RecyclerView
     android:id="@+id/list_favoritos"
     android:name="com.salesianostriana.apidexandroid.FavoritosFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="0dp"
     android:layout_marginRight="0dp"
-    android:background="#FFFFFF"
-    android:backgroundTint="#FFFFFF"
+    android:background="@color/grease"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ui.favoritos.FavoritosFragment"
     tools:listitem="@layout/fragment_favoritos" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

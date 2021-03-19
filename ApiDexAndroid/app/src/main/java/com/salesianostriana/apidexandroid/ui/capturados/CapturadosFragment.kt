@@ -21,6 +21,7 @@ class CapturadosFragment : Fragment() {
     private lateinit var capturadosViewModel: CapturadosViewModel
     var pokemonCapturadosList: List<Pokemon> = listOf()
     lateinit var listAdapter: MyCapturadosRecyclerViewAdapter
+    lateinit var lista: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +32,8 @@ class CapturadosFragment : Fragment() {
             ViewModelProvider(this).get(CapturadosViewModel::class.java)
         val view = inflater.inflate(R.layout.fragment_capturados_list, container, false)
 
-        val v = view as RecyclerView
+        lista = view.findViewById(R.id.list_capturados)
+        val v = lista
 
         v.layoutManager = LinearLayoutManager(context)
         listAdapter = MyCapturadosRecyclerViewAdapter(activity as Context, capturadosViewModel, pokemonCapturadosList)

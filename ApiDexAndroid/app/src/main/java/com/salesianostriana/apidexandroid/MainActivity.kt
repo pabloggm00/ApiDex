@@ -2,6 +2,8 @@ package com.salesianostriana.apidexandroid
 
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.Menu
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -34,6 +36,9 @@ class MainActivity : AppCompatActivity() {
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
+        navView.itemIconTintList = null
+        navView.itemTextColor = getColorStateList(R.drawable.nav_item_text_color)
+        /*navView.itemTextColor = resources.getColorStateList(R.drawable.nav_item_text_color)*/
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.

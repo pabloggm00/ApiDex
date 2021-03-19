@@ -20,6 +20,7 @@ class PokedexFragment : Fragment() {
     private lateinit var pokedexViewModel: PokedexViewModel
     var pokemonList: List<Pokemon> = listOf()
     lateinit var listAdapter: MyPokedexRecyclerViewAdapter
+    lateinit var lista: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +31,8 @@ class PokedexFragment : Fragment() {
             ViewModelProvider(this).get(PokedexViewModel::class.java)
         val view = inflater.inflate(R.layout.fragment_pokedex_list, container, false)
 
-        val v = view as RecyclerView
+        lista = view.findViewById(R.id.list_pokedex)
+        val v = lista
 
         v.layoutManager = LinearLayoutManager(context)
         listAdapter = MyPokedexRecyclerViewAdapter(activity as Context, pokedexViewModel, pokemonList)

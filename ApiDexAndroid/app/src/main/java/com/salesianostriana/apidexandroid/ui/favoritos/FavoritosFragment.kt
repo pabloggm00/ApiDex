@@ -19,6 +19,7 @@ class FavoritosFragment : Fragment() {
     private lateinit var favoritosViewModel: FavoritosViewModel
     var pokemonFavsList: List<Pokemon> = listOf()
     lateinit var listAdapter: MyFavoritosRecyclerViewAdapter
+    lateinit var lista: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,7 +30,8 @@ class FavoritosFragment : Fragment() {
             ViewModelProvider(this).get(FavoritosViewModel::class.java)
         val view = inflater.inflate(R.layout.fragment_favoritos_list, container, false)
 
-        val v = view as RecyclerView
+        lista = view.findViewById(R.id.list_favoritos)
+        val v = lista
 
         v.layoutManager = LinearLayoutManager(context)
 
