@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_username"
+            android:icon="@drawable/ic_profile_user"
+            android:title="@string/menu_perfil" />
+        <item
+            android:id="@+id/nav_pokedex"
+            android:icon="@drawable/ic_pokedex"
+            android:title="@string/menu_pokedex" />
+        <item
+            android:id="@+id/nav_favoritos"
+            android:icon="@drawable/ic_nofav"
+            android:title="@string/menu_favoritos" />
+        <item
+            android:id="@+id/nav_capturados"
+            android:icon="@drawable/ic_capturado"
+            android:title="@string/menu_capturados" />
+    </group>
+</menu>

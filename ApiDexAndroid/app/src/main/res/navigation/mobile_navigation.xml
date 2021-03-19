@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_pokedex">
+
+    <fragment
+        android:id="@+id/nav_username"
+        android:name="com.salesianostriana.apidexandroid.ui.perfil.PerfilFragment"
+        android:label="@string/menu_perfil"
+        tools:layout="@layout/perfil_fragment" />
+
+    <fragment
+        android:id="@+id/nav_pokedex"
+        android:name="com.salesianostriana.apidexandroid.ui.pokedex.PokedexFragment"
+        android:label="@string/menu_pokedex"
+        tools:layout="@layout/fragment_pokedex" />
+
+    <fragment
+        android:id="@+id/nav_favoritos"
+        android:name="com.salesianostriana.apidexandroid.ui.favoritos.FavoritosFragment"
+        android:label="@string/menu_favoritos"
+        tools:layout="@layout/fragment_favoritos" />
+
+    <fragment
+        android:id="@+id/nav_capturados"
+        android:name="com.salesianostriana.apidexandroid.ui.capturados.CapturadosFragment"
+        android:label="@string/menu_capturados"
+        tools:layout="@layout/fragment_capturados" />
+</navigation>

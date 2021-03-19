@@ -1,0 +1,435 @@
+{
+	"info": {
+		"_postman_id": "c4fb6a88-7fe9-4372-82cb-0d0ec42487b5",
+		"name": "ApiDex",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "REGISTER",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"pablo@email.com\",\r\n    \"username\": \"pablogonzalez\",\r\n    \"pass\": \"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOGIN",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"pablogonzalez\",\r\n    \"pass\": \"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pokemon",
+			"item": [
+				{
+					"name": "GET Todos los pokemons",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/pokemon",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pokemon"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Pokemon por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/pokemon/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pokemon",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Editar pokemon",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5IiwiZXhwIjoxNjE2MTc4MjE2LCJpYXQiOjE2MTU5MTkwMTYsInJlZnJlc2giOmZhbHNlLCJyb2xlcyI6IlVTRVIifQ.ZQezW88f-3udScPMmeXtKKhqMPXIWFaJnTuNpd20znCy3zbr7fvvkrAlomUml3duLhQfiJ5O8EvfuHkqG1kNyg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"estrellas\": 3,\r\n    \"ataqueRapido\": \"Látigo Cepa\",\r\n    \"ataqueCargado\": \"Bomba Lodo\",\r\n    \"pC\": \"456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/pokemon/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pokemon",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Añadir pokemon a favorito",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MyIsImV4cCI6MTYxNjMyMTMxOSwiaWF0IjoxNjE2MDYyMTE5LCJyZWZyZXNoIjpmYWxzZSwidXNlcm5hbWUiOiJwYWJsb2dvbnphbGV6Iiwicm9sZXMiOiJVU0VSIn0.3KggC16c9kDjB-GuX3YsIeI71izRk-6tblY-euMzSMmgox1BhnTLHAjGI-03LsCxspcP02SeI_cZAOn16m5Tig",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/pokemon/favs/27",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pokemon",
+								"favs",
+								"27"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Añadir pokemon capturados",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/pokemon/capturados/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pokemon",
+								"capturados",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Eliminar pokemon",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/pokemon/44",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pokemon",
+								"44"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Eliminar pokemon capturado",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5IiwiZXhwIjoxNjE2MTc5MTc4LCJpYXQiOjE2MTU5MTk5NzgsInJlZnJlc2giOmZhbHNlLCJyb2xlcyI6IlVTRVIifQ.3i-zc-F2SP7Trb1nzGEVclEXZehrjdMJ2R2xlyynXB5oXsQBr0mzAfwQZBRYfagFYXGldyisnKoyk6T0WgclLw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/pokemon/capturados/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pokemon",
+								"capturados",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Eliminar pokemon favorito",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5IiwiZXhwIjoxNjE2MTc5MTc4LCJpYXQiOjE2MTU5MTk5NzgsInJlZnJlc2giOmZhbHNlLCJyb2xlcyI6IlVTRVIifQ.3i-zc-F2SP7Trb1nzGEVclEXZehrjdMJ2R2xlyynXB5oXsQBr0mzAfwQZBRYfagFYXGldyisnKoyk6T0WgclLw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/pokemon/favs/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pokemon",
+								"favs",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Pokemon favoritos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/pokemon/favs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pokemon",
+								"favs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Pokemon capturados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/pokemon/capturados",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pokemon",
+								"capturados"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Duplicar Pokemon",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MiIsImV4cCI6MTYxNjMyMjExNSwiaWF0IjoxNjE2MDYyOTE1LCJyZWZyZXNoIjpmYWxzZSwidXNlcm5hbWUiOiJwYWJsb2dvbnphbGV6Iiwicm9sZXMiOiJVU0VSIn0.ug1ZYuN9wahm8tyOh3v6MAJalcbDuefYl9Q6_p2dWIGuSTIS12GaeAduJkJ3foPaeXYn3MNmDYfKdfZGayT3PA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"estrellas\": 2,\r\n    \"ataqueRapido\": \"Látigo Cepta\",\r\n    \"ataqueCargado\": \"Bomba Lodo\",\r\n    \"pC\": 450\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/pokemon/27",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pokemon",
+								"27"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Evolucionar Pokemon",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MiIsImV4cCI6MTYxNjM5OTYzMSwiaWF0IjoxNjE2MTQwNDMxLCJyZWZyZXNoIjpmYWxzZSwidXNlcm5hbWUiOiJwYWJsb2dvbnphbGV6Iiwicm9sZXMiOiJVU0VSIn0.geUXKpQYibTNS9DB_3u9b_JxA-wC5KkcQx216dtF0COH1dfr9W7ccs5r6bJ440DUkR1N0T_z-zRTwMIz-vVQkg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/pokemon/evolucion/43",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pokemon",
+								"evolucion",
+								"43"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MiIsImV4cCI6MTYxNjM5OTYzMSwiaWF0IjoxNjE2MTQwNDMxLCJyZWZyZXNoIjpmYWxzZSwidXNlcm5hbWUiOiJwYWJsb2dvbnphbGV6Iiwicm9sZXMiOiJVU0VSIn0.geUXKpQYibTNS9DB_3u9b_JxA-wC5KkcQx216dtF0COH1dfr9W7ccs5r6bJ440DUkR1N0T_z-zRTwMIz-vVQkg",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
