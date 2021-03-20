@@ -167,7 +167,7 @@ class PokemonController {
                         ).toGetPokemonDetalleDto(usuario!!.get()))
             }
         }
-        throw SingleEntityNotFoundException(id.toString(), Pokemon::class.java)
+        throw EvolucionarOriginalNotFoundException(Pokemon::class.java)
 
 
     }
