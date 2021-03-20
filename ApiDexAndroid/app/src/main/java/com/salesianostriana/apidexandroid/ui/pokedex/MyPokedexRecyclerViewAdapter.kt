@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import coil.load
 import com.salesianostriana.apidexandroid.R
 import com.salesianostriana.apidexandroid.data.poko.response.Pokemon
@@ -32,16 +33,20 @@ class MyPokedexRecyclerViewAdapter(
         val fotoPokemon: ImageView = view.findViewById(R.id.imageView_fotoPokemon)
         val rootView: View = view.findViewById(R.id.pokedex_view)
         val capturado: ImageView = view.findViewById(R.id.imageView_noCapturado)
+        val cardPokemon: CardView = view.findViewById(R.id.cardView_Pokemon)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.nombreView.text = item.nombre
         holder.idPokedex.text = item.idPokedex
-        //holder.fotoPokemon.load(item.imagen)
+        holder.fotoPokemon.load(item.imagen)
         var isCapturado= item.isCapturado
         var megusta= item.isFav
 
+        /*if (item.tipo == 11){
+            holder.cardPokemon.setBackgroundColor(R.color.red)
+        }*/
 
         if(isCapturado){
             holder.capturado.load(R.drawable.ic_capturado)

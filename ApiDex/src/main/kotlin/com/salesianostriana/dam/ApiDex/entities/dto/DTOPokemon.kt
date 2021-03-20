@@ -17,7 +17,7 @@ data class GetPokemonPokedexDto(
     var nombre: String,
     var isFav: Boolean,
     var isCapturado: Boolean,
-   // var imagen: String
+    var imagen: String
 )
 
 data class GetPokemonDetalleDto(
@@ -28,7 +28,7 @@ data class GetPokemonDetalleDto(
     var ataqueRapido: String?,
     var ataqueCargado: String?,
     var pC: Int?,
-    //var imagen: String?,
+    var imagen: GetImagenDetalleDto,
     var generacion: String?,
     var primerTipo: String,
     var segundoTipo: String?,
@@ -71,12 +71,11 @@ fun Pokemon.toGetPokemonDto(usuario: Usuario?): GetPokemonPokedexDto{
         }
     }
 
+    var url: String = "http://10.0.2.2:9000/files/"
 
-    /*lateinit var imagenPokemon: ImagenPokemon
-    var url: String = "http://10.0.2.2:9000/files/"*/
 
     return GetPokemonPokedexDto(
-        id,idPokedex, nombre, favorito, capturado /*"${url}${imagenPokemon.dataId}"*/
+        id,"#${idPokedex}", nombre, favorito, capturado, "${url}${imagen!!.dataId}"
     )
 }
 
@@ -100,23 +99,26 @@ fun Pokemon.toGetPokemonDetalleDto(usuario: Usuario?): GetPokemonDetalleDto {
         }
     }
 
-    /*var url: String = "http://10.0.2.2:9000/files/"*/
+    var url: String = "http://10.0.2.2:9000/files/"
 
-    /*lateinit var imagenPokemon: ImagenPokemon*/
+    var imagenPoke: GetImagenDetalleDto = GetImagenDetalleDto(imagen!!.id, "${url}${imagen!!.dataId}", imagen!!.deleteHash)
 
-    /*if (imagen != null) {
-        return GetPokemoDetalleDto(
+
+   /* if (imagen != null) {
+        return GetPokemonDetalleDto(
             id,
             nombre,
+            idPokedex,
             estrellas,
             ataqueRapido,
             ataqueCargado,
             pC,
-            //"${url}${imagenPokemon.dataId}",
+            imagenPoke,
             generacion?.nombre,
             primerTipo.nombreTipo,
             segundoTipo?.nombreTipo,
-            favorito
+            favorito,
+            capturado
         )
     }else{*/
         return GetPokemonDetalleDto(
@@ -127,7 +129,7 @@ fun Pokemon.toGetPokemonDetalleDto(usuario: Usuario?): GetPokemonDetalleDto {
             ataqueRapido,
             ataqueCargado,
             pC,
-            //"",
+            imagenPoke,
             generacion?.nombre,
             primerTipo.nombreTipo,
             segundoTipo?.nombreTipo,

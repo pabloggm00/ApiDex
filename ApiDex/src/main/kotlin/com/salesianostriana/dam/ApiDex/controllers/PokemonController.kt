@@ -6,14 +6,18 @@ import com.salesianostriana.dam.ApiDex.entities.Usuario
 import com.salesianostriana.dam.ApiDex.entities.dto.*
 import com.salesianostriana.dam.ApiDex.error.*
 import com.salesianostriana.dam.ApiDex.services.EquipoService
+import com.salesianostriana.dam.ApiDex.services.ImagenService
 /*import com.salesianostriana.dam.ApiDex.services.ImagenPokemonService*/
 import com.salesianostriana.dam.ApiDex.services.PokemonService
 import com.salesianostriana.dam.ApiDex.services.UsuarioService
+import com.salesianostriana.dam.ApiDex.upload.ImgurBadRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
+import org.springframework.web.server.ResponseStatusException
 import java.util.*
 
 @RestController
@@ -23,8 +27,8 @@ class PokemonController {
     @Autowired
     lateinit var pokemonService: PokemonService
 
-    /*@Autowired
-    lateinit var imagenService: ImagenPokemonService*/
+    @Autowired
+    lateinit var imagenService: ImagenService
 
     @Autowired
     lateinit var usuarioService: UsuarioService
@@ -42,7 +46,11 @@ class PokemonController {
         var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
 
 
-        return pokemonService.getPokemonFiltrados(tipo, generacion)?.map { it.toGetPokemonDto(usuario!!.get()) }
+        var listaPokemonFiltrados : List<Pokemon>? = pokemonService.getPokemonFiltrados(tipo, generacion)
+
+        listaPokemonFiltrados = listaPokemonFiltrados?.sortedBy{ it.idPokedex.toInt() }
+
+        return listaPokemonFiltrados?.map { it.toGetPokemonDto(usuario!!.get()) }
             .takeIf { it!!.isNotEmpty() } ?: throw ListEntityNotFoundException(Pokemon::class.java)
 
     }
@@ -174,29 +182,34 @@ class PokemonController {
 
 
 
-    /*@PostMapping("/{id}/img")
+    @PostMapping("/{id}/img")
     fun createImage(
-        @AuthenticationPrincipal usuario: Usuario,
+        /*@AuthenticationPrincipal usuario: Usuario,*/
         @PathVariable id:Long,
         @RequestPart("file") file: MultipartFile
-    ): ResponseEntity<GetPokemoDetalleDto>{
+    ): ResponseEntity<GetPokemonDetalleDto>{
+
+        var auth: String = SecurityContextHolder.getContext().authentication.name
+        var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
+
         var pokemon: Pokemon = pokemonService.findById(id).orElse(null)
+
 
         if (pokemon != null){
             try {
-                imagenService.save(file,pokemon)
+                imagenService.saveImagenPokemon(file,pokemon)
                 return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(pokemon.toGetPokemonDetalleDto(usuario))
+                    .body(pokemon.toGetPokemonDetalleDto(usuario!!.get()))
             }catch (ex: ImgurBadRequest){
                 throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Error en la subida de imagen")
             }
         } else {
             throw SingleEntityNotFoundException(id.toString(), Pokemon::class.java)
         }
-    }*/
+    }
 
     //Este método no estará en el final, solo es para testear
-   /* @DeleteMapping("/{id}/img/{hash}")
+    @DeleteMapping("/{id}/img/{hash}")
     fun deleteImage(@PathVariable id: Long, @PathVariable hash: String): ResponseEntity<Any>{
         var pokemon: Pokemon = pokemonService.findById(id).orElse(null)
 
@@ -209,7 +222,7 @@ class PokemonController {
 
         }
         return ResponseEntity.noContent().build()
-    }*/
+    }
 
     /*POKEMON FAVORITOS*/
 

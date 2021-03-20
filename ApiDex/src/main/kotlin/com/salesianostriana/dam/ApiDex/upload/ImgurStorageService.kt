@@ -1,6 +1,6 @@
 package com.salesianostriana.dam.ApiDex.upload
 
-import com.salesianostriana.dam.ApiDex.entities.ImagenPokemon
+import com.salesianostriana.dam.ApiDex.entities.Imagen
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.core.io.UrlResource
@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile
 import java.net.URI
 import java.util.*
 
-interface ImgurStorageService : BasicImageStorageService<ImagenPokemon, String, String>
+interface ImgurStorageService : BasicImageStorageService<Imagen, String, String>
 
 @Service
 class ImgurStorageServiceImpl(
@@ -22,7 +22,7 @@ class ImgurStorageServiceImpl(
     val logger: Logger = LoggerFactory.getLogger(ImgurStorageService::class.java)
 
 
-    override fun store(file: MultipartFile) : Optional<ImagenPokemon> {
+    override fun store(file: MultipartFile) : Optional<Imagen> {
 
         if (!file.isEmpty) {
             var imgReq =
@@ -32,7 +32,7 @@ class ImgurStorageServiceImpl(
                     file.originalFilename.toString())
             var imgRes = imgurService.upload(imgReq)
             if(imgRes.isPresent)
-                return Optional.of(ImagenPokemon(imgRes.get().data.id, imgRes.get().data.deletehash))
+                return Optional.of(Imagen(imgRes.get().data.id, imgRes.get().data.deletehash))
         }
 
         return Optional.empty()

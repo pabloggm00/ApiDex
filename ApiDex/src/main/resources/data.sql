@@ -28,23 +28,33 @@ INSERT INTO TIPO(nombre_Tipo, id) VALUES('Siniestro', NEXTVAL('hibernate_sequenc
 INSERT INTO TIPO(nombre_Tipo, id) VALUES('Tierra', NEXTVAL('hibernate_sequence'));
 INSERT INTO TIPO(nombre_Tipo, id) VALUES('Volador', NEXTVAL('hibernate_sequence'));
 
+INSERT INTO IMAGEN(data_id, delete_hash, id) VALUES('Zz7qHNj', 'h2H8fHa7qYAZuRy', NEXTVAL('hibernate_sequence'));
+INSERT INTO IMAGEN(data_id, delete_hash, id) VALUES('yPV4XgX', 'MH8Gy809rhwanhD', NEXTVAL('hibernate_sequence'));
+INSERT INTO IMAGEN(data_id, delete_hash, id) VALUES('ALoewPT', 'L5RmHHAgv4h9kKo', NEXTVAL('hibernate_sequence'));
+INSERT INTO IMAGEN(data_id, delete_hash, id) VALUES('S4XdgD9', 'dNfzR6JUfw7EHre', NEXTVAL('hibernate_sequence'));
+INSERT INTO IMAGEN(data_id, delete_hash, id) VALUES('9JBaL78', 'vK4hm5bA5PMOnfD', NEXTVAL('hibernate_sequence'));
+INSERT INTO IMAGEN(data_id, delete_hash, id) VALUES('pc9scvX', 'o11p8O1oKN1XajG', NEXTVAL('hibernate_sequence'));
+INSERT INTO IMAGEN(data_id, delete_hash, id) VALUES('7jA7Sqw', '6nESk3DxiIgWgqF', NEXTVAL('hibernate_sequence'));
+INSERT INTO IMAGEN(data_id, delete_hash, id) VALUES('4qk5WKd', 'shd1yqmo60Eo6Dy', NEXTVAL('hibernate_sequence'));
+INSERT INTO IMAGEN(data_id, delete_hash, id) VALUES('vBS1Tar', 'pQi0BuJ1ab9ZoIY', NEXTVAL('hibernate_sequence'));
+INSERT INTO IMAGEN(data_id, delete_hash, id) VALUES('R2sYiCB', 'cutpRKkYW5tuftt', NEXTVAL('hibernate_sequence'));
+INSERT INTO IMAGEN(data_id, delete_hash, id) VALUES('lMBNim8', 'LCuohmGukH0q9IS', NEXTVAL('hibernate_sequence'));
+INSERT INTO IMAGEN(data_id, delete_hash, id) VALUES('ivKhCSI', 'FvXZL1ivGfJjlOJ', NEXTVAL('hibernate_sequence'));
+
 /*POKEMONS*/
-INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Bulbasaur', null, null, null, null, '#001', false, false, false, true, null, 1, 9, 10, NEXTVAL('hibernate_sequence'));
-INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Ivysaur', null, null, null, null, '#002', false, false, false, true, null, 1, 9, 10,NEXTVAL('hibernate_sequence'));
-INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Venasaur', null, null, null, null, '#003', true, false,false, true, null, 1, 9,10, NEXTVAL('hibernate_sequence'));
-INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Charmander', null, null, null, null, '#004', false,false, false, true, null, 1,11,null, NEXTVAL('hibernate_sequence'));
-INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Charmeleon', null, null, null, null, '#005', false,false, false, true, null, 1,11,null, NEXTVAL('hibernate_sequence'));
-INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Charizard', null, null, null, null, '#006', true,false, false, true, null, 1,11,26, NEXTVAL('hibernate_sequence'));
-INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Squirtle', null, null, null, null, '#007', false,false, false, true, null, 1,13,null, NEXTVAL('hibernate_sequence'));
-INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Wartotle', null, null, null, null, '#008', false,false, false, true, null, 1,13, null, NEXTVAL('hibernate_sequence'));
-INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Blastoise', null, null, null, null, '#009', true,false, false, true, null, 1,13,null, NEXTVAL('hibernate_sequence'));
-INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Dragonite', null, null, null, null, '#149', true, false,false, true, null, 1,15,26, NEXTVAL('hibernate_sequence'));
-INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Mewtwo', null, null, null, null, '#150', true,false, false, true, null, 1,22,null, NEXTVAL('hibernate_sequence'));
-INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Mew', null, null, null, null, '#151', true,false, false, true, null, 1, 22,null, NEXTVAL('hibernate_sequence'));
+INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, imagen_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Bulbasaur',  null, null, null, null, '001', false, false, false, true, null, 1, 27, 9, 10,    NEXTVAL('hibernate_sequence'));
+INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, imagen_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Ivysaur',    null, null, null, null, '002', false, false, false, true, null, 1, 28, 9, 10,    NEXTVAL('hibernate_sequence'));
+INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, imagen_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Venusaur',   null, null, null, null, '003', true,  false, false, true, null, 1, 29, 9, 10,    NEXTVAL('hibernate_sequence'));
+INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, imagen_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Charmander', null, null, null, null, '004', false, false, false, true, null, 1, 30, 11, null, NEXTVAL('hibernate_sequence'));
+INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, imagen_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Charmeleon', null, null, null, null, '005', false, false, false, true, null, 1, 31, 11, null, NEXTVAL('hibernate_sequence'));
+INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, imagen_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Charizard',  null, null, null, null, '006', true,  false, false, true, null, 1, 32, 11, 26,   NEXTVAL('hibernate_sequence'));
+INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, imagen_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Squirtle',   null, null, null, null, '007', false, false, false, true, null, 1, 33, 13, null, NEXTVAL('hibernate_sequence'));
+INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, imagen_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Wartotle',   null, null, null, null, '008', false, false, false, true, null, 1, 34, 13, null, NEXTVAL('hibernate_sequence'));
+INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, imagen_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Blastoise',  null, null, null, null, '009', true,  false, false, true, null, 1, 35, 13, null, NEXTVAL('hibernate_sequence'));
+INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, imagen_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Dragonite',  null, null, null, null, '149', true,  false, false, true, null, 1, 36, 15, 26,   NEXTVAL('hibernate_sequence'));
+INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, imagen_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Mewtwo',     null, null, null, null, '150', true,  false, false, true, null, 1, 37, 22, null, NEXTVAL('hibernate_sequence'));
+INSERT INTO POKEMON(nombre, estrellas, ataque_Rapido, ataque_Cargado, pC, id_Pokedex, is_Ultimo, is_Fav, is_Capturado, is_Original, equipo_id, generacion_id, imagen_id, primer_Tipo_id, segundo_tipo_id, id) VALUES ('Mew',        null, null, null, null, '151', true,  false, false, true, null, 1, 38, 22, null, NEXTVAL('hibernate_sequence'));
 
 
 
-/*LIGAS*/
-INSERT INTO LIGA(nombre, pc_maximos, id) VALUES('Liga Super Ball', 1500, NEXTVAL('hibernate_sequence'));
-INSERT INTO LIGA(nombre,pc_maximos, id) VALUES('Liga Ultra Ball', 2500, NEXTVAL('hibernate_sequence'));
-INSERT INTO LIGA(nombre,pc_maximos, id) VALUES('Liga Master Ball', null, NEXTVAL('hibernate_sequence'));
+

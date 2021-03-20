@@ -7,5 +7,5 @@ data class GetImagenDto(
 data class GetImagenDetalleDto(
     var id: Long?,
     var url: String,
-    var deleteHash: String
+    var deleteHash: String?
 )
