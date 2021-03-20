@@ -38,7 +38,7 @@ class MyCapturadosRecyclerViewAdapter(
         val item = values[position]
         holder.nombreView.text = item.nombre
         holder.idPokedex.text = item.idPokedex
-        //holder.fotoPokemon.load(item.imagen)
+        holder.fotoPokemon.load(item.imagen)
         var isCapturado= item.isCapturado
         var megusta= item.isFav
 

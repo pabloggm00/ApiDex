@@ -80,9 +80,7 @@ class AuthController(
         return ResponseEntity.badRequest().build()
     }
 
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("/user/me")
-    fun me(@AuthenticationPrincipal usuario : Usuario) = usuario.toGetUsuarioRegistradoDto()
+
 }
 
 data class LoginRequest(

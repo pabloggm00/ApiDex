@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.ApiDex.controllers
 
 /*import com.salesianostriana.dam.ApiDex.services.ImagenPokemonService*/
+import com.salesianostriana.dam.ApiDex.services.ImagenService
 import com.salesianostriana.dam.ApiDex.upload.ImgurImageNotFoundException
 import com.salesianostriana.dam.ApiDex.upload.ImgurStorageService
 import com.salesianostriana.dam.ApiDex.upload.MediaTypeUrlResource
@@ -18,10 +19,10 @@ import java.util.*
 import kotlin.jvm.Throws
 
 @RestController
-class ImagenPokemonController {
+class ImagenController {
 
-   /* @Autowired
-    lateinit var servicio: ImagenPokemonService*/
+    @Autowired
+    lateinit var servicio: ImagenService
 
     @Autowired
     lateinit var imgurStorageService: ImgurStorageService
@@ -42,7 +43,7 @@ class ImagenPokemonController {
 
     }
 
-    /*@DeleteMapping("/{id}")
+    @DeleteMapping("/{id}")
     fun delete(@PathVariable id: Long) : ResponseEntity<Void> {
         var imagen = servicio.findById(id).orElse(null)
         if(imagen != null){
@@ -50,5 +51,5 @@ class ImagenPokemonController {
 
         }
         return ResponseEntity.noContent().build()
-    }*/
+    }
 }

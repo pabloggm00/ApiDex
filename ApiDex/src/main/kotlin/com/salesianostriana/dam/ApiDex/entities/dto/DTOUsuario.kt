@@ -14,16 +14,39 @@ data class EditUsuarioDto(
 fun Usuario.editUsuarioDto(): EditUsuarioDto =
     EditUsuarioDto(email, username, pass, roles.joinToString())
 
+data class EditPerfilDto(
+    var email: String
+)
+
+fun Usuario.toEditPerfilDto() : EditPerfilDto {
+
+    var url: String = "http://10.0.2.2:9000/files/"
+
+
+    return EditPerfilDto(
+        email
+    )
+}
+
 data class GetUsuarioDto(
     var id: Long?,
     var username: String,
     var email: String,
-    var pass: String,
     var avatar: String
 )
 
-fun Usuario.toGetUsuairoDto(): GetUsuarioDto =
-    GetUsuarioDto(id,username,email,pass,"https://robohash.org/${username}")
+fun Usuario.toGetUsuarioDto(): GetUsuarioDto {
+
+    var url: String = "http://10.0.2.2:9000/files/"
+
+    if (avatar != null){
+        return GetUsuarioDto(id,username,email,"${url}${avatar!!.dataId}")
+    }else{
+        return GetUsuarioDto(id, username, email, "https://robohash.org/${username}")
+    }
+
+}
+
 
 data class GetUsuarioRegistradoDto(
     var id: Long?,
@@ -42,16 +65,6 @@ data class GetLoginDto(
 )
 
 fun Usuario.toGetLoginDto(): GetLoginDto = GetLoginDto(id, username, email)
-
-
-data class GetPerfilUsuarioDto(
-    var username: String,
-    var email: String,
-    var avatar: String
-)
-
-fun Usuario.toGetPerfilUsuarioDto(): GetPerfilUsuarioDto =
-    GetPerfilUsuarioDto(username, email, "https://robohash.org/${username}")
 
 data class UsuarioDto(
     var username: String,

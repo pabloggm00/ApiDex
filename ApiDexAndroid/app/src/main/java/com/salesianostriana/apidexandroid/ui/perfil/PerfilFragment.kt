@@ -56,7 +56,7 @@ class PerfilFragment : Fragment() {
             user ->
             textViewUsername.text = user.username
             textViewEmail.text = user.email
-            avatar.load("https://robohash.org/${user.username}")
+            avatar.load(user.avatar)
             Log.e("USERNAME:", "${user.username}")
         })
     }

@@ -7,6 +7,6 @@ import retrofit2.http.Header
 
 interface UsuarioService {
 
-    @GET("auth/user/me")
+    @GET("user/me")
     fun getUser(@Header("Authorization")token: String?): Call<UsuarioRegistroResponse>
 }
