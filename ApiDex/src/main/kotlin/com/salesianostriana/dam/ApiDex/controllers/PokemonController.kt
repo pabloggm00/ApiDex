@@ -351,8 +351,8 @@ class PokemonController {
                     Equipo(
                         nuevoEquipo.nombre,
                         nuevoEquipo.totalPC,
-                        usuario!!.get(),
                         nuevoEquipo.liga,
+                        usuario!!.get(),
                         nuevoEquipo.listaPokemon
 
                     )

@@ -9,11 +9,10 @@ class Equipo(
 
     var totalPC: Int,
 
-    @ManyToOne
-    var usuario: Usuario,
+    var liga: Liga,
 
     @ManyToOne
-    var liga: Liga,
+    var usuario: Usuario,
 
     @OneToMany(mappedBy = "equipo")
     var listaPokemon: MutableList<Pokemon> = mutableListOf(),
