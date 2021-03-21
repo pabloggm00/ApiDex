@@ -339,6 +339,31 @@ class PokemonController {
             }
     }
 
+    @PostMapping("/{idEquipo}/pokemon/{idPokemon}")
+    fun addPokemonEquipo(@PathVariable idEquipo: Long, @PathVariable idPokemon: Long) : ResponseEntity<GetEquipoDetalleDto> {
+        var auth: String = SecurityContextHolder.getContext().authentication.name
+        var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
+
+        var pokemon : Pokemon = pokemonService.findById(idPokemon).orElse(null)
+        var equipo: Equipo = equipoService.findById(idEquipo).orElse(null)
+
+        if (usuario!!.isPresent) {
+            if (equipo != null) {
+                if (pokemon != null) {
+                    equipo.listaPokemon.add(pokemon)
+                    equipoService.save(equipo)
+                    return ResponseEntity.status(HttpStatus.CREATED).body(equipo.toGetEquipoDetalleDto())
+                } else {
+                    throw SingleEntityNotFoundException(idPokemon.toString(), Pokemon::class.java)
+                }
+            } else {
+                throw SingleEntityNotFoundException(idEquipo.toString(), Equipo::class.java)
+            }
+        }else{
+            return ResponseEntity.status(HttpStatus.CREATED).body(null)
+        }
+    }
+
     @PostMapping("/equipos")
     fun createEquipo(@RequestBody nuevoEquipo: EditEquipoDto): ResponseEntity<GetEquipoDetalleDto>{
 
@@ -350,7 +375,6 @@ class PokemonController {
                 equipoService.save(
                     Equipo(
                         nuevoEquipo.nombre,
-                        nuevoEquipo.totalPC,
                         nuevoEquipo.liga,
                         usuario!!.get(),
                         nuevoEquipo.listaPokemon

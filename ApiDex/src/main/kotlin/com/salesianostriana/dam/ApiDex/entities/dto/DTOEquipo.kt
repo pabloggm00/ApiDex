@@ -5,22 +5,20 @@ import com.salesianostriana.dam.ApiDex.entities.*
 
 data class EditEquipoDto(
     var nombre: String,
-    var totalPC: Int,
     var listaPokemon: MutableList<Pokemon>,
     var liga: Liga
 )
 
 data class GetEquipoDto(
     var nombre: String,
-    var liga: String
+    var liga: Liga
 )
 
-fun Equipo.toGetEquipoDto(): GetEquipoDto = GetEquipoDto(nombre,liga.nombre)
+fun Equipo.toGetEquipoDto(): GetEquipoDto = GetEquipoDto(nombre,liga)
 
 data class GetEquipoDetalleDto(
     var nombre: String,
-    var listaPokemon: List<GetPokemonEquipoDto>,
-    var totalPC: Int
+    var listaPokemon: List<GetPokemonEquipoDto>
 )
 
 
@@ -28,13 +26,14 @@ fun Equipo.toGetEquipoDetalleDto(): GetEquipoDetalleDto {
 
     var listaPokemon: MutableList<GetPokemonEquipoDto> = mutableListOf()
     listaPokemon.forEach { i ->
-        listaPokemon.add(GetPokemonEquipoDto(i!!.id, /*"${i.imagen}",*/ i.pC ))
+        listaPokemon.add(GetPokemonEquipoDto(i!!.id, "${i.imagen}", i.pC ))
     }
+
+
 
     return GetEquipoDetalleDto(
         nombre,
-        listaPokemon,
-        totalPC
+        listaPokemon
     )
 
 }

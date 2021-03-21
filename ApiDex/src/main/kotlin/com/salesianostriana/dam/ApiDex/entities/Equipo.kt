@@ -7,8 +7,6 @@ class Equipo(
 
     var nombre: String,
 
-    var totalPC: Int,
-
     var liga: Liga,
 
     @ManyToOne
