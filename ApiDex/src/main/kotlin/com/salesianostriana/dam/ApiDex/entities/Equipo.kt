@@ -13,10 +13,10 @@ class Equipo(
     var usuario: Usuario,
 
     @OneToMany(mappedBy = "equipo")
-    var listaPokemon: MutableList<Pokemon> = mutableListOf(),
+    var listaPokemon: MutableList<Pokemon>,
 
     @Id @GeneratedValue
-    val id: Long? = null
+    var id: Long? = null
 ) {
 
     override fun equals(other: Any?): Boolean {

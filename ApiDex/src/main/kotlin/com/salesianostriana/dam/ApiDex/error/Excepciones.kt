@@ -50,3 +50,7 @@ data class EquipoNotFoundException(
 data class EvolucionarOriginalNotFoundException(
     val javaClass: Class<out Any>
 ): EntityNotFoundException("Este pokemon no se puede evolucionar")
+
+data class PokemonOriginalNotFoundException(
+    val javaClass: Class<out Any>
+): EntityNotFoundException("Este Pokémon es el original")
