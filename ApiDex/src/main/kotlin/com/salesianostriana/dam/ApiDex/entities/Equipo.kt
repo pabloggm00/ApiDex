@@ -7,19 +7,16 @@ class Equipo(
 
     var nombre: String,
 
-    var totalPC: Int,
+    var liga: Liga,
 
     @ManyToOne
     var usuario: Usuario,
 
-    @ManyToOne
-    var liga: Liga,
-
     @OneToMany(mappedBy = "equipo")
-    var listaPokemon: MutableList<Pokemon> = mutableListOf(),
+    var listaPokemon: MutableList<Pokemon>,
 
     @Id @GeneratedValue
-    val id: Long? = null
+    var id: Long? = null
 ) {
 
     override fun equals(other: Any?): Boolean {
