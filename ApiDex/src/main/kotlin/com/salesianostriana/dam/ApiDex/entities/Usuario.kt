@@ -3,14 +3,25 @@ package com.salesianostriana.dam.ApiDex.entities
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
-import java.time.LocalDate
 import javax.persistence.*
+import javax.validation.constraints.Email
+import javax.validation.constraints.NotBlank
+import javax.validation.constraints.Size
 
 @Entity
 class Usuario(
+
+    @get:Email(message = "{usuario.email.blank}")
     var email: String,
+
+    @get:NotBlank(message = "{usuario.username.blank}")
+    @get:Size( message = "{usuario.username.size}", min= 4, max= 20)
+    @Column(unique = true)
     private var username: String,
+
+    @get:Size( message = "{usuario.password.size}", min= 8, max = 100)
     var pass: String,
+
 
     @ElementCollection(fetch = FetchType.EAGER)
     val roles: MutableSet<String> = HashSet(),
@@ -23,12 +34,18 @@ class Usuario(
 
     private val credentialIsNonExpired: Boolean = true,
 
+
+
     @ManyToMany
     @JoinTable(name = "favoritos",
         joinColumns = [JoinColumn(name="usuario_id")],
         inverseJoinColumns = [JoinColumn(name="pokemon_id")]
     )
     var pokemonsFavs: MutableList<Pokemon> = mutableListOf(),
+
+    @OneToOne(cascade = arrayOf(CascadeType.ALL))
+    @JoinColumn(name = "imagen_id", referencedColumnName = "id")
+    var avatar: Imagen? = null,
 
     @OneToMany(mappedBy = "usuario")
     var listaEquipos: MutableList<Equipo> = mutableListOf(),

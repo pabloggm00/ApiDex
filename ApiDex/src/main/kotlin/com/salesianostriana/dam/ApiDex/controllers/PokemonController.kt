@@ -6,15 +6,20 @@ import com.salesianostriana.dam.ApiDex.entities.Usuario
 import com.salesianostriana.dam.ApiDex.entities.dto.*
 import com.salesianostriana.dam.ApiDex.error.*
 import com.salesianostriana.dam.ApiDex.services.EquipoService
+import com.salesianostriana.dam.ApiDex.services.ImagenService
 /*import com.salesianostriana.dam.ApiDex.services.ImagenPokemonService*/
 import com.salesianostriana.dam.ApiDex.services.PokemonService
 import com.salesianostriana.dam.ApiDex.services.UsuarioService
+import com.salesianostriana.dam.ApiDex.upload.ImgurBadRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
+import org.springframework.web.server.ResponseStatusException
 import java.util.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/pokemon")
@@ -23,14 +28,12 @@ class PokemonController {
     @Autowired
     lateinit var pokemonService: PokemonService
 
-    /*@Autowired
-    lateinit var imagenService: ImagenPokemonService*/
+    @Autowired
+    lateinit var imagenService: ImagenService
 
     @Autowired
     lateinit var usuarioService: UsuarioService
 
-    @Autowired
-    lateinit var equipoService: EquipoService
 
     @GetMapping
     fun getAllPokemon(/*@AuthenticationPrincipal usuario: Usuario*/
@@ -42,7 +45,11 @@ class PokemonController {
         var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
 
 
-        return pokemonService.getPokemonFiltrados(tipo, generacion)?.map { it.toGetPokemonDto(usuario!!.get()) }
+        var listaPokemonFiltrados : List<Pokemon>? = pokemonService.getPokemonFiltrados(tipo, generacion)
+
+        listaPokemonFiltrados = listaPokemonFiltrados?.sortedBy{ it.idPokedex.toInt() }
+
+        return listaPokemonFiltrados?.map { it.toGetPokemonDto(usuario!!.get()) }
             .takeIf { it!!.isNotEmpty() } ?: throw ListEntityNotFoundException(Pokemon::class.java)
 
     }
@@ -64,6 +71,7 @@ class PokemonController {
 
     @PostMapping("/{id}")
     fun duplicate(
+        @Valid
         @PathVariable id: Long,
         @RequestBody pokemonDuplicado: EditPokemonDto
     ): ResponseEntity<GetPokemonDetalleDto> {
@@ -77,21 +85,22 @@ class PokemonController {
             .body(
                 pokemonService.save(
                     Pokemon(
-                        pokemon!!.get().nombre,
+                        pokemon.get().nombre,
                         pokemonDuplicado.estrellas ,
                         pokemonDuplicado.ataqueRapido,
                         pokemonDuplicado.ataqueCargado,
                         pokemonDuplicado.pC,
-                        pokemon!!.get().idPokedex,
-                        pokemon!!.get().isUltimo,
-                        pokemon!!.get().isFav,
-                        pokemon!!.get().isCapturado,
+                        pokemon.get().idPokedex,
+                        pokemon.get().isUltimo,
+                        pokemon.get().isFav,
+                        pokemon.get().isCapturado,
                         pokemonDuplicado.isOriginal,
                         /*pokemon!!.get().evolucion,*/
-                        pokemon!!.get().equipo,
-                        pokemon!!.get().generacion,
-                        pokemon!!.get().primerTipo,
-                        pokemon!!.get().segundoTipo
+                        pokemon.get().equipo,
+                        pokemon.get().generacion,
+                        pokemon.get().primerTipo,
+                        pokemon.get().segundoTipo,
+                        pokemon.get().imagen
                     )
                 ).toGetPokemonDetalleDto(usuario!!.get())
             )
@@ -99,6 +108,7 @@ class PokemonController {
 
     @PutMapping("/{id}")
     fun editPokemon(
+        @Valid
         @RequestBody editarPokemon: EditPokemonDto,
         @PathVariable id: Long
     ): GetPokemonDetalleDto {
@@ -167,36 +177,41 @@ class PokemonController {
                         ).toGetPokemonDetalleDto(usuario!!.get()))
             }
         }
-        throw SingleEntityNotFoundException(id.toString(), Pokemon::class.java)
+        throw EvolucionarOriginalNotFoundException(Pokemon::class.java)
 
 
     }
 
 
 
-    /*@PostMapping("/{id}/img")
+    @PostMapping("/{id}/img")
     fun createImage(
-        @AuthenticationPrincipal usuario: Usuario,
+        /*@AuthenticationPrincipal usuario: Usuario,*/
         @PathVariable id:Long,
         @RequestPart("file") file: MultipartFile
-    ): ResponseEntity<GetPokemoDetalleDto>{
+    ): ResponseEntity<GetPokemonDetalleDto>{
+
+        var auth: String = SecurityContextHolder.getContext().authentication.name
+        var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
+
         var pokemon: Pokemon = pokemonService.findById(id).orElse(null)
+
 
         if (pokemon != null){
             try {
-                imagenService.save(file,pokemon)
+                imagenService.saveImagenPokemon(file,pokemon)
                 return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(pokemon.toGetPokemonDetalleDto(usuario))
+                    .body(pokemon.toGetPokemonDetalleDto(usuario!!.get()))
             }catch (ex: ImgurBadRequest){
                 throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Error en la subida de imagen")
             }
         } else {
             throw SingleEntityNotFoundException(id.toString(), Pokemon::class.java)
         }
-    }*/
+    }
 
     //Este método no estará en el final, solo es para testear
-   /* @DeleteMapping("/{id}/img/{hash}")
+    @DeleteMapping("/{id}/img/{hash}")
     fun deleteImage(@PathVariable id: Long, @PathVariable hash: String): ResponseEntity<Any>{
         var pokemon: Pokemon = pokemonService.findById(id).orElse(null)
 
@@ -209,7 +224,7 @@ class PokemonController {
 
         }
         return ResponseEntity.noContent().build()
-    }*/
+    }
 
     /*POKEMON FAVORITOS*/
 
@@ -299,83 +314,7 @@ class PokemonController {
         return ResponseEntity.noContent().build()
     }
 
-    /*EQUIPO*/
 
-    @GetMapping("/equipos")
-    fun getAllEquipos(): List<GetEquipoDto> {
-
-        var auth: String = SecurityContextHolder.getContext().authentication.name
-        var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
-
-        return equipoService.getEquipos(usuario!!.get())
-            .map { it.toGetEquipoDto() }
-            .takeIf { it.isNotEmpty() } ?: throw EquipoNotFoundException(Equipo::class.java)
-
-    }
-
-    @GetMapping("/equipos/{id}")
-    fun getEquipoById(@PathVariable id: Long): GetEquipoDetalleDto{
-
-        /*var auth: String = SecurityContextHolder.getContext().authentication.name
-        var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)*/
-
-        return equipoService.findById(id)
-            .map { it.toGetEquipoDetalleDto() }
-            .orElseThrow {
-                SingleEntityNotFoundException(id.toString(), Equipo::class.java)
-            }
-    }
-
-    @PostMapping("/equipos")
-    fun createEquipo(@RequestBody nuevoEquipo: EditEquipoDto): ResponseEntity<GetEquipoDetalleDto>{
-
-        var auth : String = SecurityContextHolder.getContext().authentication.name
-        var usuario : Optional<Usuario>? = usuarioService.findByUsername(auth)
-        return ResponseEntity
-            .status(HttpStatus.CREATED)
-            .body(
-                equipoService.save(
-                    Equipo(
-                        nuevoEquipo.nombre,
-                        nuevoEquipo.totalPC,
-                        usuario!!.get(),
-                        nuevoEquipo.liga,
-                        nuevoEquipo.listaPokemon
-
-                    )
-                ).toGetEquipoDetalleDto())
-    }
-
-    @PutMapping("/equipos/{id}")
-    fun editEquipo(@RequestBody editEquipo: EditEquipoDto, @PathVariable id: Long): GetEquipoDetalleDto{
-        var auth: String = SecurityContextHolder.getContext().authentication.name
-        var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
-
-        return equipoService.findById(id)
-            .map { equipoEncontrado ->
-                equipoEncontrado.liga = editEquipo.liga
-                equipoEncontrado.nombre = editEquipo.nombre
-                equipoEncontrado.listaPokemon = editEquipo.listaPokemon
-
-                equipoService.save(equipoEncontrado).toGetEquipoDetalleDto()
-            }
-            .orElseThrow { SingleEntityNotFoundException(id.toString(), Equipo::class.java) }
-    }
-
-    @DeleteMapping("/equipos/{id}")
-    fun deleteEquipo(@PathVariable id: Long): ResponseEntity<Any>{
-
-        var auth: String = SecurityContextHolder.getContext().authentication.name
-        var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
-
-        usuario!!.get().listaEquipos.forEach { equipo ->
-            if (equipo.id == id){
-                usuario!!.get().listaEquipos.remove(equipo)
-                usuarioService.save(usuario!!.get())
-            }
-        }
-        return ResponseEntity.noContent().build()
-    }
 
 
 }

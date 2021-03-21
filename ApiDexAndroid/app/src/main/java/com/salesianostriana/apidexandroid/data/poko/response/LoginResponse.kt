@@ -1,6 +1,6 @@
 package com.salesianostriana.apidexandroid.data.poko.response
 
-class LoginResponse (
+data class LoginResponse (
     var token: String,
     var usuario: UsuarioLoginResponse
 )

@@ -1,17 +1,27 @@
 package com.salesianostriana.dam.ApiDex.entities
 
 import javax.persistence.*
+import javax.validation.constraints.*
 
 @Entity
 class Pokemon(
     var nombre: String,
 
+    @get:NotNull(message="{pokemon.estrellas.null}")
+    @get:Min(1, message = "{pokemon.estrellas.min}")
+    @get:Max(3, message = "{pokemon.estrellas.max}")
     var estrellas: Int?,
 
+    @get:NotBlank(message = "{pokemon.ataqueRapido.blank}")
+    @get:Size(message = "{pokemon.ataqueRapido.size}", min = 2)
     var ataqueRapido: String?,
 
+    @get:NotBlank(message = "{pokemon.ataqueCargado.blank}")
+    @get:Size(message = "{pokemon.ataqueCargado.size}", min = 2)
     var ataqueCargado: String?,
 
+    @get:NotNull(message = "{pokemon.pC.null}")
+    @get:Min(1, message = "{pokemon.pC.min}")
     var pC: Int?,
 
     var idPokedex: String,
@@ -30,7 +40,7 @@ class Pokemon(
     var evolucion: Evolucion?= null,*/
 
     @ManyToOne
-    var equipo: Equipo?=null,
+    var equipo: Equipo? = null,
 
     @ManyToOne
     var generacion: Pokedex?,
@@ -41,9 +51,9 @@ class Pokemon(
     @ManyToOne
     var segundoTipo: Tipo?,
 
-    //@OneToOne(cascade = arrayOf(CascadeType.ALL))
-    //@JoinColumn(name = "imagen_id", referencedColumnName = "id")
-    //var imagen: ImagenPokemon? = null,
+    @OneToOne(cascade = arrayOf(CascadeType.ALL))
+    @JoinColumn(name = "imagen_id", referencedColumnName = "id")
+    var imagen: Imagen? = null,
 
     @ManyToMany
     @JoinTable(name = "favoritos",

@@ -34,7 +34,7 @@ class PerfilViewModel (application: Application) : AndroidViewModel(application)
         val sharedPref = context?.getSharedPreferences("FILE_PREFERENCES", Context.MODE_PRIVATE)
         token = sharedPref?.getString("token", "")
 
-       _usuario.value = UsuarioRegistroResponse("",1, "")
+       _usuario.value = UsuarioRegistroResponse("",1, "", "")
 
         var retrofit = Retrofit.Builder()
                .baseUrl(baseUrl)

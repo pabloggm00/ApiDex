@@ -29,4 +29,6 @@ interface PokemonService {
 
     @DELETE("pokemon/favs/{id}")
     fun deleteFavPokemon(@Header("Authorization") token: String?, @Path("id") idPokemon: Long) : Call<Any>
+
+    @GET
 }

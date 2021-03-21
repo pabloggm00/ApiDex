@@ -1,25 +1,26 @@
 package com.salesianostriana.dam.ApiDex.entities
 
 import javax.persistence.*
+import javax.validation.constraints.NotBlank
+
 
 @Entity
 class Equipo(
 
+    @get:NotBlank(message = "{equipo.nombre.blank}")
     var nombre: String,
 
-    var totalPC: Int,
+    @get:NotBlank(message = "{equipo.liga.blank}")
+    var liga: Liga,
 
     @ManyToOne
     var usuario: Usuario,
 
-    @ManyToOne
-    var liga: Liga,
-
     @OneToMany(mappedBy = "equipo")
-    var listaPokemon: MutableList<Pokemon> = mutableListOf(),
+    var listaPokemon: MutableList<Pokemon>,
 
     @Id @GeneratedValue
-    val id: Long? = null
+    var id: Long? = null
 ) {
 
     override fun equals(other: Any?): Boolean {
