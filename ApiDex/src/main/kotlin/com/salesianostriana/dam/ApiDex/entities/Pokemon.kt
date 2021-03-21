@@ -40,7 +40,7 @@ class Pokemon(
     var evolucion: Evolucion?= null,*/
 
     @ManyToOne
-    var equipo: Equipo?=null,
+    var equipo: Equipo? = null,
 
     @ManyToOne
     var generacion: Pokedex?,

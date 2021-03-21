@@ -51,17 +51,16 @@ data class GetPokemonDetalleDto(
 
 data class GetPokemonEquipoDto(
     var id: Long?,
-    //var imagen: String?,
+    var imagen: String?,
     var pC: Int?
 )
 
-/*fun Pokemon.toGetPokemonEquipo(): GetPokemonEquipoDto {
+fun Pokemon.toGetPokemonEquipo(): GetPokemonEquipoDto {
 
-    lateinit var imagenPokemon: ImagenPokemon
-    var url: String = "http://10.0.2.2:9000/files/"
+    val url: String = "http://10.0.2.2:9000/files/"
 
-    return GetPokemonEquipoDto(id, "${url}${imagenPokemon.dataId}",pC)
-}*/
+    return GetPokemonEquipoDto(id, "${url}${imagen!!.dataId}",pC)
+}
 
 fun Pokemon.toGetPokemonDto(usuario: Usuario?): GetPokemonPokedexDto{
 
@@ -84,7 +83,7 @@ fun Pokemon.toGetPokemonDto(usuario: Usuario?): GetPokemonPokedexDto{
         }
     }
 
-    var url: String = "http://10.0.2.2:9000/files/"
+    val url: String = "http://10.0.2.2:9000/files/"
 
 
     return GetPokemonPokedexDto(
