@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.*
 import java.util.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/equipo")
@@ -83,7 +84,7 @@ class EquipoController {
     }
 
     @PostMapping
-    fun createEquipo(@RequestBody nuevoEquipo: EditEquipoDto): ResponseEntity<GetEquipoDetalleDto> {
+    fun createEquipo(@Valid @RequestBody nuevoEquipo: EditEquipoDto): ResponseEntity<GetEquipoDetalleDto> {
 
         var auth : String = SecurityContextHolder.getContext().authentication.name
         var usuario : Optional<Usuario>? = usuarioService.findByUsername(auth)
@@ -102,7 +103,7 @@ class EquipoController {
     }
 
     @PutMapping("/{id}")
-    fun editEquipo(@RequestBody editEquipo: EditEquipoDto, @PathVariable id: Long): GetEquipoDetalleDto {
+    fun editEquipo(@Valid @RequestBody editEquipo: EditEquipoDto, @PathVariable id: Long): GetEquipoDetalleDto {
         var auth: String = SecurityContextHolder.getContext().authentication.name
         var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
 

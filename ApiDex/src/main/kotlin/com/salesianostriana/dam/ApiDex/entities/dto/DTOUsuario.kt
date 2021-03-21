@@ -1,10 +1,21 @@
 package com.salesianostriana.dam.ApiDex.entities.dto
 
 import com.salesianostriana.dam.ApiDex.entities.Usuario
+import javax.persistence.Column
+import javax.validation.constraints.Email
+import javax.validation.constraints.NotBlank
+import javax.validation.constraints.Size
 
 data class EditUsuarioDto(
+
+    @get:Email(message = "{usuario.email.blank}")
     var email: String,
+    @get:NotBlank(message = "{usuario.username.blank}")
+    @get:Size( message = "{usuario.username.size}", min= 4, max= 20)
+    @Column(unique = true)
     var username: String,
+
+    @get:Size( message = "{usuario.password.size}", min= 8, max = 100)
     var pass: String,
     //var avatar: String,
     var roles: String?,

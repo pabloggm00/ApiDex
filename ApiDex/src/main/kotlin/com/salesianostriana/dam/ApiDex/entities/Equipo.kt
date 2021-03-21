@@ -10,6 +10,7 @@ class Equipo(
     @get:NotBlank(message = "{equipo.nombre.blank}")
     var nombre: String,
 
+    @get:NotBlank(message = "{equipo.liga.blank}")
     var liga: Liga,
 
     @ManyToOne
