@@ -4,11 +4,22 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import javax.persistence.*
+import javax.validation.constraints.Email
+import javax.validation.constraints.NotBlank
+import javax.validation.constraints.Size
 
 @Entity
 class Usuario(
+
+    @get:Email(message = "{usuario.email.blank}")
     var email: String,
+
+    @get:NotBlank(message = "{usuario.username.blank}")
+    @get:Size( message = "{usuario.username.size}", min= 4, max= 20)
+    @Column(unique = true)
     private var username: String,
+
+    @get:Size( message = "{usuario.password.size}", min= 8, max = 100)
     var pass: String,
 
 

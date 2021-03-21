@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.server.ResponseStatusException
 import java.util.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/pokemon")
@@ -70,6 +71,7 @@ class PokemonController {
 
     @PostMapping("/{id}")
     fun duplicate(
+        @Valid
         @PathVariable id: Long,
         @RequestBody pokemonDuplicado: EditPokemonDto
     ): ResponseEntity<GetPokemonDetalleDto> {
@@ -106,6 +108,7 @@ class PokemonController {
 
     @PutMapping("/{id}")
     fun editPokemon(
+        @Valid
         @RequestBody editarPokemon: EditPokemonDto,
         @PathVariable id: Long
     ): GetPokemonDetalleDto {

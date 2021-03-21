@@ -1,12 +1,16 @@
 package com.salesianostriana.dam.ApiDex.entities
 
 import javax.persistence.*
+import javax.validation.constraints.NotBlank
+
 
 @Entity
 class Equipo(
 
+    @get:NotBlank(message = "{equipo.nombre.blank}")
     var nombre: String,
 
+    @get:NotBlank(message = "{equipo.liga.blank}")
     var liga: Liga,
 
     @ManyToOne

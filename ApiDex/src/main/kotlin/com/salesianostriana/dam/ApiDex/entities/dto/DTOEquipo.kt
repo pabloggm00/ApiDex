@@ -1,12 +1,16 @@
 package com.salesianostriana.dam.ApiDex.entities.dto
 
 import com.salesianostriana.dam.ApiDex.entities.*
+import javax.validation.constraints.NotBlank
 
 
 data class EditEquipoDto(
+    @get:NotBlank(message = "{equipo.nombre.blank}")
     var nombre: String,
+    @get:NotBlank(message = "{equipo.liga.blank}")
+    var liga: Liga,
     var listaPokemons: MutableList<Pokemon> = mutableListOf(),
-    var liga: Liga
+
 )
 
 data class GetEquipoDto(
