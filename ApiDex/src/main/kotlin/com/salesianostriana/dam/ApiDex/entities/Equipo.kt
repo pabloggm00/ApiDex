@@ -1,10 +1,13 @@
 package com.salesianostriana.dam.ApiDex.entities
 
 import javax.persistence.*
+import javax.validation.constraints.NotBlank
+
 
 @Entity
 class Equipo(
 
+    @get:NotBlank(message = "{equipo.nombre.blank}")
     var nombre: String,
 
     var totalPC: Int,

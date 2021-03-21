@@ -1,13 +1,26 @@
 package com.salesianostriana.dam.ApiDex.entities.dto
 
 import com.salesianostriana.dam.ApiDex.entities.*
+import javax.validation.constraints.*
 
 
 data class EditPokemonDto(
-    var estrellas: Int,
-    var ataqueRapido: String,
-    var ataqueCargado: String,
-    var pC: Int,
+    @get:NotNull(message="{pokemon.estrellas.null}")
+    @get:Min(1, message = "{pokemon.estrellas.min}")
+    @get:Max(3, message = "{pokemon.estrellas.max}")
+    var estrellas: Int?,
+
+    @get:NotBlank(message = "{pokemon.ataqueRapido.blank}")
+    @get:Size(message = "{pokemon.ataqueRapido.size}", min = 2)
+    var ataqueRapido: String?,
+
+    @get:NotBlank(message = "{pokemon.ataqueCargado.blank}")
+    @get:Size(message = "{pokemon.ataqueCargado.size}", min = 2)
+    var ataqueCargado: String?,
+
+    @get:NotNull(message = "{pokemon.pC.null}")
+    @get:Min(1, message = "{pokemon.pC.min}")
+    var pC: Int?,
     var isOriginal: Boolean = false
 )
 
