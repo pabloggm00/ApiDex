@@ -13,11 +13,9 @@ class Pokemon(
     var estrellas: Int?,
 
     @get:NotBlank(message = "{pokemon.ataqueRapido.blank}")
-    @get:Size(message = "{pokemon.ataqueRapido.size}", min = 2)
     var ataqueRapido: String?,
 
     @get:NotBlank(message = "{pokemon.ataqueCargado.blank}")
-    @get:Size(message = "{pokemon.ataqueCargado.size}", min = 2)
     var ataqueCargado: String?,
 
     @get:NotNull(message = "{pokemon.pC.null}")

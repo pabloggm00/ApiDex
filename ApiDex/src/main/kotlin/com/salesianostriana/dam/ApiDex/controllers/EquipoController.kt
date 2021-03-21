@@ -69,9 +69,9 @@ class EquipoController {
 
         if (usuario!!.isPresent) {
                 if (!pokemon.isOriginal) {
-                    equipo.listaPokemon.add(pokemon)
 
-                    equipoService.save(equipo)
+                    pokemon.equipo= equipo
+
                     pokemonService.save(pokemon)
 
                     return ResponseEntity.status(HttpStatus.CREATED).body(equipo.toGetEquipoDetalleDto())

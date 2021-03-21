@@ -10,14 +10,13 @@ class Equipo(
     @get:NotBlank(message = "{equipo.nombre.blank}")
     var nombre: String,
 
-    @get:NotBlank(message = "{equipo.liga.blank}")
     var liga: Liga,
 
     @ManyToOne
     var usuario: Usuario,
 
     @OneToMany(mappedBy = "equipo")
-    var listaPokemon: MutableList<Pokemon>,
+    var listaPokemon: MutableList<Pokemon> = mutableListOf(),
 
     @Id @GeneratedValue
     var id: Long? = null
