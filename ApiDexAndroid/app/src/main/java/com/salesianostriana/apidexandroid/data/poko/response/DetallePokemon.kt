@@ -13,5 +13,6 @@ data class DetallePokemon(
         val generacion: Pokedex,
         val primerTipo: Tipo,
         val segundoTipo: Tipo,
-        val id: Long
+        val id: Long,
+        val isOriginal: Boolean
 )

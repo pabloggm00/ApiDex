@@ -1,5 +1,6 @@
 package com.salesianostriana.apidexandroid.retrofit
 
+import com.salesianostriana.apidexandroid.data.poko.response.DetallePokemon
 import com.salesianostriana.apidexandroid.data.poko.response.Pokemon
 import retrofit2.Call
 import retrofit2.http.*
@@ -30,5 +31,6 @@ interface PokemonService {
     @DELETE("pokemon/favs/{id}")
     fun deleteFavPokemon(@Header("Authorization") token: String?, @Path("id") idPokemon: Long) : Call<Any>
 
-    @GET
+    @GET("pokemon/{id}")
+    fun getDetallePokemon(@Header("Authorization") token: String?, @Path("id") idPokemon: Long) : Call<DetallePokemon>
 }
