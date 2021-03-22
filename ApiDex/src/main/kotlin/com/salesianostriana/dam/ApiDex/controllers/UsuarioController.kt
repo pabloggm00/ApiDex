@@ -70,4 +70,17 @@ class UsuarioController {
         }
     }
 
+
+    @DeleteMapping("/{id}")
+    fun deleteUser(@PathVariable id: Long): ResponseEntity<Any>{
+        var auth: String = SecurityContextHolder.getContext().authentication.name
+        var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
+
+        if (usuarioService.existsById(id)){
+            usuarioService.deleteById(id)
+        }
+
+        return ResponseEntity.noContent().build()
+    }
+
 }
