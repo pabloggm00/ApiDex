@@ -14,5 +14,6 @@ data class DetallePokemon(
         val primerTipo: String,
         val segundoTipo: String,
         val id: Long,
-        val isOriginal: Boolean
+        val isOriginal: Boolean,
+        val isUltimo: Boolean
 )

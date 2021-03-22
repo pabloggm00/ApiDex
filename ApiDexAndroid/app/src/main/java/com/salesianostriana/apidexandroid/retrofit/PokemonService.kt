@@ -38,5 +38,10 @@ interface PokemonService {
     @POST("pokemon/{id}")
     fun duplicarPokemon(@Header("Authorization") token: String?, @Body nuevoPokemon: PokemonRequest, @Path("id") idPokemon: Long) : Call<DetallePokemon>
 
+    @DELETE("pokemon/{id}")
+    fun deletePokemon(@Header("Authorization") token: String?,  @Path("id") idPokemon: Long): Call<Any>
+
+    @PUT("pokemon/{id}")
+    fun editarPokemon(@Header("Authorization") token: String?, @Body editPokemon: PokemonRequest, @Path("id") idPokemon: Long) : Call<DetallePokemon>
 
 }

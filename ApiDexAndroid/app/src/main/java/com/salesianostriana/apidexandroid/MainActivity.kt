@@ -2,10 +2,12 @@ package com.salesianostriana.apidexandroid
 
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -17,11 +19,15 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.salesianostriana.apidexandroid.ui.login.LoginActivity
+import com.salesianostriana.apidexandroid.ui.pokedex.FilterActivity
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+
+    lateinit var token: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +56,9 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        val sharedPref = getSharedPreferences("FILE_PREFERENCES", Context.MODE_PRIVATE)
+        token = sharedPref.getString("token", "")!!
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -58,9 +67,41 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_filter -> {
+                val intent = Intent(this, FilterActivity::class.java)
+                this.startActivity(intent)
+                true
+            }
+
+            R.id.action_logout -> {
+                logout()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    private fun logout(){
+        if (token.isEmpty()) {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        } else {
+            val sharedPref = getSharedPreferences("FILE_PREFERENCES", Context.MODE_PRIVATE)
+            with(sharedPref.edit()){
+                remove("token")
+                commit()
+            }
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
 }

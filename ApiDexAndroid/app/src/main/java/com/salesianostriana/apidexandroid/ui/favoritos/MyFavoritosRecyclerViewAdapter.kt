@@ -1,16 +1,17 @@
 package com.salesianostriana.apidexandroid.ui.favoritos
 
 import android.content.Context
+import android.content.Intent
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import coil.load
 import com.salesianostriana.apidexandroid.R
 import com.salesianostriana.apidexandroid.data.poko.response.Pokemon
+import com.salesianostriana.apidexandroid.ui.detallePokemon.DetallePokemonActivity
 
 
 class MyFavoritosRecyclerViewAdapter(
@@ -28,10 +29,10 @@ class MyFavoritosRecyclerViewAdapter(
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nombreView: TextView = view.findViewById(R.id.textView_nombrePokemon)
         val idPokedex: TextView = view.findViewById(R.id.textView_idPokedex)
-        val fav: ImageView = view.findViewById(R.id.imageView_favorito)
+        val fav: ImageView = view.findViewById(R.id.imageView_favoritoDetalle)
         val fotoPokemon: ImageView = view.findViewById(R.id.imageView_fotoPokemon)
         val rootView: View = view.findViewById(R.id.favoritos_view)
-        val capturado: ImageView = view.findViewById(R.id.imageView_noCapturado)
+        val capturado: ImageView = view.findViewById(R.id.imageView_noCapturadoDetalle)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -55,18 +56,20 @@ class MyFavoritosRecyclerViewAdapter(
             holder.fav.load(R.drawable.ic_nofav)
         }
 
-        /*holder.rootView.setOnClickListener(View.OnClickListener {
-            val intent = Intent(activity, DetalleViviendaActivity::class.java).apply {
+        holder.rootView.setOnClickListener(View.OnClickListener {
+            val intent = Intent(activity, DetallePokemonActivity::class.java).apply {
                 putExtra("pokemonId", item.id)
             }
             activity.startActivity(intent)
-        })*/
+        })
         holder.fav.setOnClickListener(View.OnClickListener {
             viewModel.addPokemonFav(item.id, item.isFav)
+            viewModel.getPokemonFavs()
         })
 
         holder.capturado.setOnClickListener(View.OnClickListener {
             viewModel.addPokemonCapturado(item.id, item.isCapturado)
+            viewModel.getPokemonFavs()
         })
 
     }

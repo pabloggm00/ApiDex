@@ -2,12 +2,10 @@ package com.salesianostriana.apidexandroid.ui.pokedex
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -15,7 +13,6 @@ import coil.load
 import com.salesianostriana.apidexandroid.R
 import com.salesianostriana.apidexandroid.data.poko.response.Pokemon
 import com.salesianostriana.apidexandroid.ui.detallePokemon.DetallePokemonActivity
-import kotlin.math.ln
 
 
 class MyPokedexRecyclerViewAdapter(
@@ -33,10 +30,10 @@ class MyPokedexRecyclerViewAdapter(
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nombreView: TextView = view.findViewById(R.id.textView_nombrePokemon)
         val idPokedex: TextView = view.findViewById(R.id.textView_idPokedex)
-        val fav: ImageView = view.findViewById(R.id.imageView_favorito)
+        val fav: ImageView = view.findViewById(R.id.imageView_favoritoDetalle)
         val fotoPokemon: ImageView = view.findViewById(R.id.imageView_fotoPokemon)
         val rootView: View = view.findViewById(R.id.pokedex_view)
-        val capturado: ImageView = view.findViewById(R.id.imageView_noCapturado)
+        val capturado: ImageView = view.findViewById(R.id.imageView_noCapturadoDetalle)
         val cardPokemon: CardView = view.findViewById(R.id.cardView_Pokemon)
     }
 
@@ -68,10 +65,12 @@ class MyPokedexRecyclerViewAdapter(
         })
         holder.fav.setOnClickListener(View.OnClickListener {
             viewModel.addPokemonFav(item.id, item.isFav)
+            viewModel.getPokemonList()
         })
 
         holder.capturado.setOnClickListener(View.OnClickListener {
             viewModel.addPokemonCapturado(item.id, item.isCapturado)
+            viewModel.getPokemonList()
         })
 
     }

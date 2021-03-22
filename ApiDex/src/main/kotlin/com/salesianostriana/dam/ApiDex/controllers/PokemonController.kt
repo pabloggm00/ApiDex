@@ -116,17 +116,23 @@ class PokemonController {
         var auth: String = SecurityContextHolder.getContext().authentication.name
         var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
 
-        return pokemonService.findById(id)
-            .map { pokemonEncontrado ->
-                pokemonEncontrado.pC = editarPokemon.pC
-                pokemonEncontrado.estrellas = editarPokemon.estrellas
-                pokemonEncontrado.ataqueRapido = editarPokemon.ataqueRapido
-                pokemonEncontrado.ataqueCargado = editarPokemon.ataqueCargado
+        var pokemon: Pokemon = pokemonService.findById(id).orElse(null)
+
+        if (!pokemon.isOriginal) {
+            return pokemonService.findById(id)
+                .map { pokemonEncontrado ->
+                    pokemonEncontrado.pC = editarPokemon.pC
+                    pokemonEncontrado.estrellas = editarPokemon.estrellas
+                    pokemonEncontrado.ataqueRapido = editarPokemon.ataqueRapido
+                    pokemonEncontrado.ataqueCargado = editarPokemon.ataqueCargado
 
 
-                pokemonService.save(pokemonEncontrado).toGetPokemonDetalleDto(usuario!!.get())
-            }
-            .orElseThrow { SingleEntityNotFoundException(id.toString(), Pokemon::class.java) }
+                    pokemonService.save(pokemonEncontrado).toGetPokemonDetalleDto(usuario!!.get())
+                }
+                .orElseThrow { SingleEntityNotFoundException(id.toString(), Pokemon::class.java) }
+        }else{
+            throw PokemonOriginalNotFoundException(Pokemon::class.java)
+        }
     }
 
 

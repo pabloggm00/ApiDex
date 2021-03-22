@@ -37,11 +37,13 @@ class NuevoPokemonActivity : AppCompatActivity() {
     lateinit var btnCrear: Button
     lateinit var token: String
     var _pokemonId: Long? = 0
+    var editar: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nuevo_pokemon)
 
+        editar = intent.getBooleanExtra("editar", false)
         _pokemonId = intent.extras?.getLong("idPokemon")
 
         editPC= findViewById(R.id.editText_PC)
@@ -49,6 +51,12 @@ class NuevoPokemonActivity : AppCompatActivity() {
         editAtaqueRapido = findViewById(R.id.editText_ataqueRapido)
         editAtaqueCargado = findViewById(R.id.editText_ataqueCargado)
         btnCrear = findViewById(R.id.btn_crear)
+
+        if(editar) {
+            cambiarTitulo("Editar Pokemon")
+        }else{
+            cambiarTitulo("Nuevo Pokemon")
+        }
 
         val sharedPref = context?.getSharedPreferences("FILE_PREFERENCES", Context.MODE_PRIVATE)
         token = sharedPref?.getString("token", "").toString()
@@ -66,6 +74,10 @@ class NuevoPokemonActivity : AppCompatActivity() {
 
     }
 
+    fun cambiarTitulo(titulo: String?) {
+        title = titulo
+    }
+
     fun doCreate(){
 
         val pokemonData = PokemonRequest(
@@ -76,35 +88,62 @@ class NuevoPokemonActivity : AppCompatActivity() {
                 false
         )
 
-        Log.i("Token", token)
-        Log.i("Token", "$_pokemonId")
-        Log.i("Token", pokemonData.ataqueCargado)
-        Log.i("Token", pokemonData.ataqueRapido)
-        Log.i("Token", pokemonData.pC.toString())
-        Log.i("Token", pokemonData.estrellas.toString())
+        if (!editar) {
+            service.duplicarPokemon("Bearer ${token}", pokemonData, _pokemonId!!)
+                .enqueue(object : Callback<DetallePokemon> {
+                    override fun onResponse(
+                        call: Call<DetallePokemon>,
+                        response: Response<DetallePokemon>
+                    ) {
 
-        service.duplicarPokemon("Bearer ${token}", pokemonData ,_pokemonId!!).enqueue(object : Callback<DetallePokemon>{
-            override fun onResponse(call: Call<DetallePokemon>, response: Response<DetallePokemon>) {
+                        if (response.code() == 201) {
+                            Toast.makeText(context, "Duplicado correctamente", Toast.LENGTH_SHORT)
+                                .show()
+                            /*var intent = Intent(context, DetallePokemonActivity::class.java).apply {
+                            putExtra("pokemonId", pokemonData.)
+                        }*/
+                            var intent = Intent(context, MainActivity::class.java)
+                            context.startActivity(intent)
+                        } else {
+                            Log.i("code", response.code().toString())
+                            Toast.makeText(context, "No se ha podido duplicar", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
 
-                if (response.code() == 201){
-                    Toast.makeText(context, "Duplicado correctamente", Toast.LENGTH_SHORT)
-                            .show()
-                    /*var intent = Intent(context, DetallePokemonActivity::class.java).apply {
-                        putExtra("pokemonId", pokemonData.)
-                    }*/
-                    var intent = Intent(context, MainActivity::class.java)
-                    context.startActivity(intent)
-                }else {
-                    Log.i("code", response.code().toString())
-                    Toast.makeText(context, "No se ha podido duplicar", Toast.LENGTH_SHORT)
-                            .show()
-                }
-            }
+                    override fun onFailure(call: Call<DetallePokemon>, t: Throwable) {
+                        Log.e("Error!!!", t.message.toString())
+                    }
 
-            override fun onFailure(call: Call<DetallePokemon>, t: Throwable) {
-                Log.e("Error!!!", t.message.toString())
-            }
+                })
+        }else{
+            service.editarPokemon("Bearer ${token}", pokemonData, _pokemonId!!)
+                .enqueue(object : Callback<DetallePokemon> {
+                    override fun onResponse(
+                        call: Call<DetallePokemon>,
+                        response: Response<DetallePokemon>
+                    ) {
 
-        })
+                        if (response.code() == 200) {
+                            Toast.makeText(context, "Duplicado correctamente", Toast.LENGTH_SHORT)
+                                .show()
+                            /*var intent = Intent(context, DetallePokemonActivity::class.java).apply {
+                            putExtra("pokemonId", pokemonData.)
+                        }*/
+                            var intent = Intent(context, MainActivity::class.java)
+                            context.startActivity(intent)
+                        } else {
+                            Log.i("code", response.code().toString())
+                            Toast.makeText(context, "No se ha podido duplicar", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<DetallePokemon>, t: Throwable) {
+                        Log.e("Error!!!", t.message.toString())
+                    }
+
+                })
+        }
     }
 }

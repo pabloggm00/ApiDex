@@ -55,4 +55,7 @@
     <string name="btnDuplicar">Duplicar</string>
     <string name="btnEvolucionar">Evolucionar</string>
     <string name="btnCrear">Crear</string>
+    <string name="btn_buscar">Buscar</string>
+    <string name="generacion_filter">Generación</string>
+    <string name="tipo_filter">Tipo</string>
 </resources>

@@ -5,15 +5,18 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
-import androidx.core.view.isGone
-import androidx.core.view.isInvisible
 import androidx.lifecycle.MutableLiveData
 import coil.load
+import com.salesianostriana.apidexandroid.MainActivity
 import com.salesianostriana.apidexandroid.R
 import com.salesianostriana.apidexandroid.data.poko.response.DetallePokemon
 import com.salesianostriana.apidexandroid.retrofit.PokemonService
@@ -59,6 +62,37 @@ class DetallePokemonActivity : AppCompatActivity() {
     lateinit var tituloValoracion: TextView
     lateinit var tituloPC: TextView
 
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        /*if (!_detallePokemon.value!!.isOriginal)*/
+            inflater.inflate(R.menu.detalle_pokemon_option_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return when (item.itemId) {
+            R.id.action_edit -> {
+                val intent = Intent(this, NuevoPokemonActivity::class.java).apply{
+                    putExtra("editar", true)
+                    putExtra("idPokemon", pokemonId)
+                }
+                this.startActivity(intent)
+                true
+            }
+
+            R.id.action_delete -> {
+                deletePokemon()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+
+    }
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalle_pokemon)
@@ -82,8 +116,8 @@ class DetallePokemonActivity : AppCompatActivity() {
         tituloPC = findViewById(R.id.textView_PC)
 
         idPokedexView = findViewById(R.id.textView_idPokedex)
-        isFavView = findViewById(R.id.imageView_favorito)
-        isCapView = findViewById(R.id.imageView_noCapturado)
+        isFavView = findViewById(R.id.imageView_favoritoDetalle)
+        isCapView = findViewById(R.id.imageView_noCapturadoDetalle)
         nombreView = findViewById(R.id.textView_nombrePokemon)
         fotoPokemon = findViewById(R.id.imageView_fotoPokemon)
         regionView = findViewById(R.id.textView_Region)
@@ -99,6 +133,8 @@ class DetallePokemonActivity : AppCompatActivity() {
         btnEvolucionar = findViewById(R.id.button_evolucionar)
         cardViewSegundotipo = findViewById(R.id.cardView_tipo2)
         cardViewPrimertipo = findViewById(R.id.cardView_tipo1)
+
+
 
         btnDuplicar.setOnClickListener ( View.OnClickListener {
             var intent = Intent(context, NuevoPokemonActivity::class.java).apply {
@@ -121,6 +157,10 @@ class DetallePokemonActivity : AppCompatActivity() {
                 if (response.code() == 200){
                     _detallePokemon.value = response.body()
                     idPokedexView.text = _detallePokemon.value?.idPokedex
+
+                    Log.i("is fav",_detallePokemon.value!!.isFav.toString())
+                    Log.i("is fav",_detallePokemon.value!!.isCapturado.toString())
+
                     if (_detallePokemon.value!!.isFav) {
                         isFavView.load(R.drawable.ic_isfav)
                     }else {
@@ -169,8 +209,7 @@ class DetallePokemonActivity : AppCompatActivity() {
                     ataqueRapidoView.text = _detallePokemon.value?.ataqueRapido
                     ataqueCargadoView.text = _detallePokemon.value?.ataqueCargado
 
-                    if (_detallePokemon.value!!.isOriginal){
-                        btnEvolucionar.visibility = View.GONE
+                    if (_detallePokemon.value!!.isOriginal) {
                         val1View.visibility = View.GONE
                         val2View.visibility = View.GONE
                         val3View.visibility = View.GONE
@@ -179,13 +218,40 @@ class DetallePokemonActivity : AppCompatActivity() {
                         tituloAtaqueRapido.visibility = View.GONE
                         tituloAtaqueCargado.visibility = View.GONE
                         pCView.visibility = View.GONE
+                        btnEvolucionar.visibility = View.GONE
+                    }
 
+                    if (_detallePokemon.value!!.isUltimo) {
+                        btnEvolucionar.visibility = View.GONE
                     }
 
                 }
             }
 
             override fun onFailure(call: Call<DetallePokemon>, t: Throwable) {
+                Log.e("Error!!!", t.message.toString())
+            }
+
+        })
+    }
+
+    fun deletePokemon(){
+        service.deletePokemon("Bearer $token", pokemonId!!.toLong()).enqueue(object : Callback<Any>{
+            override fun onResponse(call: Call<Any>, response: Response<Any>) {
+
+                if(response.code()==204){
+                    Toast.makeText(context, "Borrado correctamente", Toast.LENGTH_SHORT)
+                        .show()
+                    var intent = Intent(context, MainActivity::class.java)
+                    context.startActivity(intent)
+                }else{
+                    Toast.makeText(context, "No se ha podido borrar", Toast.LENGTH_SHORT)
+                        .show()
+                }
+
+            }
+
+            override fun onFailure(call: Call<Any>, t: Throwable) {
                 Log.e("Error!!!", t.message.toString())
             }
 

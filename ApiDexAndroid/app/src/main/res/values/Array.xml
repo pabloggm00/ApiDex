@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tipos_array">
+        <item>Todos</item>
+        <item>Planta</item>
+        <item>Veneno</item>
+        <item>Fuego</item>
+        <item>Acero</item>
+        <item>Agua</item>
+        <item>Bicho</item>
+        <item>Dragón</item>
+        <item>Eléctrico</item>
+        <item>Fantasma</item>
+        <item>Hada</item>
+        <item>Hielo</item>
+        <item>Lucha</item>
+        <item>Normal</item>
+        <item>Psíquico</item>
+        <item>Roca</item>
+        <item>Siniestro</item>
+        <item>Tierra</item>
+        <item>Volador</item>
+    </string-array>
+
+    <string-array name="generacion_array">
+        <item>Todas</item>
+        <item>Kanto</item>
+        <item>Johto</item>
+        <item>Hoenn</item>
+        <item>Sinnoh</item>
+        <item>Teselia</item>
+        <item>Kalos</item>
+        <item>Alola</item>
+        <item>Galar</item>
+    </string-array>
+</resources>
