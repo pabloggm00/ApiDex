@@ -2,14 +2,18 @@ package com.salesianostriana.apidexandroid.ui.perfil
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.salesianostriana.apidexandroid.MainActivity
 import com.salesianostriana.apidexandroid.data.poko.response.UsuarioRegistroResponse
 import com.salesianostriana.apidexandroid.retrofit.UsuarioService
+import com.salesianostriana.apidexandroid.ui.login.LoginActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -64,5 +68,26 @@ class PerfilViewModel (application: Application) : AndroidViewModel(application)
                     Log.e("Error", t.message.toString())
                 }
             })
+    }
+
+    fun deleteUser(){
+        service.deleteUser("Bearer $token", _usuario.value!!.id.toLong()).enqueue(object : Callback<Any>{
+            override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                if (response.code()== 204){
+                    Toast.makeText(context, "Cuenta eliminada", Toast.LENGTH_SHORT)
+                        .show()
+                    /*var intent = Intent(context, LoginActivity::class.java)
+                    context.startActivity(intent)*/
+                }else{
+                    Toast.makeText(context, "La cuenta no se ha podido eliminar", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+
+            override fun onFailure(call: Call<Any>, t: Throwable) {
+                Log.e("Error!!!", t.message.toString())
+            }
+
+        })
     }
 }

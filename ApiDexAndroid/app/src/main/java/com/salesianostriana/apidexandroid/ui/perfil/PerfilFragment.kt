@@ -1,6 +1,7 @@
 package com.salesianostriana.apidexandroid.ui.perfil
 
 import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,7 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import coil.load
 import com.salesianostriana.apidexandroid.R
+import com.salesianostriana.apidexandroid.ui.login.LoginActivity
 
 class PerfilFragment : Fragment() {
 
@@ -41,8 +43,14 @@ class PerfilFragment : Fragment() {
         textViewUsername = v.findViewById(R.id.profile_username)
         textViewEmail = v.findViewById(R.id.textView_email)
         avatar = v.findViewById(R.id.profile_avatar)
+        eliminarCuenta = v.findViewById(R.id.btn_eliminarCuenta)
 
+        eliminarCuenta.setOnClickListener(View.OnClickListener {
+            viewModel.deleteUser()
+            var intent = Intent(context, LoginActivity::class.java)
+            context?.startActivity(intent)
 
+        })
 
         return v
     }
