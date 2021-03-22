@@ -36,4 +36,22 @@
     <string name="menu_username">Username</string>
     <string name="idPokedex">#001</string>
     <string name="nombre_pokemon">Bulbasaur</string>
+    <string name="region">Kanto</string>
+    <string name="tipo1">Planta</string>
+    <string name="tipo2">Veneno</string>
+    <string name="pc">PC</string>
+    <string name="pcNumber">450</string>
+    <string name="valoracion">Valoración</string>
+    <string name="descriptionFotoPokemon">Foto Pokémon</string>
+    <string name="descriptionFotoFav">Botón Favorito</string>
+    <string name="descriptionFotoCap">Botón Capturado</string>
+    <string name="descriptionFotoVal1">Foto valoración 1</string>
+    <string name="descriptionFotoVal2">Foto valoración 2</string>
+    <string name="descriptionFotoVal3">Foto valoración 3</string>
+    <string name="tit_ataqueR">Ataque Rápido</string>
+    <string name="tit_ataqueC">Ataque Cargado</string>
+    <string name="ataqueR">Látigo Cepa</string>
+    <string name="ataqueC">Bomba Lodo</string>
+    <string name="btnDuplicar">Duplicar</string>
+    <string name="btnEvolucionar">Evolucionar</string>
 </resources>

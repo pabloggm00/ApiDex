@@ -44,7 +44,8 @@ data class GetPokemonDetalleDto(
     var primerTipo: String,
     var segundoTipo: String?,
     var fav: Boolean,
-    var capturado: Boolean
+    var capturado: Boolean,
+    var isOriginal: Boolean
 )
 
 data class GetPokemonEquipoDto(
@@ -134,7 +135,7 @@ fun Pokemon.toGetPokemonDetalleDto(usuario: Usuario?): GetPokemonDetalleDto {
         return GetPokemonDetalleDto(
             id,
             nombre,
-            idPokedex,
+            "#${idPokedex}",
             estrellas,
             ataqueRapido,
             ataqueCargado,
@@ -144,7 +145,8 @@ fun Pokemon.toGetPokemonDetalleDto(usuario: Usuario?): GetPokemonDetalleDto {
             primerTipo.nombreTipo,
             segundoTipo?.nombreTipo,
             favorito,
-            capturado
+            capturado,
+            isOriginal
         )
     //}
 }

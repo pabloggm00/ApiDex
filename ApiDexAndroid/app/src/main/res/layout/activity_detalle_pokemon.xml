@@ -8,63 +8,282 @@
     tools:context=".ui.detallePokemon.DetallePokemonActivity">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView_detallePokemon"
         android:layout_width="380dp"
         android:layout_height="674dp"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="#8B2A9865"
+        app:cardBackgroundColor="@color/plantaCard"
         app:cardCornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/layout_detallePokemon"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageView_favorito"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:src="@drawable/ic_nofav" />
+            <LinearLayout
+                android:id="@+id/layaout_hor_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/imageView_noCapturado"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:src="@drawable/ic_nocapturado" />
+                <ImageView
+                    android:id="@+id/imageView_favorito"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/descriptionFotoFav"
+                    android:src="@drawable/ic_nofav" />
+
+                <ImageView
+                    android:id="@+id/imageView_noCapturado"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/descriptionFotoCap"
+                    android:src="@drawable/ic_nocapturado" />
+
+                <TextView
+                    android:id="@+id/textView_idPokedex"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/idPokedex"
+                    android:textColor="#CCFFFFFF" />
+
+                <TextView
+                    android:id="@+id/textView_nombrePokemon"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/nombre_pokemon"
+                    android:textColor="#CCFFFFFF" />
+
+                <ImageView
+                    android:id="@+id/imageView_fotoPokemon"
+                    android:layout_width="50dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/descriptionFotoPokemon"
+                    android:src="@drawable/ic_launcher_foreground" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/textView_idPokedex"
-                android:layout_width="60dp"
+                android:id="@+id/textView_Region"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
-                android:textColor="#FFFFFF" />
+                android:text="@string/region"
+                android:textColor="#CCFFFFFF"
+                android:textSize="22sp" />
+
+            <LinearLayout
+                android:id="@+id/layout_hor_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_tipo1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="#8B2A9865"
+                    app:cardCornerRadius="30dp">
+
+                    <TextView
+                        android:id="@+id/textView_tipo1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/tipo1"
+                        android:textColor="#CCFFFFFF" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_tipo2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="#8B2A9865"
+                    app:cardCornerRadius="30dp">
+
+                    <TextView
+                        android:id="@+id/textView_tipo2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/tipo2"
+                        android:textColor="#CCFFFFFF" />
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/textView_nombrePokemon"
-                android:layout_width="60dp"
+                android:id="@+id/textView_PC"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
+                android:layout_marginTop="30dp"
                 android:gravity="center"
-                android:text="TextView"
-                android:textColor="#FFFFFF" />
+                android:text="@string/pc"
+                android:textColor="#CCFFFFFF"
+                android:textSize="27.5sp" />
 
-            <ImageView
-                android:id="@+id/imageView_fotoPokemon"
-                android:layout_width="50dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:src="@drawable/ic_launcher_foreground" />
+            <TextView
+                android:id="@+id/textView_PCnumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:gravity="center"
+                android:text="@string/pcNumber"
+                android:textColor="#CC6CEC1D"
+                android:textSize="27.5sp" />
+
+            <TextView
+                android:id="@+id/textView_valoracion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:text="@string/valoracion"
+                android:textColor="#CCFFFFFF"
+                android:textSize="27.5sp" />
+
+            <LinearLayout
+                android:id="@+id/layout_hor_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView_val1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/descriptionFotoVal1"
+                    app:srcCompat="@drawable/ic_nofav" />
+
+                <ImageView
+                    android:id="@+id/imageView_val2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/descriptionFotoVal2"
+                    app:srcCompat="@drawable/ic_nofav" />
+
+                <ImageView
+                    android:id="@+id/imageView_val3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/descriptionFotoVal3"
+                    app:srcCompat="@drawable/ic_nofav" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_hor_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView_tituloAtaqueR"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/tit_ataqueR"
+                    android:textColor="#CCFFFFFF"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/textView_tituloAtaqueC"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/tit_ataqueC"
+                    android:textColor="#CCFFFFFF"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_hor_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView_ataqueR"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/ataqueR"
+                    android:textColor="#CC6CEC1D"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/textView_ataqueC"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/ataqueC"
+                    android:textColor="#CC6CEC1D"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/button_duplicar"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:backgroundTint="#4CAF50"
+                android:text="@string/btnDuplicar"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/button_evolucionar"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:backgroundTint="#A84CAF"
+                android:text="@string/btnEvolucionar"
+                android:textSize="12sp" />
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

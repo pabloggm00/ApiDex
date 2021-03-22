@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -40,7 +41,6 @@ class PokedexFragment : Fragment() {
 
         pokedexViewModel.pokemon.observe(viewLifecycleOwner, Observer {
             pokemons -> pokemonList = pokemons
-            Log.i("Pokemooonsssss", pokemonList.toString())
             listAdapter.setData(pokemons)
         })
 

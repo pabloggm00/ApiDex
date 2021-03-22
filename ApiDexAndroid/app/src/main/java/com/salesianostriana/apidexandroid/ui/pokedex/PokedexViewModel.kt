@@ -4,9 +4,11 @@ import android.app.Application
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.salesianostriana.apidexandroid.R
 import com.salesianostriana.apidexandroid.data.poko.response.Pokemon
 import com.salesianostriana.apidexandroid.retrofit.PokemonService
 import retrofit2.Call
@@ -47,6 +49,8 @@ class PokedexViewModel(application: Application) : AndroidViewModel(application)
         service = retrofit.create(PokemonService::class.java)
 
         getPokemonList()
+
+
 
     }
 
