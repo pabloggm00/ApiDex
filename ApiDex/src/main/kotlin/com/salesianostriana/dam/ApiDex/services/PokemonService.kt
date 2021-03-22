@@ -55,7 +55,7 @@ class PokemonService: BaseServiceImpl<Pokemon, Long, PokemonRepository>() {
         pokemonAEvolucionar.get().idPokedex = pokemonEvolucionado.get().idPokedex
         pokemonAEvolucionar.get().pC = pokemonAEvolucionar.get().pC!!.plus(600)
         pokemonAEvolucionar.get().nombre = pokemonEvolucionado.get().nombre
-        //meter imagen
+        pokemonAEvolucionar.get().imagen = pokemonEvolucionado.get().imagen
 
         if (pokemonEvolucionado.get().isUltimo){
             pokemonAEvolucionar.get().isUltimo = true

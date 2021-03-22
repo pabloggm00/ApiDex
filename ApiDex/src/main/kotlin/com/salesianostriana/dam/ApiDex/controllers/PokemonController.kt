@@ -178,7 +178,8 @@ class PokemonController {
                                 pokemon.get().equipo,
                                 pokemon.get().generacion,
                                 pokemon.get().primerTipo,
-                                pokemon.get().segundoTipo
+                                pokemon.get().segundoTipo,
+                                pokemon.get().imagen
                             )
                         ).toGetPokemonDetalleDto(usuario!!.get()))
             }

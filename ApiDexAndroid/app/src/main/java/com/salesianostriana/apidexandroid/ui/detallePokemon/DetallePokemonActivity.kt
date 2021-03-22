@@ -144,6 +144,10 @@ class DetallePokemonActivity : AppCompatActivity() {
 
         } )
 
+        btnEvolucionar.setOnClickListener(View.OnClickListener {
+            evolucionarPokemon()
+        })
+
         getDetallePokemon()
 
 
@@ -235,18 +239,52 @@ class DetallePokemonActivity : AppCompatActivity() {
         })
     }
 
+    fun evolucionarPokemon(){
+        service.evolucionarPokemon("Bearer $token", pokemonId!!.toLong()).enqueue(object : Callback<DetallePokemon>{
+            override fun onResponse(
+                call: Call<DetallePokemon>,
+                response: Response<DetallePokemon>
+            ) {
+                if (response.code() == 201){
+                    Toast.makeText(context, "Evolucionado!!!", Toast.LENGTH_SHORT)
+                        .show()
+                    /*var intent = Intent(context, DetallePokemonActivity::class.java).apply {
+                    putExtra("pokemonId", pokemonData.)
+                }*/
+                    var intent = Intent(context, MainActivity::class.java)
+                    context.startActivity(intent)
+                } else {
+                    Log.i("code", response.code().toString())
+                    Toast.makeText(context, "No se ha podido evolucionar", Toast.LENGTH_SHORT)
+                        .show()
+                }
+
+            }
+
+            override fun onFailure(call: Call<DetallePokemon>, t: Throwable) {
+                Log.e("Error!!!", t.message.toString())
+            }
+
+        })
+    }
+
     fun deletePokemon(){
         service.deletePokemon("Bearer $token", pokemonId!!.toLong()).enqueue(object : Callback<Any>{
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
 
-                if(response.code()==204){
-                    Toast.makeText(context, "Borrado correctamente", Toast.LENGTH_SHORT)
-                        .show()
-                    var intent = Intent(context, MainActivity::class.java)
-                    context.startActivity(intent)
-                }else{
-                    Toast.makeText(context, "No se ha podido borrar", Toast.LENGTH_SHORT)
-                        .show()
+                if(response.code() == 204){
+
+                    if (_detallePokemon.value!!.isOriginal){
+                        Toast.makeText(context, "No se ha podido borrar", Toast.LENGTH_SHORT)
+                            .show()
+                        var intent = Intent(context, MainActivity::class.java)
+                        context.startActivity(intent)
+                    }else{
+                        Toast.makeText(context, "Borrado correctamente", Toast.LENGTH_SHORT)
+                            .show()
+                        var intent = Intent(context, MainActivity::class.java)
+                        context.startActivity(intent)
+                    }
                 }
 
             }

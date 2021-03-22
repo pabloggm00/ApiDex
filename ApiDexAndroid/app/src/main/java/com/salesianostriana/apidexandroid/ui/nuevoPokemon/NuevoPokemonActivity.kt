@@ -125,7 +125,7 @@ class NuevoPokemonActivity : AppCompatActivity() {
                     ) {
 
                         if (response.code() == 200) {
-                            Toast.makeText(context, "Duplicado correctamente", Toast.LENGTH_SHORT)
+                            Toast.makeText(context, "Editado correctamente", Toast.LENGTH_SHORT)
                                 .show()
                             /*var intent = Intent(context, DetallePokemonActivity::class.java).apply {
                             putExtra("pokemonId", pokemonData.)
@@ -134,7 +134,7 @@ class NuevoPokemonActivity : AppCompatActivity() {
                             context.startActivity(intent)
                         } else {
                             Log.i("code", response.code().toString())
-                            Toast.makeText(context, "No se ha podido duplicar", Toast.LENGTH_SHORT)
+                            Toast.makeText(context, "No se ha podido editar", Toast.LENGTH_SHORT)
                                 .show()
                         }
                     }

@@ -44,4 +44,7 @@ interface PokemonService {
     @PUT("pokemon/{id}")
     fun editarPokemon(@Header("Authorization") token: String?, @Body editPokemon: PokemonRequest, @Path("id") idPokemon: Long) : Call<DetallePokemon>
 
+    @POST("pokemon/evolucion/{id}")
+    fun evolucionarPokemon(@Header("Authorization") token: String?, @Path("id") idPokemon: Long) : Call<DetallePokemon>
+
 }
