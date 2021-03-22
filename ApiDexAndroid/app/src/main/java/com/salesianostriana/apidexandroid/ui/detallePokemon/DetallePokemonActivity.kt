@@ -33,6 +33,7 @@ class DetallePokemonActivity : AppCompatActivity() {
     lateinit var retrofit: Retrofit
     var pokemonId: Long?= 0
     var token: String? = ""
+    val context = this
 
     lateinit var idPokedexView: TextView
     lateinit var isFavView: ImageView
@@ -99,10 +100,13 @@ class DetallePokemonActivity : AppCompatActivity() {
         cardViewSegundotipo = findViewById(R.id.cardView_tipo2)
         cardViewPrimertipo = findViewById(R.id.cardView_tipo1)
 
-        btnDuplicar.setOnClickListener { View.OnClickListener {
-            var intent = Intent(this, NuevoPokemonActivity::class.java)
-            this.startActivity(intent)
-        } }
+        btnDuplicar.setOnClickListener ( View.OnClickListener {
+            var intent = Intent(context, NuevoPokemonActivity::class.java).apply {
+                putExtra("idPokemon", pokemonId)
+            }
+            context.startActivity(intent)
+
+        } )
 
         getDetallePokemon()
 

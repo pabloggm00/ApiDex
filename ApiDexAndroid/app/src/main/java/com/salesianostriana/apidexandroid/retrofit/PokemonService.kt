@@ -1,5 +1,6 @@
 package com.salesianostriana.apidexandroid.retrofit
 
+import com.salesianostriana.apidexandroid.data.poko.request.PokemonRequest
 import com.salesianostriana.apidexandroid.data.poko.response.DetallePokemon
 import com.salesianostriana.apidexandroid.data.poko.response.Pokemon
 import retrofit2.Call
@@ -35,7 +36,7 @@ interface PokemonService {
     fun getDetallePokemon(@Header("Authorization") token: String?, @Path("id") idPokemon: Long) : Call<DetallePokemon>
 
     @POST("pokemon/{id}")
-    fun duplicarPokemon(@Header("Authorization") token: String?, @Path("id") idPokemon: Long) : Call<DetallePokemon>
+    fun duplicarPokemon(@Header("Authorization") token: String?, @Body nuevoPokemon: PokemonRequest, @Path("id") idPokemon: Long) : Call<DetallePokemon>
 
 
 }

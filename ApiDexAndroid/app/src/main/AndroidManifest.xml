@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ApiDexAndroid">
-        <activity android:name=".ui.nuevoPokemon.NuevoPokemonActivity"></activity>
+        <activity android:name=".ui.nuevoPokemon.NuevoPokemonActivity" />
         <activity android:name=".ui.detallePokemon.DetallePokemonActivity" />
         <activity
             android:name=".MainActivity"
