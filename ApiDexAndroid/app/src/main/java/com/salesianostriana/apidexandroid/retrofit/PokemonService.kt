@@ -33,4 +33,9 @@ interface PokemonService {
 
     @GET("pokemon/{id}")
     fun getDetallePokemon(@Header("Authorization") token: String?, @Path("id") idPokemon: Long) : Call<DetallePokemon>
+
+    @POST("pokemon/{id}")
+    fun duplicarPokemon(@Header("Authorization") token: String?, @Path("id") idPokemon: Long) : Call<DetallePokemon>
+
+
 }

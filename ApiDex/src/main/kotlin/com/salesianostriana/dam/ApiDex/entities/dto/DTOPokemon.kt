@@ -11,11 +11,9 @@ data class EditPokemonDto(
     var estrellas: Int?,
 
     @get:NotBlank(message = "{pokemon.ataqueRapido.blank}")
-    @get:Size(message = "{pokemon.ataqueRapido.size}", min = 2)
     var ataqueRapido: String?,
 
     @get:NotBlank(message = "{pokemon.ataqueCargado.blank}")
-    @get:Size(message = "{pokemon.ataqueCargado.size}", min = 2)
     var ataqueCargado: String?,
 
     @get:NotNull(message = "{pokemon.pC.null}")
@@ -46,7 +44,8 @@ data class GetPokemonDetalleDto(
     var primerTipo: String,
     var segundoTipo: String?,
     var fav: Boolean,
-    var capturado: Boolean
+    var capturado: Boolean,
+    var isOriginal: Boolean
 )
 
 data class GetPokemonEquipoDto(
@@ -136,7 +135,7 @@ fun Pokemon.toGetPokemonDetalleDto(usuario: Usuario?): GetPokemonDetalleDto {
         return GetPokemonDetalleDto(
             id,
             nombre,
-            idPokedex,
+            "#${idPokedex}",
             estrellas,
             ataqueRapido,
             ataqueCargado,
@@ -146,7 +145,8 @@ fun Pokemon.toGetPokemonDetalleDto(usuario: Usuario?): GetPokemonDetalleDto {
             primerTipo.nombreTipo,
             segundoTipo?.nombreTipo,
             favorito,
-            capturado
+            capturado,
+            isOriginal
         )
     //}
 }

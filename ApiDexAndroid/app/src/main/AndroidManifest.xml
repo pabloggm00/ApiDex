@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ApiDexAndroid">
-        <activity android:name=".ui.detallePokemon.DetallePokemonActivity"></activity>
+        <activity android:name=".ui.nuevoPokemon.NuevoPokemonActivity"></activity>
+        <activity android:name=".ui.detallePokemon.DetallePokemonActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"

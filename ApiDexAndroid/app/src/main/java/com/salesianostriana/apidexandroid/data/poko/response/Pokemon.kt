@@ -7,12 +7,14 @@ data class Pokemon (
     val ataqueCargado: String,
     val pC: Int,
     val imagen: String,
-    val tipo: Int,
+    val primerTipo: Int,
+    val segundoTipo: Int,
     val idPokedex: String,
     val isUltimo: Boolean,
     val isCapturado: Boolean,
     val isOriginal: Boolean,
     val isFav: Boolean,
-    val id: Long
+    val id: Long,
+    val generacion: String
 
 )

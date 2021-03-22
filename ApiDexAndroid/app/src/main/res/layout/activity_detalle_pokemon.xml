@@ -11,7 +11,7 @@
         android:id="@+id/cardView_detallePokemon"
         android:layout_width="380dp"
         android:layout_height="674dp"
-        android:backgroundTint="#8B2A9865"
+        app:cardBackgroundColor="@color/plantaCard"
         app:cardCornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,7 +84,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/region"
-                android:textColor="#CCFFFFFF" />
+                android:textColor="#CCFFFFFF"
+                android:textSize="22sp" />
 
             <LinearLayout
                 android:id="@+id/layout_hor_2"
@@ -100,7 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="#00FA0909"
+                    app:cardBackgroundColor="#8B2A9865"
                     app:cardCornerRadius="30dp">
 
                     <TextView
@@ -117,9 +118,9 @@
                     android:id="@+id/cardView_tipo2"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="#00FFFFFF"
+                    app:cardBackgroundColor="#8B2A9865"
                     app:cardCornerRadius="30dp">
 
                     <TextView

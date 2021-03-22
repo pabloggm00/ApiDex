@@ -1,17 +1,23 @@
 package com.salesianostriana.apidexandroid.ui.detallePokemon
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.core.view.isGone
+import androidx.core.view.isInvisible
 import androidx.lifecycle.MutableLiveData
 import coil.load
 import com.salesianostriana.apidexandroid.R
 import com.salesianostriana.apidexandroid.data.poko.response.DetallePokemon
 import com.salesianostriana.apidexandroid.retrofit.PokemonService
+import com.salesianostriana.apidexandroid.ui.nuevoPokemon.NuevoPokemonActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -44,6 +50,13 @@ class DetallePokemonActivity : AppCompatActivity() {
     lateinit var ataqueCargadoView: TextView
     lateinit var btnDuplicar: Button
     lateinit var btnEvolucionar: Button
+    lateinit var cardViewSegundotipo: CardView
+    lateinit var cardViewPrimertipo: CardView
+
+    lateinit var tituloAtaqueRapido : TextView
+    lateinit var tituloAtaqueCargado : TextView
+    lateinit var tituloValoracion: TextView
+    lateinit var tituloPC: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +75,10 @@ class DetallePokemonActivity : AppCompatActivity() {
         service = retrofit.create(PokemonService::class.java)
 
 
+        tituloAtaqueRapido  = findViewById(R.id.textView_tituloAtaqueR)
+        tituloAtaqueCargado  = findViewById(R.id.textView_tituloAtaqueC)
+        tituloValoracion = findViewById(R.id.textView_valoracion)
+        tituloPC = findViewById(R.id.textView_PC)
 
         idPokedexView = findViewById(R.id.textView_idPokedex)
         isFavView = findViewById(R.id.imageView_favorito)
@@ -79,59 +96,97 @@ class DetallePokemonActivity : AppCompatActivity() {
         ataqueCargadoView = findViewById(R.id.textView_ataqueC)
         btnDuplicar = findViewById(R.id.button_duplicar)
         btnEvolucionar = findViewById(R.id.button_evolucionar)
+        cardViewSegundotipo = findViewById(R.id.cardView_tipo2)
+        cardViewPrimertipo = findViewById(R.id.cardView_tipo1)
+
+        btnDuplicar.setOnClickListener { View.OnClickListener {
+            var intent = Intent(this, NuevoPokemonActivity::class.java)
+            this.startActivity(intent)
+        } }
+
+        getDetallePokemon()
+
+
+
     }
 
     fun getDetallePokemon(){
         service.getDetallePokemon("Bearer ${token}", pokemonId!!).enqueue(object : Callback<DetallePokemon>{
+
             override fun onResponse(call: Call<DetallePokemon>, response: Response<DetallePokemon>) {
                 if (response.code() == 200){
                     _detallePokemon.value = response.body()
-
                     idPokedexView.text = _detallePokemon.value?.idPokedex
-                    if (_detallePokemon.value!!.isFav)
+                    if (_detallePokemon.value!!.isFav) {
                         isFavView.load(R.drawable.ic_isfav)
-                    else
+                    }else {
                         isFavView.load(R.drawable.ic_nofav)
+                    }
 
-                    if (_detallePokemon.value!!.isCapturado)
+                    if (_detallePokemon.value!!.isCapturado) {
                         isCapView.load(R.drawable.ic_capturado)
-                    else
+                    }else {
                         isCapView.load(R.drawable.ic_nocapturado)
-
+                    }
                     nombreView.text = _detallePokemon.value?.nombre
                     fotoPokemon.load(_detallePokemon.value?.imagen?.url)
-                    regionView.text = _detallePokemon.value?.generacion?.nombre
-                    tipo1View.text = _detallePokemon.value?.primerTipo?.nombreTipo
-                    tipo2View.text = _detallePokemon.value?.segundoTipo?.nombreTipo
+                    regionView.text = _detallePokemon.value?.generacion
+
+                    /*when (_detallePokemon.value!!.primerTipo) {
+                        "Planta" ->{ tipo1View.setTextColor(R.color.red)
+                            //cardViewPrimertipo.setCardBackgroundColor(R.color.planta)
+                        }
+
+                    }*/
+
+
+                    tipo1View.text = _detallePokemon.value?.primerTipo
+
+                    if (_detallePokemon.value!!.segundoTipo == null)
+                        cardViewSegundotipo.visibility = View.GONE
+                    else
+                        tipo2View.text = _detallePokemon.value?.segundoTipo
+
                     pCView.text = _detallePokemon.value?.pC.toString()
                     if (_detallePokemon.value!!.estrellas == 1){
-                        val1View.load(R.drawable.ic_isfav)
+                        val1View.load(R.drawable.ic_val)
                         val2View.load(R.drawable.ic_nofav)
                         val3View.load(R.drawable.ic_nofav)
                     } else if (_detallePokemon.value!!.estrellas == 2){
-                        val1View.load(R.drawable.ic_isfav)
-                        val2View.load(R.drawable.ic_isfav)
+                        val1View.load(R.drawable.ic_val)
+                        val2View.load(R.drawable.ic_val)
                         val3View.load(R.drawable.ic_nofav)
                     }else{
-                        val1View.load(R.drawable.ic_isfav)
-                        val2View.load(R.drawable.ic_isfav)
-                        val3View.load(R.drawable.ic_isfav)
+                        val1View.load(R.drawable.ic_val)
+                        val2View.load(R.drawable.ic_val)
+                        val3View.load(R.drawable.ic_val)
                     }
 
                     ataqueRapidoView.text = _detallePokemon.value?.ataqueRapido
                     ataqueCargadoView.text = _detallePokemon.value?.ataqueCargado
 
                     if (_detallePokemon.value!!.isOriginal){
-                        btnEvolucionar.isGone
+                        btnEvolucionar.visibility = View.GONE
+                        val1View.visibility = View.GONE
+                        val2View.visibility = View.GONE
+                        val3View.visibility = View.GONE
+                        tituloPC.visibility = View.GONE
+                        tituloValoracion.visibility = View.GONE
+                        tituloAtaqueRapido.visibility = View.GONE
+                        tituloAtaqueCargado.visibility = View.GONE
+                        pCView.visibility = View.GONE
+
                     }
 
                 }
             }
 
             override fun onFailure(call: Call<DetallePokemon>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.e("Error!!!", t.message.toString())
             }
 
         })
     }
+
+
 }

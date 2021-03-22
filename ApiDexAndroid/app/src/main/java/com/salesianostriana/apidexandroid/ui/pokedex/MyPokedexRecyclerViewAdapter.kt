@@ -1,6 +1,8 @@
 package com.salesianostriana.apidexandroid.ui.pokedex
 
 import android.content.Context
+import android.content.Intent
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,8 @@ import androidx.cardview.widget.CardView
 import coil.load
 import com.salesianostriana.apidexandroid.R
 import com.salesianostriana.apidexandroid.data.poko.response.Pokemon
+import com.salesianostriana.apidexandroid.ui.detallePokemon.DetallePokemonActivity
+import kotlin.math.ln
 
 
 class MyPokedexRecyclerViewAdapter(
@@ -44,10 +48,6 @@ class MyPokedexRecyclerViewAdapter(
         var isCapturado= item.isCapturado
         var megusta= item.isFav
 
-        /*if (item.tipo == 11){
-            holder.cardPokemon.setBackgroundColor(R.color.red)
-        }*/
-
         if(isCapturado){
             holder.capturado.load(R.drawable.ic_capturado)
         } else{
@@ -60,12 +60,12 @@ class MyPokedexRecyclerViewAdapter(
             holder.fav.load(R.drawable.ic_nofav)
         }
 
-        /*holder.rootView.setOnClickListener(View.OnClickListener {
-            val intent = Intent(activity, DetalleViviendaActivity::class.java).apply {
+        holder.rootView.setOnClickListener(View.OnClickListener {
+            val intent = Intent(activity, DetallePokemonActivity::class.java).apply {
                 putExtra("pokemonId", item.id)
             }
             activity.startActivity(intent)
-        })*/
+        })
         holder.fav.setOnClickListener(View.OnClickListener {
             viewModel.addPokemonFav(item.id, item.isFav)
         })

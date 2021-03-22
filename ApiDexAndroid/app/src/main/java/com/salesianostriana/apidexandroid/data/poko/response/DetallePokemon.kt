@@ -10,9 +10,9 @@ data class DetallePokemon(
         val pC: Int,
         val ataqueRapido: String,
         val ataqueCargado: String,
-        val generacion: Pokedex,
-        val primerTipo: Tipo,
-        val segundoTipo: Tipo,
+        val generacion: String,
+        val primerTipo: String,
+        val segundoTipo: String,
         val id: Long,
         val isOriginal: Boolean
 )
