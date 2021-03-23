@@ -19,6 +19,7 @@ import coil.load
 import com.salesianostriana.apidexandroid.MainActivity
 import com.salesianostriana.apidexandroid.R
 import com.salesianostriana.apidexandroid.data.poko.response.DetallePokemon
+import com.salesianostriana.apidexandroid.data.poko.response.Pokemon
 import com.salesianostriana.apidexandroid.retrofit.PokemonService
 import com.salesianostriana.apidexandroid.ui.nuevoPokemon.NuevoPokemonActivity
 import retrofit2.Call
@@ -37,6 +38,9 @@ class DetallePokemonActivity : AppCompatActivity() {
     var pokemonId: Long?= 0
     var token: String? = ""
     val context = this
+    var pokemonFav: Boolean = false
+    var pokemonCap: Boolean = false
+    var pokemonPC: Int = 0
 
     lateinit var idPokedexView: TextView
     lateinit var isFavView: ImageView
@@ -100,6 +104,8 @@ class DetallePokemonActivity : AppCompatActivity() {
         val sharedPref = this.getSharedPreferences("FILE_PREFERENCES", Context.MODE_PRIVATE)
         token = sharedPref?.getString("token", "")
 
+        pokemonFav = intent.getBooleanExtra("pokemonFav", false)
+        pokemonCap = intent.getBooleanExtra("pokemonCap", false)
         pokemonId = intent.extras?.getLong("pokemonId")
 
         retrofit = Retrofit.Builder()
@@ -135,7 +141,6 @@ class DetallePokemonActivity : AppCompatActivity() {
         cardViewPrimertipo = findViewById(R.id.cardView_tipo1)
 
 
-
         btnDuplicar.setOnClickListener ( View.OnClickListener {
             var intent = Intent(context, NuevoPokemonActivity::class.java).apply {
                 putExtra("idPokemon", pokemonId)
@@ -146,6 +151,16 @@ class DetallePokemonActivity : AppCompatActivity() {
 
         btnEvolucionar.setOnClickListener(View.OnClickListener {
             evolucionarPokemon()
+        })
+
+        isFavView.setOnClickListener(View.OnClickListener {
+            addPokemonFav(pokemonId!!.toLong(),pokemonFav)
+            getDetallePokemon()
+        })
+
+        isCapView.setOnClickListener(View.OnClickListener {
+            addPokemonCapturado(pokemonId!!.toLong(), pokemonCap)
+            getDetallePokemon()
         })
 
         getDetallePokemon()
@@ -162,16 +177,16 @@ class DetallePokemonActivity : AppCompatActivity() {
                     _detallePokemon.value = response.body()
                     idPokedexView.text = _detallePokemon.value?.idPokedex
 
-                    Log.i("is fav",_detallePokemon.value!!.isFav.toString())
-                    Log.i("is fav",_detallePokemon.value!!.isCapturado.toString())
+                    Log.i("is fav",pokemonFav.toString())
+                    Log.i("is fav",pokemonCap.toString())
 
-                    if (_detallePokemon.value!!.isFav) {
+                    if (pokemonFav) {
                         isFavView.load(R.drawable.ic_isfav)
                     }else {
                         isFavView.load(R.drawable.ic_nofav)
                     }
 
-                    if (_detallePokemon.value!!.isCapturado) {
+                    if (pokemonCap) {
                         isCapView.load(R.drawable.ic_capturado)
                     }else {
                         isCapView.load(R.drawable.ic_nocapturado)
@@ -294,6 +309,70 @@ class DetallePokemonActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    fun addPokemonCapturado(pokemonId: Long, isCapturado: Boolean) {
+
+        if (!isCapturado) {
+            service.addPokemonCapturado("Bearer ${token}", pokemonId).enqueue(object : Callback<Pokemon> {
+                override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
+                    if (response.code() == 204) {
+                        getDetallePokemon()
+                    }
+                }
+
+                override fun onFailure(call: Call<Pokemon>, t: Throwable) {
+                    Log.e("Error", t.message.toString())
+                }
+
+
+            })
+        } else {
+            service.deleteCapturadoPokemon("Bearer ${token}", pokemonId).enqueue(object : Callback<Any> {
+                override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                    if (response.code() == 204) {
+                        getDetallePokemon()
+                    }
+                }
+
+                override fun onFailure(call: Call<Any>, t: Throwable) {
+                    Log.e("Error", t.message.toString())
+                }
+
+            })
+        }
+    }
+
+    fun addPokemonFav(pokemonId: Long, isFav: Boolean) {
+
+        if (!isFav) {
+            service.addPokemonFav("Bearer ${token}", pokemonId).enqueue(object : Callback<Pokemon> {
+                override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
+                    if (response.code() == 204){
+                        getDetallePokemon()
+                    }
+                }
+
+                override fun onFailure(call: Call<Pokemon>, t: Throwable) {
+                    Log.e("Error", t.message.toString())
+                }
+
+
+            })
+        }else{
+            service.deleteFavPokemon("Bearer ${token}", pokemonId).enqueue(object : Callback<Any>{
+                override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                    if (response.code() == 204){
+                        getDetallePokemon()
+                    }
+                }
+
+                override fun onFailure(call: Call<Any>, t: Throwable) {
+                    Log.e("Error", t.message.toString())
+                }
+
+            })
+        }
     }
 
 

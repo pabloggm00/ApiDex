@@ -60,6 +60,8 @@ class MyPokedexRecyclerViewAdapter(
         holder.rootView.setOnClickListener(View.OnClickListener {
             val intent = Intent(activity, DetallePokemonActivity::class.java).apply {
                 putExtra("pokemonId", item.id)
+                putExtra("pokemonCap", item.isCapturado)
+                putExtra("pokemonFav", item.isFav)
             }
             activity.startActivity(intent)
         })
