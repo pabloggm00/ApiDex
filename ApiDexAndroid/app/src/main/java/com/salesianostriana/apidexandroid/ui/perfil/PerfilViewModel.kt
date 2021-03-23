@@ -2,23 +2,25 @@ package com.salesianostriana.apidexandroid.ui.perfil
 
 import android.app.Application
 import android.content.Context
-import android.content.Intent
 import android.util.Log
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.salesianostriana.apidexandroid.MainActivity
 import com.salesianostriana.apidexandroid.data.poko.response.UsuarioRegistroResponse
 import com.salesianostriana.apidexandroid.retrofit.UsuarioService
-import com.salesianostriana.apidexandroid.ui.login.LoginActivity
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.OkHttpClient
+import okhttp3.RequestBody
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
+
 
 class PerfilViewModel (application: Application) : AndroidViewModel(application) {
 
@@ -32,6 +34,7 @@ class PerfilViewModel (application: Application) : AndroidViewModel(application)
     val usuario: LiveData<UsuarioRegistroResponse>
         get() = _usuario
 
+    var body: MultipartBody.Part
 
     init {
 
@@ -45,10 +48,32 @@ class PerfilViewModel (application: Application) : AndroidViewModel(application)
                .addConverterFactory(GsonConverterFactory.create())
                .build()
 
+        val file = File(_usuario.value!!.avatar)
+
+        val reqFile = RequestBody.create(MediaType.parse("image/*"), file)
+        body =
+            MultipartBody.Part.createFormData("file", file.name, reqFile)
+
        service = retrofit.create(UsuarioService::class.java)
 
        getUser()
    }
+
+    fun postImage(){
+        service.postImage(body, "Bearer $token").enqueue(object : Callback<UsuarioRegistroResponse>{
+            override fun onResponse(
+                call: Call<UsuarioRegistroResponse>,
+                response: Response<UsuarioRegistroResponse>
+            ) {
+
+            }
+
+            override fun onFailure(call: Call<UsuarioRegistroResponse>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+        })
+    }
 
     fun getUser() {
 

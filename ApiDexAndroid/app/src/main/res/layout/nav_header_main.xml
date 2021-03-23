@@ -17,6 +17,5 @@
         android:id="@+id/imageView_logoMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ic_launcher_foreground" />
-
+        app:srcCompat="@drawable/letra_logo" />
 </LinearLayout>
