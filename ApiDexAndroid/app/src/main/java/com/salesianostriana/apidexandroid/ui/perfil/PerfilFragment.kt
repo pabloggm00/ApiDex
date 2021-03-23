@@ -25,15 +25,13 @@ class PerfilFragment : Fragment() {
         fun newInstance() = PerfilFragment()
     }
 
-    val PICK_IMAGE = 100
-    val REQUEST_CODE = 100
-
     private lateinit var viewModel: PerfilViewModel
 
     lateinit var textViewUsername: TextView
     lateinit var textViewEmail: TextView
     lateinit var avatar: ImageView
     lateinit var eliminarCuenta: Button
+    lateinit var btnEditar: Button
 
     var token: String?  = ""
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -50,12 +48,13 @@ class PerfilFragment : Fragment() {
         textViewEmail = v.findViewById(R.id.textView_email)
         avatar = v.findViewById(R.id.profile_avatar)
         eliminarCuenta = v.findViewById(R.id.btn_eliminarCuenta)
+        btnEditar = v.findViewById(R.id.btn_editarPerfil)
 
-        avatar.setOnClickListener(View.OnClickListener {
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
-            intent.type = "image/*"
-            startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE)
-            
+        btnEditar.setOnClickListener(View.OnClickListener {
+            var intent = Intent(context, EditarPerfilActivity::class.java).apply {
+                putExtra("avatar", viewModel.usuario.value!!.avatar)
+            }
+            context?.startActivity(intent)
         })
 
         eliminarCuenta.setOnClickListener(View.OnClickListener {
@@ -68,12 +67,7 @@ class PerfilFragment : Fragment() {
         return v
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE){
-            avatar.setImageURI(data?.data) // handle chosen image
-        }
-    }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -85,7 +79,6 @@ class PerfilFragment : Fragment() {
             textViewUsername.text = user.username
             textViewEmail.text = user.email
             avatar.load(user.avatar)
-            Log.e("USERNAME:", "${user.username}")
         })
     }
 

@@ -4,8 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
+        android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
@@ -13,7 +15,7 @@
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ApiDexAndroid">
-        <activity android:name=".ui.perfil.EditarPerfilActivity"></activity>
+        <activity android:name=".ui.perfil.EditarPerfilActivity" />
         <activity
             android:name=".ui.pokedex.FilterActivity"
             android:label="@string/titulo_filtro" />

@@ -11,9 +11,7 @@ import com.salesianostriana.apidexandroid.data.poko.response.UsuarioRegistroResp
 import com.salesianostriana.apidexandroid.retrofit.UsuarioService
 import okhttp3.MediaType
 import okhttp3.MultipartBody
-import okhttp3.OkHttpClient
 import okhttp3.RequestBody
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,7 +32,6 @@ class PerfilViewModel (application: Application) : AndroidViewModel(application)
     val usuario: LiveData<UsuarioRegistroResponse>
         get() = _usuario
 
-    var body: MultipartBody.Part
 
     init {
 
@@ -48,32 +45,13 @@ class PerfilViewModel (application: Application) : AndroidViewModel(application)
                .addConverterFactory(GsonConverterFactory.create())
                .build()
 
-        val file = File(_usuario.value!!.avatar)
 
-        val reqFile = RequestBody.create(MediaType.parse("image/*"), file)
-        body =
-            MultipartBody.Part.createFormData("file", file.name, reqFile)
 
        service = retrofit.create(UsuarioService::class.java)
 
        getUser()
    }
 
-    fun postImage(){
-        service.postImage(body, "Bearer $token").enqueue(object : Callback<UsuarioRegistroResponse>{
-            override fun onResponse(
-                call: Call<UsuarioRegistroResponse>,
-                response: Response<UsuarioRegistroResponse>
-            ) {
-
-            }
-
-            override fun onFailure(call: Call<UsuarioRegistroResponse>, t: Throwable) {
-                t.printStackTrace()
-            }
-
-        })
-    }
 
     fun getUser() {
 

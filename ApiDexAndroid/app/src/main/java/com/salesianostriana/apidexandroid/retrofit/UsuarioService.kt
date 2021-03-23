@@ -16,5 +16,5 @@ interface UsuarioService {
 
     @Multipart
     @POST("user/img")
-    fun postImage(@Part("file") file: MultipartBody.Part, @Header("Authorization")token: String? ) : Call<UsuarioRegistroResponse>
+    fun postImage(@Part file: MultipartBody.Part, @Header("Authorization")token: String? ) : Call<UsuarioRegistroResponse>
 }
