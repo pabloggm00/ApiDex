@@ -91,8 +91,7 @@ class EditarPerfilActivity : AppCompatActivity() {
             this.startActivity(intent)
         })
 
-        val reqFile: RequestBody = RequestBody.create(MediaType.parse("image/*"), filePath!!)
-        body = MultipartBody.Part.createFormData("upload", filePath, reqFile)
+
 
 
 
@@ -139,11 +138,17 @@ class EditarPerfilActivity : AppCompatActivity() {
     }
 
     fun postImage(){
+
+        var file: File = File(filePath!!)
+
         service.postImage(body, "Bearer $token").enqueue(object : Callback<UsuarioRegistroResponse> {
             override fun onResponse(
                     call: Call<UsuarioRegistroResponse>,
                     response: Response<UsuarioRegistroResponse>
             ) {
+
+                val reqFile: RequestBody = RequestBody.create(MediaType.parse("image/*"), file)
+                body = MultipartBody.Part.createFormData("upload", file.name, reqFile)
 
                 println(response.code())
 
