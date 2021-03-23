@@ -93,6 +93,7 @@
         android:layout_marginBottom="40dp"
         android:text="@string/registrate"
         android:textColor="#FFFFFF"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

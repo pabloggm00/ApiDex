@@ -169,12 +169,19 @@ class DetallePokemonActivity : AppCompatActivity() {
 
     }
 
+    fun cambiarTitulo(titulo: String?){
+        title = titulo
+    }
+
     fun getDetallePokemon(){
         service.getDetallePokemon("Bearer ${token}", pokemonId!!).enqueue(object : Callback<DetallePokemon>{
 
             override fun onResponse(call: Call<DetallePokemon>, response: Response<DetallePokemon>) {
                 if (response.code() == 200){
                     _detallePokemon.value = response.body()
+
+                    cambiarTitulo(_detallePokemon.value?.nombre)
+
                     idPokedexView.text = _detallePokemon.value?.idPokedex
 
                     Log.i("is fav",pokemonFav.toString())

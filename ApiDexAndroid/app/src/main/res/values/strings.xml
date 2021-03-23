@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ApiDexAndroid</string>
+    <string name="app_name">ApiDex</string>
     <!-- Strings related to login -->
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
@@ -58,4 +58,6 @@
     <string name="btn_buscar">Buscar</string>
     <string name="generacion_filter">Generación</string>
     <string name="tipo_filter">Tipo</string>
+    <string name="titulo_filtro">Filtrar Pokémon</string>
+    <string name="titulo_registro">Registro</string>
 </resources>
