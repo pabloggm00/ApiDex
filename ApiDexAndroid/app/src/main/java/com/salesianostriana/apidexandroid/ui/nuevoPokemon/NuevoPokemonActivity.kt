@@ -6,9 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import com.salesianostriana.apidexandroid.MainActivity
 import com.salesianostriana.apidexandroid.R
 import com.salesianostriana.apidexandroid.data.poko.request.PokemonRequest
@@ -31,7 +29,7 @@ class NuevoPokemonActivity : AppCompatActivity() {
     val context = this
 
     lateinit var editPC : EditText
-    lateinit var editValoracion: EditText
+    lateinit var spinnerValoracion: Spinner
     lateinit var editAtaqueRapido: EditText
     lateinit var editAtaqueCargado: EditText
     lateinit var btnCrear: Button
@@ -47,10 +45,19 @@ class NuevoPokemonActivity : AppCompatActivity() {
         _pokemonId = intent.extras?.getLong("idPokemon")
 
         editPC= findViewById(R.id.editText_PC)
-        editValoracion = findViewById(R.id.editText_valoracion)
+        spinnerValoracion = findViewById(R.id.estrellas_spinner)
         editAtaqueRapido = findViewById(R.id.editText_ataqueRapido)
         editAtaqueCargado = findViewById(R.id.editText_ataqueCargado)
         btnCrear = findViewById(R.id.btn_crear)
+
+        ArrayAdapter.createFromResource(
+                this,
+                R.array.estrellas_array,
+                android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerValoracion.adapter = adapter
+        }
 
         if(editar) {
             cambiarTitulo("Editar Pokemon")
@@ -81,7 +88,7 @@ class NuevoPokemonActivity : AppCompatActivity() {
     fun doCreate(){
 
         val pokemonData = PokemonRequest(
-                editValoracion.text.toString().toInt(),
+                spinnerValoracion.selectedItem.toString().toInt(),
                 editAtaqueRapido.text.toString(),
                 editAtaqueCargado.text.toString(),
                 editPC.text.toString().toInt(),

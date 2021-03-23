@@ -54,3 +54,11 @@ data class EvolucionarOriginalNotFoundException(
 data class PokemonOriginalNotFoundException(
     val javaClass: Class<out Any>
 ): EntityNotFoundException("Este Pokémon es el original")
+
+data class PokemonFavoritoYaExiste(
+    val javaClass: Class<out Any>
+): ExistsException("Este Pokémon ya está agregado como favorito")
+
+data class PokemonCapturadoYaExiste(
+    val javaClass: Class<out Any>
+): ExistsException("Este Pokémon ya está agregado como capturado")

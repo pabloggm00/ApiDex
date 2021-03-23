@@ -154,13 +154,11 @@ class DetallePokemonActivity : AppCompatActivity() {
         })
 
         isFavView.setOnClickListener(View.OnClickListener {
-            addPokemonFav(pokemonId!!.toLong(),pokemonFav)
-            getDetallePokemon()
+            addPokemonFav(pokemonId!!.toLong())
         })
 
         isCapView.setOnClickListener(View.OnClickListener {
-            addPokemonCapturado(pokemonId!!.toLong(), pokemonCap)
-            getDetallePokemon()
+            addPokemonCapturado(pokemonId!!.toLong())
         })
 
         getDetallePokemon()
@@ -244,6 +242,8 @@ class DetallePokemonActivity : AppCompatActivity() {
                         tituloAtaqueRapido.visibility = View.GONE
                         tituloAtaqueCargado.visibility = View.GONE
                         pCView.visibility = View.GONE
+                        ataqueRapidoView.visibility = View.GONE
+                        ataqueCargadoView.visibility = View.GONE
                         btnEvolucionar.visibility = View.GONE
                     }
 
@@ -318,13 +318,18 @@ class DetallePokemonActivity : AppCompatActivity() {
         })
     }
 
-    fun addPokemonCapturado(pokemonId: Long, isCapturado: Boolean) {
+    fun addPokemonCapturado(pokemonId: Long) {
 
-        if (!isCapturado) {
+        if (!pokemonCap) {
             service.addPokemonCapturado("Bearer ${token}", pokemonId).enqueue(object : Callback<Pokemon> {
                 override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
-                    if (response.code() == 204) {
-                        getDetallePokemon()
+                    if (response.code() == 201) {
+                        pokemonCap = !pokemonCap
+                        if (pokemonCap) {
+                            isCapView.load(R.drawable.ic_capturado)
+                        }else {
+                            isCapView.load(R.drawable.ic_nocapturado)
+                        }
                     }
                 }
 
@@ -338,7 +343,12 @@ class DetallePokemonActivity : AppCompatActivity() {
             service.deleteCapturadoPokemon("Bearer ${token}", pokemonId).enqueue(object : Callback<Any> {
                 override fun onResponse(call: Call<Any>, response: Response<Any>) {
                     if (response.code() == 204) {
-                        getDetallePokemon()
+                        pokemonCap = !pokemonCap
+                        if (pokemonCap) {
+                            isCapView.load(R.drawable.ic_capturado)
+                        }else {
+                            isCapView.load(R.drawable.ic_nocapturado)
+                        }
                     }
                 }
 
@@ -350,13 +360,18 @@ class DetallePokemonActivity : AppCompatActivity() {
         }
     }
 
-    fun addPokemonFav(pokemonId: Long, isFav: Boolean) {
+    fun addPokemonFav(pokemonId: Long) {
 
-        if (!isFav) {
+        if (!pokemonFav) {
             service.addPokemonFav("Bearer ${token}", pokemonId).enqueue(object : Callback<Pokemon> {
                 override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
-                    if (response.code() == 204){
-                        getDetallePokemon()
+                    if (response.code() == 201){
+                        pokemonFav = !pokemonFav
+                        if (pokemonFav) {
+                            isFavView.load(R.drawable.ic_isfav)
+                        }else {
+                            isFavView.load(R.drawable.ic_nofav)
+                        }
                     }
                 }
 
@@ -370,7 +385,12 @@ class DetallePokemonActivity : AppCompatActivity() {
             service.deleteFavPokemon("Bearer ${token}", pokemonId).enqueue(object : Callback<Any>{
                 override fun onResponse(call: Call<Any>, response: Response<Any>) {
                     if (response.code() == 204){
-                        getDetallePokemon()
+                        pokemonFav = !pokemonFav
+                        if (pokemonFav) {
+                            isFavView.load(R.drawable.ic_isfav)
+                        }else {
+                            isFavView.load(R.drawable.ic_nofav)
+                        }
                     }
                 }
 

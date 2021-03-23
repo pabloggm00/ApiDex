@@ -27,6 +27,8 @@ class FilterActivity : AppCompatActivity() {
         spinnerTipos  = findViewById(R.id.tipos_spinner)
         spinnerGeneracion = findViewById(R.id.generacion_spinner)
 
+        /*spinnerGeneracion.solidColor = R.color.red*/
+
         ArrayAdapter.createFromResource(
             this,
             R.array.tipos_array,

@@ -46,4 +46,9 @@ class PokedexFragment : Fragment() {
 
         return view
     }
+
+    override fun onResume() {
+        super.onResume()
+        pokedexViewModel.getPokemonList()
+    }
 }

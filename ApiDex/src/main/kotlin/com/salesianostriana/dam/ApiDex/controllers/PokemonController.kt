@@ -95,7 +95,6 @@ class PokemonController {
                         pokemon.get().isFav,
                         pokemon.get().isCapturado,
                         pokemonDuplicado.isOriginal,
-                        /*pokemon!!.get().evolucion,*/
                         pokemon.get().equipo,
                         pokemon.get().generacion,
                         pokemon.get().primerTipo,
@@ -242,7 +241,7 @@ class PokemonController {
         var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
 
         return pokemonService.getPokemonFavs(usuario!!.get())
-            .map { it.toGetPokemonDto(usuario!!.get()) }
+            .map { it.toGetPokemonDto(usuario.get()) }
             .takeIf { it.isNotEmpty() } ?: throw FavoriteNotFoundException(Pokemon::class.java)
     }
 
@@ -254,9 +253,15 @@ class PokemonController {
         var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
 
         if (pokemon != null){
-            usuario!!.get().pokemonsFavs.add(pokemon)
-            usuarioService.save(usuario!!.get())
-            return ResponseEntity.status(HttpStatus.CREATED).body(pokemon.toGetPokemonDto(usuario!!.get()))
+            if(!usuario!!.get().pokemonsFavs.contains(pokemon)) {
+                usuario.get().pokemonsFavs.add(pokemon)
+                pokemon.isFav = true
+                pokemonService.save(pokemon)
+                usuarioService.save(usuario.get())
+                return ResponseEntity.status(HttpStatus.CREATED).body(pokemon.toGetPokemonDto(usuario.get()))
+            }else{
+                throw PokemonFavoritoYaExiste(Pokemon::class.java)
+            }
         }else{
             throw SingleEntityNotFoundException(id.toString(), Pokemon::class.java)
         }
@@ -268,12 +273,17 @@ class PokemonController {
         var auth: String = SecurityContextHolder.getContext().authentication.name
         var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
 
-        usuario!!.get().pokemonsFavs.forEach { pokemon ->
-            if (pokemon.id == id){
-                usuario!!.get().pokemonsFavs.remove(pokemon)
-                usuarioService.save(usuario!!.get())
+        lateinit var pokemon: Pokemon
+
+        usuario!!.get().pokemonsFavs.forEach { pokemonEncontrado ->
+            if (pokemonEncontrado.id == id){
+               pokemon = pokemonEncontrado
             }
         }
+        usuario.get().pokemonsFavs.remove(pokemon)
+        pokemon.isFav = false
+        pokemonService.save(pokemon)
+        usuarioService.save(usuario.get())
         return ResponseEntity.noContent().build()
     }
 
@@ -286,7 +296,7 @@ class PokemonController {
         var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
 
         return pokemonService.getPokemonCapturados(usuario!!.get())
-            .map { it.toGetPokemonDto(usuario!!.get()) }
+            .map { it.toGetPokemonDto(usuario.get()) }
             .takeIf { it.isNotEmpty() } ?: throw CapturadoNotFoundException(Pokemon::class.java)
     }
 
@@ -298,9 +308,15 @@ class PokemonController {
         var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
 
         if (pokemon != null){
-            usuario!!.get().pokemonsCapturados.add(pokemon)
-            usuarioService.save(usuario!!.get())
-            return ResponseEntity.status(HttpStatus.CREATED).body(pokemon.toGetPokemonDto(usuario!!.get()))
+            if(!usuario!!.get().pokemonsCapturados.contains(pokemon)) {
+                usuario.get().pokemonsCapturados.add(pokemon)
+                pokemon.isCapturado = true
+                usuarioService.save(usuario.get())
+                pokemonService.save(pokemon)
+                return ResponseEntity.status(HttpStatus.CREATED).body(pokemon.toGetPokemonDto(usuario.get()))
+            }else{
+                throw PokemonCapturadoYaExiste(Pokemon::class.java)
+            }
         }else{
             throw SingleEntityNotFoundException(id.toString(), Pokemon::class.java)
         }
@@ -312,12 +328,18 @@ class PokemonController {
         var auth: String = SecurityContextHolder.getContext().authentication.name
         var usuario: Optional<Usuario>? = usuarioService.findByUsername(auth)
 
-        usuario!!.get().pokemonsCapturados.forEach { pokemon ->
-            if (pokemon.id == id){
-                usuario!!.get().pokemonsCapturados.remove(pokemon)
-                usuarioService.save(usuario!!.get())
+        lateinit var pokemon: Pokemon
+
+        usuario!!.get().pokemonsCapturados.forEach { pokemonEncontrado ->
+            if (pokemonEncontrado.id == id){
+                pokemon = pokemonEncontrado
             }
         }
+        usuario.get().pokemonsCapturados.remove(pokemon)
+        pokemon.isCapturado = false
+        pokemonService.save(pokemon)
+        usuarioService.save(usuario.get())
+
         return ResponseEntity.noContent().build()
     }
 

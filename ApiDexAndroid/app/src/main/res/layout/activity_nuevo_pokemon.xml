@@ -24,20 +24,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editText_valoracion"
-        android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/estrellas_spinner"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="68dp"
         android:backgroundTint="#FFFFFF"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/valoracion"
-        android:inputType="number"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/editText_PC"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editText_PC"
         app:layout_constraintTop_toBottomOf="@+id/editText_PC" />
 
@@ -45,7 +38,7 @@
         android:id="@+id/editText_ataqueRapido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="68dp"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:gravity="center"
@@ -53,10 +46,9 @@
         android:text="@string/tit_ataqueR"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="@+id/editText_valoracion"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editText_valoracion"
-        app:layout_constraintTop_toBottomOf="@+id/editText_valoracion" />
+        app:layout_constraintEnd_toEndOf="@+id/estrellas_spinner"
+        app:layout_constraintStart_toStartOf="@+id/estrellas_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/estrellas_spinner" />
 
     <EditText
         android:id="@+id/editText_ataqueCargado"
