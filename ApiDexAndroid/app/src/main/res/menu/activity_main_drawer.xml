@@ -20,5 +20,10 @@
             android:id="@+id/nav_capturados"
             android:icon="@drawable/ic_capturado"
             android:title="@string/menu_capturados" />
+
+        <item
+            android:id="@+id/nav_equipo"
+            android:icon="@drawable/ic_equipo"
+            android:title="@string/menu_equipo" />
     </group>
 </menu>

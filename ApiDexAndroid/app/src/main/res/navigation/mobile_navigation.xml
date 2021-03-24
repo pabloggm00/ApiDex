@@ -28,4 +28,10 @@
         android:name="com.salesianostriana.apidexandroid.ui.capturados.CapturadosFragment"
         android:label="@string/menu_capturados"
         tools:layout="@layout/fragment_capturados" />
+
+    <fragment
+        android:id="@+id/nav_equipo"
+        android:name="com.salesianostriana.apidexandroid.ui.equipos.EquipoFragment"
+        android:label="@string/menu_equipo"
+        tools:layout="@layout/fragment_equipo" />
 </navigation>

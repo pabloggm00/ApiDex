@@ -62,4 +62,9 @@
     <string name="titulo_registro">Registro</string>
     <string name="btn_guardar">Guardar</string>
     <string name="editarPerfil">Editar Perfil</string>
+    <string name="menu_equipo">Equipos</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="actualizarPRO">ACTUALIZAR A PRO</string>
+    <string name="precio">0,99€</string>
 </resources>
