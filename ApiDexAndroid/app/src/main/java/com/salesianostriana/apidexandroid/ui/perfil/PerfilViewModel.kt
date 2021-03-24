@@ -2,23 +2,23 @@ package com.salesianostriana.apidexandroid.ui.perfil
 
 import android.app.Application
 import android.content.Context
-import android.content.Intent
 import android.util.Log
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.salesianostriana.apidexandroid.MainActivity
 import com.salesianostriana.apidexandroid.data.poko.response.UsuarioRegistroResponse
 import com.salesianostriana.apidexandroid.retrofit.UsuarioService
-import com.salesianostriana.apidexandroid.ui.login.LoginActivity
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
+
 
 class PerfilViewModel (application: Application) : AndroidViewModel(application) {
 
@@ -45,10 +45,13 @@ class PerfilViewModel (application: Application) : AndroidViewModel(application)
                .addConverterFactory(GsonConverterFactory.create())
                .build()
 
+
+
        service = retrofit.create(UsuarioService::class.java)
 
        getUser()
    }
+
 
     fun getUser() {
 

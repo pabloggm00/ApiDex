@@ -60,4 +60,6 @@
     <string name="tipo_filter">Tipo</string>
     <string name="titulo_filtro">Filtrar Pokémon</string>
     <string name="titulo_registro">Registro</string>
+    <string name="btn_guardar">Guardar</string>
+    <string name="editarPerfil">Editar Perfil</string>
 </resources>
