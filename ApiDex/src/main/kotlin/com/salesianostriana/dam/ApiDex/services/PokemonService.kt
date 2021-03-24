@@ -25,7 +25,6 @@ class PokemonService: BaseServiceImpl<Pokemon, Long, PokemonRepository>() {
         return lista
     }
 
-    //fun getAll(): MutableList<Pokemon>? = repositorio?.findAll()
 
     fun getPokemonFavs (usuario: Usuario) : List<Pokemon> = usuario.pokemonsFavs
 
@@ -51,9 +50,14 @@ class PokemonService: BaseServiceImpl<Pokemon, Long, PokemonRepository>() {
 
         //var pokemonEvolucionado : Optional<Pokemon> = repositorio!!.findById(id.plus(1))
 
+        fun Random.nextInt(range: IntRange): Int {
+            return range.start + nextInt(range.last - range.start)
+        }
+
+        val random = Random()
 
         pokemonAEvolucionar.get().idPokedex = pokemonEvolucionado.get().idPokedex
-        pokemonAEvolucionar.get().pC = pokemonAEvolucionar.get().pC!!.plus(600)
+        pokemonAEvolucionar.get().pC = pokemonAEvolucionar.get().pC!!.plus(random.nextInt(300..800))
         pokemonAEvolucionar.get().nombre = pokemonEvolucionado.get().nombre
         pokemonAEvolucionar.get().imagen = pokemonEvolucionado.get().imagen
 
