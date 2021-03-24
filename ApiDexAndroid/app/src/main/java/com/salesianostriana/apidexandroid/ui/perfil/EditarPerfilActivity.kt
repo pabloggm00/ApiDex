@@ -7,20 +7,18 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
-import coil.load
 import com.salesianostriana.apidexandroid.MainActivity
 import com.salesianostriana.apidexandroid.R
 import com.salesianostriana.apidexandroid.data.poko.response.UsuarioRegistroResponse
 import com.salesianostriana.apidexandroid.retrofit.UsuarioService
 import okhttp3.MediaType
 import okhttp3.MultipartBody
+import okhttp3.OkHttpClient
 import okhttp3.RequestBody
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -44,8 +42,8 @@ class EditarPerfilActivity : AppCompatActivity() {
     lateinit var body: MultipartBody.Part
 
     val uriPathHelper = URIPathHelper()
-    lateinit var selectedImage: Uri
-     var filePath: String? = ""
+    var selectedImage: Uri? = null
+    var filePath: String = ""
 
 
     lateinit var btnGuardar: Button
@@ -62,9 +60,16 @@ class EditarPerfilActivity : AppCompatActivity() {
         val sharedPref = this.getSharedPreferences("FILE_PREFERENCES", Context.MODE_PRIVATE)
         token = sharedPref?.getString("token", "")
 
+        val logging = HttpLoggingInterceptor()
+        logging.level= HttpLoggingInterceptor.Level.BODY
+        val httpCliente = OkHttpClient.Builder()
+        httpCliente.addInterceptor(logging)
+
+
         retrofit = Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(httpCliente.build())
                 .build()
 
         service = retrofit.create(UsuarioService::class.java)
@@ -80,9 +85,12 @@ class EditarPerfilActivity : AppCompatActivity() {
 
 
         avatar.setOnClickListener(View.OnClickListener {
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
+//            val intent = Intent(Intent.ACTION_GET_CONTENT)
+//            intent.type = "image/*"
+//            startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE)
+            var intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
-            startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE)
+            startActivityForResult(intent, PICK_IMAGE)
         })
 
         btnGuardar.setOnClickListener(View.OnClickListener {
@@ -102,7 +110,7 @@ class EditarPerfilActivity : AppCompatActivity() {
         if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE){
             avatar.setImageURI(data?.data) // handle chosen image
             selectedImage = data?.getData()!!
-            filePath = context.let {uriPathHelper.getPath(context, selectedImage) }
+            filePath = uriPathHelper.getPath(context, selectedImage!!)!!
 
 
             println(selectedImage)
@@ -139,7 +147,10 @@ class EditarPerfilActivity : AppCompatActivity() {
 
     fun postImage(){
 
-        var file: File = File(filePath!!)
+        var file: File = File(filePath)
+
+        val reqFile: RequestBody = RequestBody.create(MediaType.parse("image/*"), file)
+        body = MultipartBody.Part.createFormData("file", file.name, reqFile)
 
         service.postImage(body, "Bearer $token").enqueue(object : Callback<UsuarioRegistroResponse> {
             override fun onResponse(
@@ -147,16 +158,13 @@ class EditarPerfilActivity : AppCompatActivity() {
                     response: Response<UsuarioRegistroResponse>
             ) {
 
-                val reqFile: RequestBody = RequestBody.create(MediaType.parse("image/*"), file)
-                body = MultipartBody.Part.createFormData("upload", file.name, reqFile)
-
-                println(response.code())
-
+                Toast.makeText(context, "Usuario editado", Toast.LENGTH_SHORT)
+                        .show()
 
             }
 
             override fun onFailure(call: Call<UsuarioRegistroResponse>, t: Throwable) {
-                t.printStackTrace()
+                Log.e("Error", t.message.toString())
             }
 
         })
