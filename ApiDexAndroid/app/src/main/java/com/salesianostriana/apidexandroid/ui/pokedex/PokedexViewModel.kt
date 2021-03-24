@@ -76,8 +76,8 @@ class PokedexViewModel(application: Application) : AndroidViewModel(application)
         if (!isFav) {
             service.addPokemonFav("Bearer ${token}", pokemonId).enqueue(object : Callback<Pokemon> {
                 override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
-                    if (response.code() == 204){
-                        getPokemonList()
+                    if (response.code() == 201){
+
                     }
                 }
 
@@ -91,7 +91,7 @@ class PokedexViewModel(application: Application) : AndroidViewModel(application)
             service.deleteFavPokemon("Bearer ${token}", pokemonId).enqueue(object : Callback<Any>{
                 override fun onResponse(call: Call<Any>, response: Response<Any>) {
                     if (response.code() == 204){
-                        getPokemonList()
+
                     }
                 }
 
@@ -108,8 +108,8 @@ class PokedexViewModel(application: Application) : AndroidViewModel(application)
         if (!isCapturado) {
             service.addPokemonCapturado("Bearer ${token}", pokemonId).enqueue(object : Callback<Pokemon> {
                 override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
-                    if (response.code() == 204) {
-                        getPokemonList()
+                    if (response.code() == 201) {
+
                     }
                 }
 
@@ -123,7 +123,7 @@ class PokedexViewModel(application: Application) : AndroidViewModel(application)
             service.deleteCapturadoPokemon("Bearer ${token}", pokemonId).enqueue(object : Callback<Any> {
                 override fun onResponse(call: Call<Any>, response: Response<Any>) {
                     if (response.code() == 204) {
-                        getPokemonList()
+
                     }
                 }
 

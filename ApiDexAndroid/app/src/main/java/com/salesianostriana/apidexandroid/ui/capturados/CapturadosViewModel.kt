@@ -68,8 +68,8 @@ class CapturadosViewModel(application: Application) : AndroidViewModel(applicati
         if (!isFav) {
             service.addPokemonFav("Bearer ${token}", pokemonId).enqueue(object : Callback<Pokemon> {
                 override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
-                    if (response.code() == 204) {
-                        getPokemonCapturados()
+                    if (response.code() == 201) {
+
                     }
                 }
 
@@ -100,8 +100,8 @@ class CapturadosViewModel(application: Application) : AndroidViewModel(applicati
         if (!isCapturado) {
             service.addPokemonCapturado("Bearer ${token}", pokemonId).enqueue(object : Callback<Pokemon> {
                 override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
-                    if (response.code() == 204) {
-                        getPokemonCapturados()
+                    if (response.code() == 201) {
+
                     }
                 }
 
