@@ -2,6 +2,8 @@ package com.salesianostriana.apidexandroid.ui.pokedex
 
 import android.app.Application
 import android.content.Context
+import android.graphics.Color
+import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.cardview.widget.CardView
@@ -28,10 +30,14 @@ class PokedexViewModel(application: Application) : AndroidViewModel(application)
     var generacion: String?
     var tipo: String?
 
+    lateinit var adapter: MyPokedexRecyclerViewAdapter
+
     private val context = getApplication<Application>().applicationContext
 
     val pokemon: LiveData<List<Pokemon>>
         get() = _pokemons
+
+
 
     init {
         _pokemons.value = listOf()
@@ -60,6 +66,7 @@ class PokedexViewModel(application: Application) : AndroidViewModel(application)
             override fun onResponse(call: Call<List<Pokemon>>, response: Response<List<Pokemon>>) {
                 if (response.code() == 200){
                     _pokemons.value = response.body()
+
                 }
             }
 

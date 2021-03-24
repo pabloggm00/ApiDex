@@ -101,7 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="#8B2A9865"
+                    app:cardBackgroundColor="#00FFFFFF"
                     app:cardCornerRadius="30dp">
 
                     <TextView
@@ -120,7 +120,7 @@
                     android:layout_height="30dp"
                     android:layout_marginStart="10dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="#8B2A9865"
+                    app:cardBackgroundColor="#002A9865"
                     app:cardCornerRadius="30dp">
 
                     <TextView
@@ -151,7 +151,7 @@
                 android:layout_marginTop="0dp"
                 android:gravity="center"
                 android:text="@string/pcNumber"
-                android:textColor="#CC6CEC1D"
+                android:textColor="#CCFFFFFF"
                 android:textSize="27.5sp" />
 
             <TextView
@@ -248,7 +248,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/ataqueR"
-                    android:textColor="#CC6CEC1D"
+                    android:textColor="#CCFFFFFF"
                     android:textSize="17sp" />
 
                 <TextView
@@ -259,7 +259,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/ataqueC"
-                    android:textColor="#CC6CEC1D"
+                    android:textColor="#CCFFFFFF"
                     android:textSize="17sp" />
 
             </LinearLayout>
@@ -270,7 +270,7 @@
                 android:layout_height="38dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp"
-                android:backgroundTint="#4CAF50"
+                android:backgroundTint="#004422"
                 android:text="@string/btnDuplicar"
                 android:textSize="12sp" />
 
@@ -280,7 +280,7 @@
                 android:layout_height="38dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:backgroundTint="#A84CAF"
+                android:backgroundTint="#004422"
                 android:text="@string/btnEvolucionar"
                 android:textSize="12sp" />
 

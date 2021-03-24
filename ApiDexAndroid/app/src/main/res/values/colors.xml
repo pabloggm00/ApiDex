@@ -11,6 +11,6 @@
     <color name="red">#F91515</color>
     <color name="selector">@color/nav_item_text_color</color>
     <color name="planta">#5EFF53</color>
-    <color name="plantaCard">#8B2A9865</color>
+    <color name="plantaCard">#1F704A</color>
 
 </resources>

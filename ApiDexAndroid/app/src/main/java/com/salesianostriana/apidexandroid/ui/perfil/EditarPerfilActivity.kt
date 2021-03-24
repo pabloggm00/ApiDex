@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import com.salesianostriana.apidexandroid.MainActivity
 import com.salesianostriana.apidexandroid.R
+import com.salesianostriana.apidexandroid.data.poko.request.UsuarioEditRequest
 import com.salesianostriana.apidexandroid.data.poko.response.UsuarioRegistroResponse
 import com.salesianostriana.apidexandroid.retrofit.UsuarioService
 import okhttp3.MediaType
@@ -95,6 +96,7 @@ class EditarPerfilActivity : AppCompatActivity() {
 
         btnGuardar.setOnClickListener(View.OnClickListener {
             postImage()
+            editUser()
             var intent = Intent(this, MainActivity::class.java)
             this.startActivity(intent)
         })
@@ -118,6 +120,28 @@ class EditarPerfilActivity : AppCompatActivity() {
 
 
         }
+    }
+
+    fun editUser(){
+
+        val userData= UsuarioEditRequest(
+                editEmail.text.toString()
+        )
+
+        service.editUser("Bearer $token", _usuario.value!!.id.toLong(), userData).enqueue(object : Callback<UsuarioRegistroResponse>{
+            override fun onResponse(
+                call: Call<UsuarioRegistroResponse>,
+                response: Response<UsuarioRegistroResponse>
+            ) {
+                Toast.makeText(context, "Usuario editado", Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+            override fun onFailure(call: Call<UsuarioRegistroResponse>, t: Throwable) {
+
+            }
+
+        })
     }
 
     fun getUser() {

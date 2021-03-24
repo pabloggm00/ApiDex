@@ -2,17 +2,16 @@ package com.salesianostriana.apidexandroid.ui.detallePokemon
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.MutableLiveData
 import coil.load
@@ -60,6 +59,8 @@ class DetallePokemonActivity : AppCompatActivity() {
     lateinit var btnEvolucionar: Button
     lateinit var cardViewSegundotipo: CardView
     lateinit var cardViewPrimertipo: CardView
+    lateinit var cardView: CardView
+    lateinit var layoutView: LinearLayout
 
     lateinit var tituloAtaqueRapido : TextView
     lateinit var tituloAtaqueCargado : TextView
@@ -139,7 +140,8 @@ class DetallePokemonActivity : AppCompatActivity() {
         btnEvolucionar = findViewById(R.id.button_evolucionar)
         cardViewSegundotipo = findViewById(R.id.cardView_tipo2)
         cardViewPrimertipo = findViewById(R.id.cardView_tipo1)
-
+        cardView = findViewById(R.id.cardView_detallePokemon)
+        layoutView = findViewById(R.id.layout_detallePokemon)
 
         btnDuplicar.setOnClickListener ( View.OnClickListener {
             var intent = Intent(context, NuevoPokemonActivity::class.java).apply {
@@ -200,12 +202,92 @@ class DetallePokemonActivity : AppCompatActivity() {
                     fotoPokemon.load(_detallePokemon.value?.imagen?.url)
                     regionView.text = _detallePokemon.value?.generacion
 
-                    /*when (_detallePokemon.value!!.primerTipo) {
-                        "Planta" ->{ tipo1View.setTextColor(R.color.red)
-                            //cardViewPrimertipo.setCardBackgroundColor(R.color.planta)
+                    when (_detallePokemon.value!!.primerTipo) {
+                        "Fuego" ->{
+                            //cardViewPrimertipo.setCardBackgroundColor(Color.parseColor("#7d2d00"))
+                            cardView.setCardBackgroundColor(Color.parseColor("#AA5B1E"))
+                            layoutView.setBackgroundColor(Color.parseColor("#AA5B1E"))
+                            btnDuplicar.setBackgroundColor(Color.parseColor("#7d2d00"))
+                            btnEvolucionar.setBackgroundColor(Color.parseColor("#7d2d00"))
+                        }
+                        "Agua" -> {
+                            cardView.setCardBackgroundColor(Color.parseColor("#FF0C147C"))
+                            layoutView.setBackgroundColor(Color.parseColor("#FF0C147C"))
+                            btnDuplicar.setBackgroundColor(Color.parseColor("#000062"))
+                            btnEvolucionar.setBackgroundColor(Color.parseColor("#000062"))
+                        }
+                        "Veneno" -> {
+                            cardView.setCardBackgroundColor(Color.parseColor("#FF4C3287"))
+                            layoutView.setBackgroundColor(Color.parseColor("#FF4C3287"))
+                            btnDuplicar.setBackgroundColor(Color.parseColor("#1b0a59"))
+                            btnEvolucionar.setBackgroundColor(Color.parseColor("#1b0a59"))
+                        }
+                        "Acero" -> {
+                            cardView.setCardBackgroundColor(Color.parseColor("#235253"))
+                            layoutView.setBackgroundColor(Color.parseColor("#235253"))
+                            btnDuplicar.setBackgroundColor(Color.parseColor("#00292b"))
+                            btnEvolucionar.setBackgroundColor(Color.parseColor("#00292b"))
+                        }
+                        "Bicho" -> {
+                            cardView.setCardBackgroundColor(Color.parseColor("#376127"))
+                            layoutView.setBackgroundColor(Color.parseColor("#376127"))
+                            btnDuplicar.setBackgroundColor(Color.parseColor("#0b3600"))
+                            btnEvolucionar.setBackgroundColor(Color.parseColor("#0b3600"))
+                        }
+                        "Dragón" -> {
+                            cardView.setCardBackgroundColor(Color.parseColor("#352455"))
+                            layoutView.setBackgroundColor(Color.parseColor("#352455"))
+                            btnDuplicar.setBackgroundColor(Color.parseColor("#11002c"))
+                            btnEvolucionar.setBackgroundColor(Color.parseColor("#11002c"))
+                        }
+                        "Eléctrico" -> {
+                            cardView.setCardBackgroundColor(Color.parseColor("#403D01"))
+                            layoutView.setBackgroundColor(Color.parseColor("#403D01"))
+                            btnDuplicar.setBackgroundColor(Color.parseColor("#201600"))
+                            btnEvolucionar.setBackgroundColor(Color.parseColor("#201600"))
+                        }
+                        "Hada" -> {
+                            cardView.setCardBackgroundColor(Color.parseColor("#8C448B"))
+                            layoutView.setBackgroundColor(Color.parseColor("#8C448B"))
+                            btnDuplicar.setBackgroundColor(Color.parseColor("#5d165d"))
+                            btnEvolucionar.setBackgroundColor(Color.parseColor("#5d165d"))
+                        }
+                        "Lucha" -> {
+                            cardView.setCardBackgroundColor(Color.parseColor("#771313"))
+                            layoutView.setBackgroundColor(Color.parseColor("#771313"))
+                            btnDuplicar.setBackgroundColor(Color.parseColor("#470000"))
+                            btnEvolucionar.setBackgroundColor(Color.parseColor("#470000"))
+                        }
+                        "Normal" -> {
+                            cardView.setCardBackgroundColor(Color.parseColor("#534B37"))
+                            layoutView.setBackgroundColor(Color.parseColor("#534B37"))
+                            btnDuplicar.setBackgroundColor(Color.parseColor("#2a2311"))
+                            btnEvolucionar.setBackgroundColor(Color.parseColor("#2a2311"))
+                        }
+                        "Siniestro" -> {
+                            cardView.setCardBackgroundColor(Color.parseColor("#443753"))
+                            layoutView.setBackgroundColor(Color.parseColor("#443753"))
+                            btnDuplicar.setBackgroundColor(Color.parseColor("#1c112a"))
+                            btnEvolucionar.setBackgroundColor(Color.parseColor("#1c112a"))
+                        }
+                        "Tierra" -> {
+                            cardView.setCardBackgroundColor(Color.parseColor("#886B23"))
+                            layoutView.setBackgroundColor(Color.parseColor("#886B23"))
+                            btnDuplicar.setBackgroundColor(Color.parseColor("#584100"))
+                            btnEvolucionar.setBackgroundColor(Color.parseColor("#584100"))
+                        }
+                        "Psíquico" -> {
+                            cardView.setCardBackgroundColor(Color.parseColor("#921397"))
+                            layoutView.setBackgroundColor(Color.parseColor("#921397"))
+                            btnDuplicar.setBackgroundColor(Color.parseColor("#600068"))
+                            btnEvolucionar.setBackgroundColor(Color.parseColor("#600068"))
                         }
 
-                    }*/
+                    }
+
+
+
+
 
 
                     tipo1View.text = _detallePokemon.value?.primerTipo

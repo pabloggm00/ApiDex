@@ -2,6 +2,7 @@ package com.salesianostriana.apidexandroid.ui.pokedex
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -74,6 +75,8 @@ class MyPokedexRecyclerViewAdapter(
             viewModel.addPokemonCapturado(item.id, item.isCapturado)
             viewModel.getPokemonList()
         })
+
+
 
     }
 
