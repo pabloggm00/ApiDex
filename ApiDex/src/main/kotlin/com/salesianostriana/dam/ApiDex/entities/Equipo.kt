@@ -1,25 +1,36 @@
 package com.salesianostriana.dam.ApiDex.entities
 
 import javax.persistence.*
+import javax.validation.constraints.NotBlank
+
+/**
+ *
+ * Esta clase es para crear un Equipo
+ * @author Pablo González González
+ *
+ * @param nombre Nombre del equipo
+ * @param liga Liga a la que pertenece
+ * @param usuario Usuario del que pertenece al equipo
+ * @param listaPokemon Listado de Pokémon del equipo
+ *
+ */
 
 @Entity
 class Equipo(
 
+    @get:NotBlank(message = "{equipo.nombre.blank}")
     var nombre: String,
 
-    var totalPC: Int,
+    var liga: Liga,
 
     @ManyToOne
     var usuario: Usuario,
-
-    @ManyToOne
-    var liga: Liga,
 
     @OneToMany(mappedBy = "equipo")
     var listaPokemon: MutableList<Pokemon> = mutableListOf(),
 
     @Id @GeneratedValue
-    val id: Long? = null
+    var id: Long? = null
 ) {
 
     override fun equals(other: Any?): Boolean {

@@ -34,8 +34,6 @@ class RegistroActivity : AppCompatActivity() {
     lateinit var editTextUsername: EditText
     lateinit var editTextPassword: EditText
     lateinit var editTextEmail: EditText
-    lateinit var editTextFullName: EditText
-    lateinit var editTextBirthday: EditText
     lateinit var textGoLogin: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,8 +76,20 @@ class RegistroActivity : AppCompatActivity() {
                     Toast.makeText(context, "Registro realizado correctamente", Toast.LENGTH_SHORT).show()
                     var intent = Intent(context, LoginActivity::class.java)
                     context.startActivity(intent)
+
                 }
                 else{
+
+                    if (editTextUsername.length() < 3){
+                        Toast.makeText(context, "El usuario debe tener al menos 4 carácteres", Toast.LENGTH_SHORT).show()
+                    }
+                    if (editTextPassword.length() < 9){
+                        Toast.makeText(context, "La contraseña debe ser mayor de 9", Toast.LENGTH_SHORT).show()
+                    }
+                    if (editTextEmail.contentDescription == "@"){
+                        Toast.makeText(context, "El email debe ser de tipo email", Toast.LENGTH_SHORT).show()
+                    }
+
                     Toast.makeText(context, "No se ha podido registrar", Toast.LENGTH_SHORT).show()
                 }
             }

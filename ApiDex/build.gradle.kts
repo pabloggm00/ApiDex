@@ -6,6 +6,7 @@ plugins {
 	kotlin("jvm") version "1.4.30"
 	kotlin("plugin.spring") version "1.4.30"
 	kotlin("plugin.jpa") version "1.4.30"
+	id("org.jetbrains.dokka") version "1.4.30"
 }
 
 group = "com.salesianostriana.dam"
@@ -14,6 +15,7 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
 	mavenCentral()
+	jcenter()
 }
 
 dependencies {
@@ -30,6 +32,11 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	testImplementation("org.springframework.security:spring-security-test")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
+	implementation("io.springfox:springfox-swagger2:2.9.2")
+	implementation("io.springfox:springfox-swagger-ui:2.9.2")
+	/*implementation("io.springfox", "springfox-swagger2" , "2.9.2")
+	implementation("io.springfox","springfox-swagger-ui","2.9.2")*/
+
 }
 
 tasks.withType<KotlinCompile> {

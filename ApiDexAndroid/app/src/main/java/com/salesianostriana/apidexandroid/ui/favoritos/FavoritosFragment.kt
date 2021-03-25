@@ -45,4 +45,9 @@ class FavoritosFragment : Fragment() {
 
         return view
     }
+
+    override fun onResume() {
+        super.onResume()
+        favoritosViewModel.getPokemonFavs()
+    }
 }

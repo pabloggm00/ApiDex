@@ -9,5 +9,8 @@
     <color name="grease">#484848</color>
     <color name="white">#FFFFFF</color>
     <color name="red">#F91515</color>
-    <color name="selector">@drawable/nav_item_text_color</color>
+    <color name="selector">@color/nav_item_text_color</color>
+    <color name="planta">#5EFF53</color>
+    <color name="plantaCard">#1F704A</color>
+
 </resources>

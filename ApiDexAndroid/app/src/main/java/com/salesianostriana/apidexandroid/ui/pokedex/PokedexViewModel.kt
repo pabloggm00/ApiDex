@@ -2,11 +2,15 @@ package com.salesianostriana.apidexandroid.ui.pokedex
 
 import android.app.Application
 import android.content.Context
+import android.graphics.Color
+import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.salesianostriana.apidexandroid.R
 import com.salesianostriana.apidexandroid.data.poko.response.Pokemon
 import com.salesianostriana.apidexandroid.retrofit.PokemonService
 import retrofit2.Call
@@ -31,6 +35,8 @@ class PokedexViewModel(application: Application) : AndroidViewModel(application)
     val pokemon: LiveData<List<Pokemon>>
         get() = _pokemons
 
+
+
     init {
         _pokemons.value = listOf()
 
@@ -48,6 +54,8 @@ class PokedexViewModel(application: Application) : AndroidViewModel(application)
 
         getPokemonList()
 
+
+
     }
 
     fun getPokemonList() {
@@ -56,6 +64,7 @@ class PokedexViewModel(application: Application) : AndroidViewModel(application)
             override fun onResponse(call: Call<List<Pokemon>>, response: Response<List<Pokemon>>) {
                 if (response.code() == 200){
                     _pokemons.value = response.body()
+
                 }
             }
 
@@ -72,8 +81,8 @@ class PokedexViewModel(application: Application) : AndroidViewModel(application)
         if (!isFav) {
             service.addPokemonFav("Bearer ${token}", pokemonId).enqueue(object : Callback<Pokemon> {
                 override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
-                    if (response.code() == 204){
-                        getPokemonList()
+                    if (response.code() == 201){
+
                     }
                 }
 
@@ -87,7 +96,7 @@ class PokedexViewModel(application: Application) : AndroidViewModel(application)
             service.deleteFavPokemon("Bearer ${token}", pokemonId).enqueue(object : Callback<Any>{
                 override fun onResponse(call: Call<Any>, response: Response<Any>) {
                     if (response.code() == 204){
-                        getPokemonList()
+
                     }
                 }
 
@@ -104,8 +113,8 @@ class PokedexViewModel(application: Application) : AndroidViewModel(application)
         if (!isCapturado) {
             service.addPokemonCapturado("Bearer ${token}", pokemonId).enqueue(object : Callback<Pokemon> {
                 override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
-                    if (response.code() == 204) {
-                        getPokemonList()
+                    if (response.code() == 201) {
+
                     }
                 }
 
@@ -119,7 +128,7 @@ class PokedexViewModel(application: Application) : AndroidViewModel(application)
             service.deleteCapturadoPokemon("Bearer ${token}", pokemonId).enqueue(object : Callback<Any> {
                 override fun onResponse(call: Call<Any>, response: Response<Any>) {
                     if (response.code() == 204) {
-                        getPokemonList()
+
                     }
                 }
 

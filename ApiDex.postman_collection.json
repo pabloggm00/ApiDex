@@ -71,6 +71,75 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "GET User me",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/user/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"user",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Edit usuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"palete@email.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/user/51",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"user",
+								"51"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/user/52",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"user",
+								"52"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -102,7 +171,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9000/pokemon/6",
+							"raw": "http://localhost:9000/pokemon/160",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -110,7 +179,7 @@
 							"port": "9000",
 							"path": [
 								"pokemon",
-								"6"
+								"160"
 							]
 						}
 					},
@@ -119,16 +188,6 @@
 				{
 					"name": "PUT Editar pokemon",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5IiwiZXhwIjoxNjE2MTc4MjE2LCJpYXQiOjE2MTU5MTkwMTYsInJlZnJlc2giOmZhbHNlLCJyb2xlcyI6IlVTRVIifQ.ZQezW88f-3udScPMmeXtKKhqMPXIWFaJnTuNpd20znCy3zbr7fvvkrAlomUml3duLhQfiJ5O8EvfuHkqG1kNyg",
-									"type": "string"
-								}
-							]
-						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -141,7 +200,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9000/pokemon/6",
+							"raw": "http://localhost:9000/pokemon/63",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -149,7 +208,7 @@
 							"port": "9000",
 							"path": [
 								"pokemon",
-								"6"
+								"63"
 							]
 						}
 					},
@@ -158,20 +217,10 @@
 				{
 					"name": "POST Añadir pokemon a favorito",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MyIsImV4cCI6MTYxNjMyMTMxOSwiaWF0IjoxNjE2MDYyMTE5LCJyZWZyZXNoIjpmYWxzZSwidXNlcm5hbWUiOiJwYWJsb2dvbnphbGV6Iiwicm9sZXMiOiJVU0VSIn0.3KggC16c9kDjB-GuX3YsIeI71izRk-6tblY-euMzSMmgox1BhnTLHAjGI-03LsCxspcP02SeI_cZAOn16m5Tig",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9000/pokemon/favs/27",
+							"raw": "http://localhost:9000/pokemon/favs/160",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -180,7 +229,7 @@
 							"path": [
 								"pokemon",
 								"favs",
-								"27"
+								"160"
 							]
 						}
 					},
@@ -192,7 +241,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9000/pokemon/capturados/6",
+							"raw": "http://localhost:9000/pokemon/capturados/41",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -201,7 +250,7 @@
 							"path": [
 								"pokemon",
 								"capturados",
-								"6"
+								"41"
 							]
 						}
 					},
@@ -230,20 +279,10 @@
 				{
 					"name": "DELETE Eliminar pokemon capturado",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5IiwiZXhwIjoxNjE2MTc5MTc4LCJpYXQiOjE2MTU5MTk5NzgsInJlZnJlc2giOmZhbHNlLCJyb2xlcyI6IlVTRVIifQ.3i-zc-F2SP7Trb1nzGEVclEXZehrjdMJ2R2xlyynXB5oXsQBr0mzAfwQZBRYfagFYXGldyisnKoyk6T0WgclLw",
-									"type": "string"
-								}
-							]
-						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9000/pokemon/capturados/6",
+							"raw": "http://localhost:9000/pokemon/capturados/41",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -252,7 +291,7 @@
 							"path": [
 								"pokemon",
 								"capturados",
-								"6"
+								"41"
 							]
 						}
 					},
@@ -261,20 +300,10 @@
 				{
 					"name": "DELETE Eliminar pokemon favorito",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5IiwiZXhwIjoxNjE2MTc5MTc4LCJpYXQiOjE2MTU5MTk5NzgsInJlZnJlc2giOmZhbHNlLCJyb2xlcyI6IlVTRVIifQ.3i-zc-F2SP7Trb1nzGEVclEXZehrjdMJ2R2xlyynXB5oXsQBr0mzAfwQZBRYfagFYXGldyisnKoyk6T0WgclLw",
-									"type": "string"
-								}
-							]
-						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9000/pokemon/favs/6",
+							"raw": "http://localhost:9000/pokemon/favs/41",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -283,7 +312,7 @@
 							"path": [
 								"pokemon",
 								"favs",
-								"6"
+								"41"
 							]
 						}
 					},
@@ -332,21 +361,11 @@
 				{
 					"name": "POST Duplicar Pokemon",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MiIsImV4cCI6MTYxNjMyMjExNSwiaWF0IjoxNjE2MDYyOTE1LCJyZWZyZXNoIjpmYWxzZSwidXNlcm5hbWUiOiJwYWJsb2dvbnphbGV6Iiwicm9sZXMiOiJVU0VSIn0.ug1ZYuN9wahm8tyOh3v6MAJalcbDuefYl9Q6_p2dWIGuSTIS12GaeAduJkJ3foPaeXYn3MNmDYfKdfZGayT3PA",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"estrellas\": 2,\r\n    \"ataqueRapido\": \"Látigo Cepta\",\r\n    \"ataqueCargado\": \"Bomba Lodo\",\r\n    \"pC\": 450\r\n}",
+							"raw": "{\r\n    \"estrellas\": 2,\r\n    \"ataqueRapido\": \"Látigo Cepta\",\r\n    \"ataqueCargado\": \"Bomba Lodo\",\r\n    \"pC\": 60\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -354,7 +373,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9000/pokemon/27",
+							"raw": "http://localhost:9000/pokemon/118",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -362,7 +381,7 @@
 							"port": "9000",
 							"path": [
 								"pokemon",
-								"27"
+								"118"
 							]
 						}
 					},
@@ -371,20 +390,10 @@
 				{
 					"name": "POST Evolucionar Pokemon",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MiIsImV4cCI6MTYxNjM5OTYzMSwiaWF0IjoxNjE2MTQwNDMxLCJyZWZyZXNoIjpmYWxzZSwidXNlcm5hbWUiOiJwYWJsb2dvbnphbGV6Iiwicm9sZXMiOiJVU0VSIn0.geUXKpQYibTNS9DB_3u9b_JxA-wC5KkcQx216dtF0COH1dfr9W7ccs5r6bJ440DUkR1N0T_z-zRTwMIz-vVQkg",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9000/pokemon/evolucion/43",
+							"raw": "http://localhost:9000/pokemon/evolucion/212",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -393,7 +402,190 @@
 							"path": [
 								"pokemon",
 								"evolucion",
-								"43"
+								"212"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Imágenes",
+			"item": [
+				{
+					"name": "POST Subir imagen pokemon",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Pablo/Pictures/Posibles logos/FOTO POKEMONS/g3/255.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:9000/pokemon/194/img",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pokemon",
+								"194",
+								"img"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Imagen",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://10.0.2.2:9000/files/fIkuJ6t",
+							"protocol": "http",
+							"host": [
+								"10",
+								"0",
+								"2",
+								"2"
+							],
+							"port": "9000",
+							"path": [
+								"files",
+								"fIkuJ6t"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Subir imagen usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Pablo/Pictures/1617d06bff73655ba910da1b6c86701c.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:9000/user/img",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"user",
+								"img"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Equipo",
+			"item": [
+				{
+					"name": "GET Todos los equipos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/equipo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"equipo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Añadir equipo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"e\",\r\n    \"liga\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/equipo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"equipo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Añadir pokemon a equipo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/equipo/53/pokemon/54",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"equipo",
+								"53",
+								"pokemon",
+								"54"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Equipo por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/equipo/53",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"equipo",
+								"53"
 							]
 						}
 					},
@@ -407,7 +599,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MiIsImV4cCI6MTYxNjM5OTYzMSwiaWF0IjoxNjE2MTQwNDMxLCJyZWZyZXNoIjpmYWxzZSwidXNlcm5hbWUiOiJwYWJsb2dvbnphbGV6Iiwicm9sZXMiOiJVU0VSIn0.geUXKpQYibTNS9DB_3u9b_JxA-wC5KkcQx216dtF0COH1dfr9W7ccs5r6bJ440DUkR1N0T_z-zRTwMIz-vVQkg",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyMDkiLCJleHAiOjE2MTY5MzY0NDQsImlhdCI6MTYxNjY3NzI0NCwicmVmcmVzaCI6ZmFsc2UsInVzZXJuYW1lIjoicGFibG9nb256YWxleiIsInJvbGVzIjoiVVNFUiJ9.2G7hFaeSiHlkgcdbPOfiwoL54a1HZJyFTwluACWx2wwelY3Pber5G_XgJFXcfWg7WcD4ZAnUfMpdW0mS5tLrYw",
 				"type": "string"
 			}
 		]

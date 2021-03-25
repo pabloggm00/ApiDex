@@ -56,14 +56,26 @@
         </androidx.cardview.widget.CardView>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_eliminarCuenta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="208dp"
+            android:layout_marginTop="152dp"
             android:backgroundTint="#F91515"
             android:text="@string/eliminar_cuenta"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/btn_editarPerfil"
+            app:layout_constraintStart_toStartOf="@+id/btn_editarPerfil"
+            app:layout_constraintTop_toBottomOf="@+id/btn_editarPerfil" />
+
+        <Button
+            android:id="@+id/btn_editarPerfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="192dp"
+            android:backgroundTint="#5E19AE"
+            android:text="@string/editarPerfil"
+            app:layout_constraintEnd_toEndOf="@+id/cardView_user"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="@+id/cardView_user"
             app:layout_constraintTop_toBottomOf="@+id/cardView_user" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

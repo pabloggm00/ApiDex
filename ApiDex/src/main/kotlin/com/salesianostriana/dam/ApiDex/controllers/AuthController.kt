@@ -6,6 +6,9 @@ import com.salesianostriana.dam.ApiDex.error.UsernameExistsException
 import com.salesianostriana.dam.ApiDex.security.jwt.BearerTokenExtractor
 import com.salesianostriana.dam.ApiDex.security.jwt.JwtTokenProvider
 import com.salesianostriana.dam.ApiDex.services.UsuarioService
+import io.swagger.annotations.ApiOperation
+import io.swagger.annotations.ApiResponse
+import io.swagger.annotations.ApiResponses
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize
@@ -30,6 +33,12 @@ class AuthController(
     private val usuarioService: UsuarioService
 ){
 
+    @ApiOperation("Login", notes = "El usuario que ha sido previamente deberá loguearse con el username y su password")
+    @ApiResponses(
+        ApiResponse(code = 200, message = "Ok."),
+        ApiResponse(code = 401, message = "No está autorizado"),
+        ApiResponse(code = 500, message = "Error inesperado")
+    )
     @PostMapping("/login")
     fun login(@Valid @RequestBody loginRequest : LoginRequest) : ResponseEntity<JwtUserResponseLogin> {
 
@@ -48,6 +57,8 @@ class AuthController(
 
     }
 
+    @ApiOperation("Registrarse", notes = "Se encarga del registro del usuario. Deberá registrarse con los campos de " +
+            "email, username, y password. En el campo de roles quedará tal que así: USER ")
     @PostMapping("/register")
     fun register(@Valid @RequestBody newUser: EditUsuarioDto) : ResponseEntity<GetUsuarioRegistradoDto> =
         usuarioService.create(newUser).map { ResponseEntity.status(HttpStatus.CREATED)
@@ -80,9 +91,7 @@ class AuthController(
         return ResponseEntity.badRequest().build()
     }
 
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("/user/me")
-    fun me(@AuthenticationPrincipal usuario : Usuario) = usuario.toGetUsuarioRegistradoDto()
+
 }
 
 data class LoginRequest(

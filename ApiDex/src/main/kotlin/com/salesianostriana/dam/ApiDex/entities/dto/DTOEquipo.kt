@@ -1,40 +1,50 @@
 package com.salesianostriana.dam.ApiDex.entities.dto
 
 import com.salesianostriana.dam.ApiDex.entities.*
+import javax.validation.constraints.NotBlank
 
 
 data class EditEquipoDto(
+    @get:NotBlank(message = "{equipo.nombre.blank}")
     var nombre: String,
-    var totalPC: Int,
-    var listaPokemon: MutableList<Pokemon>,
-    var liga: Liga
+    var liga: Liga,
+    var listaPokemons: MutableList<Pokemon> = mutableListOf(),
+
 )
 
 data class GetEquipoDto(
+    var id: Long?,
     var nombre: String,
-    var liga: String
+    var liga: Liga
 )
 
-fun Equipo.toGetEquipoDto(): GetEquipoDto = GetEquipoDto(nombre,liga.nombre)
+fun Equipo.toGetEquipoDto(): GetEquipoDto = GetEquipoDto(id,nombre,liga)
 
 data class GetEquipoDetalleDto(
+    var id: Long?,
     var nombre: String,
-    var listaPokemon: List<GetPokemonEquipoDto>,
-    var totalPC: Int
+    var listaPokemons: List<GetPokemonEquipoDto>
 )
 
 
 fun Equipo.toGetEquipoDetalleDto(): GetEquipoDetalleDto {
 
-    var listaPokemon: MutableList<GetPokemonEquipoDto> = mutableListOf()
+    val url: String = "http://10.0.2.2:9000/files/"
+
+    var listaPokemons: MutableList<GetPokemonEquipoDto> = mutableListOf()
     listaPokemon.forEach { i ->
-        listaPokemon.add(GetPokemonEquipoDto(i!!.id, /*"${i.imagen}",*/ i.pC ))
+        listaPokemons.add(GetPokemonEquipoDto(i.id, "${url}${i.imagen!!.dataId}", i.pC ))
+        println(i.nombre)
     }
 
+    println(listaPokemons)
+    println(listaPokemon)
+
+
     return GetEquipoDetalleDto(
+        id,
         nombre,
-        listaPokemon,
-        totalPC
+        listaPokemons
     )
 
 }

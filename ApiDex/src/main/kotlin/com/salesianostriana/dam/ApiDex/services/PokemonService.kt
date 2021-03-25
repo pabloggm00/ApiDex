@@ -10,9 +10,21 @@ import com.salesianostriana.dam.ApiDex.services.base.BaseServiceImpl
 import org.springframework.stereotype.Service
 import java.util.*
 
+/**
+ * Esta clase contiene metodos propios de Pokémon
+ * @author Pablo González González
+ */
+
 @Service
 class PokemonService: BaseServiceImpl<Pokemon, Long, PokemonRepository>() {
 
+    /**
+     * Este método es para filtrar los Pokémon por tipo y por su generación
+     * @param tipo Tipo del Pokémon
+     * @param generacion Generación a la que pertenece
+     *
+     * @return Devuelve un listado de Pokémon
+     */
     fun getPokemonFiltrados(tipo: String, generacion: String): List<Pokemon>? {
         var lista: List<Pokemon>? = repositorio?.findAll()
 
@@ -25,12 +37,34 @@ class PokemonService: BaseServiceImpl<Pokemon, Long, PokemonRepository>() {
         return lista
     }
 
-    //fun getAll(): MutableList<Pokemon>? = repositorio?.findAll()
 
+    /**
+     * Este método es para traer todos los Pokémon favoritos
+     *
+     * @param usuario Usuario que tiene esa lista
+     *
+     * @return Listado de Pokémon
+     */
     fun getPokemonFavs (usuario: Usuario) : List<Pokemon> = usuario.pokemonsFavs
 
+    /**
+     * Este método es para traer todos los Pokémon capturados
+     *
+     * @param usuario Usuario que tiene esa lista
+     *
+     * @return Listado de Pokémon
+     */
     fun getPokemonCapturados (usuario: Usuario) : List<Pokemon> = usuario.pokemonsCapturados
 
+    /**
+     * Este método sirve para evolucionar al Pokémon. Coge el Pokémon que se quiere evolucionar, busca ese nombre y
+     * se trae al original para poder coger los datos del siguiente Pokémon que será el Pokémon evolucionado
+     *
+     * @param usuario Usuario que quiere realizar la evolución
+     * @param id ID del Pokémon a evolucionar
+     *
+     * @return Devuelve el Pokémon evolucionado
+     */
     fun evolucionar(usuario: Usuario, id: Long): Pokemon {
 
         var pokemonAEvolucionar : Optional<Pokemon> = repositorio!!.findById(id)
@@ -51,11 +85,16 @@ class PokemonService: BaseServiceImpl<Pokemon, Long, PokemonRepository>() {
 
         //var pokemonEvolucionado : Optional<Pokemon> = repositorio!!.findById(id.plus(1))
 
+        fun Random.nextInt(range: IntRange): Int {
+            return range.start + nextInt(range.last - range.start)
+        }
+
+        val random = Random()
 
         pokemonAEvolucionar.get().idPokedex = pokemonEvolucionado.get().idPokedex
-        pokemonAEvolucionar.get().pC = pokemonAEvolucionar.get().pC!!.plus(600)
+        pokemonAEvolucionar.get().pC = pokemonAEvolucionar.get().pC!!.plus(random.nextInt(300..800))
         pokemonAEvolucionar.get().nombre = pokemonEvolucionado.get().nombre
-        //meter imagen
+        pokemonAEvolucionar.get().imagen = pokemonEvolucionado.get().imagen
 
         if (pokemonEvolucionado.get().isUltimo){
             pokemonAEvolucionar.get().isUltimo = true

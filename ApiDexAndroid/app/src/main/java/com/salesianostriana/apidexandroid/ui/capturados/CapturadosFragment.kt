@@ -46,4 +46,9 @@ class CapturadosFragment : Fragment() {
 
         return view
     }
+
+    override fun onResume() {
+        super.onResume()
+        capturadosViewModel.getPokemonCapturados()
+    }
 }
