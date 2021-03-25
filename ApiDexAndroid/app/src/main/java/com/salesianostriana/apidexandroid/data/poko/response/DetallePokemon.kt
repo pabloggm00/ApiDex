@@ -7,7 +7,7 @@ data class DetallePokemon(
         val isCapturado: Boolean,
         val imagen: Imagen,
         val estrellas: Int,
-        val pC: Int,
+        val pc: Int,
         val ataqueRapido: String,
         val ataqueCargado: String,
         val generacion: String,
