@@ -1,24 +1,51 @@
 package com.salesianostriana.dam.ApiDex.entities.dto
 
 import com.salesianostriana.dam.ApiDex.entities.*
+import io.swagger.annotations.ApiModelProperty
 import javax.validation.constraints.*
 
 
 data class EditPokemonDto(
+    @ApiModelProperty(
+        example = "3",
+        dataType= "Int",
+        value = "Estrellas/Valoración"
+    )
     @get:NotNull(message="{pokemon.estrellas.null}")
     @get:Min(1, message = "{pokemon.estrellas.min}")
     @get:Max(3, message = "{pokemon.estrellas.max}")
     var estrellas: Int?,
 
+    @ApiModelProperty(
+        example = "Látigo Cepa",
+        dataType="String",
+        value = "Ataque Rápido"
+    )
     @get:NotBlank(message = "{pokemon.ataqueRapido.blank}")
     var ataqueRapido: String?,
 
+    @ApiModelProperty(
+        example = "Bomba Lodo",
+        dataType="String",
+        value = "Ataque Cargado"
+    )
     @get:NotBlank(message = "{pokemon.ataqueCargado.blank}")
     var ataqueCargado: String?,
 
+    @ApiModelProperty(
+        example = "450",
+        dataType="Int",
+        value = "Puntos de combate"
+    )
     @get:NotNull(message = "{pokemon.pC.null}")
     @get:Min(1, message = "{pokemon.pC.min}")
     var pC: Int?,
+
+    @ApiModelProperty(
+        example = "false",
+        dataType="Boolean",
+        value = "Pokemon Original"
+    )
     var isOriginal: Boolean = false
 )
 

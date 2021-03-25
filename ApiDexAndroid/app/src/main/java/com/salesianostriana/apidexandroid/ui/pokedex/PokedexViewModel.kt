@@ -30,8 +30,6 @@ class PokedexViewModel(application: Application) : AndroidViewModel(application)
     var generacion: String?
     var tipo: String?
 
-    lateinit var adapter: MyPokedexRecyclerViewAdapter
-
     private val context = getApplication<Application>().applicationContext
 
     val pokemon: LiveData<List<Pokemon>>

@@ -1,6 +1,4 @@
 package com.salesianostriana.dam.ApiDex.controllers
-
-/*import com.salesianostriana.dam.ApiDex.services.ImagenPokemonService*/
 import com.salesianostriana.dam.ApiDex.services.ImagenService
 import com.salesianostriana.dam.ApiDex.upload.ImgurImageNotFoundException
 import com.salesianostriana.dam.ApiDex.upload.ImgurStorageService
@@ -43,7 +41,7 @@ class ImagenController {
 
     }
 
-    @DeleteMapping("/{id}")
+   /* @DeleteMapping("/{id}")
     fun delete(@PathVariable id: Long) : ResponseEntity<Void> {
         var imagen = servicio.findById(id).orElse(null)
         if(imagen != null){
@@ -51,5 +49,6 @@ class ImagenController {
 
         }
         return ResponseEntity.noContent().build()
-    }
+    }*/
 }
+

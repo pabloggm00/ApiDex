@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.ApiDex.entities.dto
 
 import com.salesianostriana.dam.ApiDex.entities.Usuario
+import io.swagger.annotations.ApiModelProperty
 import javax.persistence.Column
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
@@ -8,16 +9,38 @@ import javax.validation.constraints.Size
 
 data class EditUsuarioDto(
 
+    @ApiModelProperty(
+        example = "pablo@email.com",
+        dataType="String",
+        value = "Email"
+    )
     @get:Email(message = "{usuario.email.blank}")
+    @Column(unique = true)
     var email: String,
+
+    @ApiModelProperty(
+        example = "pablogonzalez",
+        dataType="String",
+        value = "Username"
+    )
     @get:NotBlank(message = "{usuario.username.blank}")
     @get:Size( message = "{usuario.username.size}", min= 4, max= 20)
     @Column(unique = true)
     var username: String,
 
+    @ApiModelProperty(
+        example = "123456789",
+        dataType="String",
+        value = "Password"
+    )
     @get:Size( message = "{usuario.password.size}", min= 8, max = 100)
     var pass: String,
-    //var avatar: String,
+
+    @ApiModelProperty(
+        example = "USER",
+        dataType="String",
+        value = "Rol"
+    )
     var roles: String?,
 
 )
@@ -26,6 +49,11 @@ fun Usuario.editUsuarioDto(): EditUsuarioDto =
     EditUsuarioDto(email, username, pass, roles.joinToString())
 
 data class EditPerfilDto(
+    @ApiModelProperty(
+        example = "pablogonzalez@email.com",
+        dataType="String",
+        value = "Email"
+    )
     var email: String
 )
 
@@ -71,7 +99,17 @@ fun Usuario.toGetUsuarioRegistradoDto(): GetUsuarioRegistradoDto =
 
 data class GetLoginDto(
     var id: Long?,
+    @ApiModelProperty(
+        example = "pablogonzalez",
+        dataType="String",
+        value = "Username"
+    )
     var username: String,
+    @ApiModelProperty(
+        example = "123456789",
+        dataType="String",
+        value = "Password"
+    )
     var email: String
 )
 
