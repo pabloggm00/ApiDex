@@ -6,6 +6,7 @@ plugins {
 	kotlin("jvm") version "1.4.30"
 	kotlin("plugin.spring") version "1.4.30"
 	kotlin("plugin.jpa") version "1.4.30"
+	id("org.jetbrains.dokka") version "1.4.30"
 }
 
 group = "com.salesianostriana.dam"
@@ -14,6 +15,7 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
 	mavenCentral()
+	jcenter()
 }
 
 dependencies {

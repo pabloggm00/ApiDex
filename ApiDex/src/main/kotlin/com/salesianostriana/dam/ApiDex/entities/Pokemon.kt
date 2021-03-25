@@ -3,6 +3,27 @@ package com.salesianostriana.dam.ApiDex.entities
 import javax.persistence.*
 import javax.validation.constraints.*
 
+/**
+ * Esta clase es para crear un Pokémon
+ *
+ * @param nombre Nombre del Pokémon
+ * @param estrellas Valoración del Pokémon según su fuerza
+ * @param ataqueRapido Ataque rápido del Pokémon
+ * @param ataqueCargado Ataque cargado del Pokémon
+ * @param pC Puntos de combate
+ * @param idPokedex Número de la Pokédex
+ * @param isUltimo Saber si es el último de su cadena evolutiva
+ * @param isFav Saber si favorito o no
+ * @param isCapturado Saber si esta capturado o no
+ * @param isOriginal Saber si es el original de la Pokédex o no
+ * @param equipo Equipo al que pertenece si es que pertenece a uno
+ * @param generacion Generación a la que pertenece
+ * @param primerTipo Primer tipo del Pokémon
+ * @param segundoTipo Segundo tipo del Pokémon
+ * @param imagen Imagen del Pokémon
+ *
+ */
+
 @Entity
 class Pokemon(
     var nombre: String,
@@ -33,9 +54,6 @@ class Pokemon(
     //Para que no se pueda borrar ni editar el pokemon original de la base de datos
     var isOriginal: Boolean = false,
 
-    /*@OneToOne(cascade = arrayOf(CascadeType.ALL))
-    @JoinColumn(name="evolucion_id", referencedColumnName = "id")
-    var evolucion: Evolucion?= null,*/
 
     @ManyToOne
     var equipo: Equipo? = null,
