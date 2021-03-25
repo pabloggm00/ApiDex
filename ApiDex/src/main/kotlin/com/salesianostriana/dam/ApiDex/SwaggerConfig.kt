@@ -48,11 +48,11 @@ class SwaggerConfig{
 
     fun apiInfo() : ApiInfo?{
             return ApiInfo(
-                "My REST API",
-                "Some custom description of API.",
+                "ApiDex",
+                "Gestión de Pokémon.",
                 "1.0",
                 "Terms of service",
-                Contact("Pablo González", "www.url.com", "pabloggm00@gmail.com"),
+                Contact("Pablo González", "www.baeldung.com", "pabloggm00@gmail.com"),
                 "License of API",
                 "API license URL",
                 Collections.emptyList())

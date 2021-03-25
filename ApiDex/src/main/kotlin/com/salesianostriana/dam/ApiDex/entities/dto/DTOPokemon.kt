@@ -147,7 +147,7 @@ fun Pokemon.toGetPokemonDetalleDto(usuario: Usuario?): GetPokemonDetalleDto {
         return GetPokemonDetalleDto(
             id,
             nombre,
-            idPokedex,
+            "#${idPokedex}",
             estrellas,
             ataqueRapido,
             ataqueCargado,
