@@ -65,7 +65,7 @@ class WebSecurityConfiguration(
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
-            .antMatchers("/h2-console/**").permitAll()
+            .antMatchers(GET,"/h2-console/**", "/swagger-ui.html").permitAll()
             .antMatchers(POST, "/auth/login", "/auth/token", "/auth/register").permitAll()
             .antMatchers(GET, "/pokemon", "/pokemon/{id}", "/pokemon/favs",
                 "/pokemon/capturados", "/pokemon/equipos", "/pokemon/equipos/{id}").hasRole("USER")
