@@ -44,4 +44,7 @@ Hay que tener la API ejecutándose, por lo que se deberá realizar los pasos ant
 Una vez ejecutada la API y el proyecto abierto en Android Studio, le daremos al boton del play arriba y empezará a ejecutarse en un emulador.
 
 
+La aplicación está desplegada a la nube con Heroku. Si se quiere probar desde POSTMAN, la url base es: 
+
+https://apidex.herokuapp.com/
 
