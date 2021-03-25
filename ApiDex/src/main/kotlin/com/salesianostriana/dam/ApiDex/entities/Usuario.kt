@@ -28,6 +28,7 @@ import javax.validation.constraints.Size
 @Entity
 class Usuario(
 
+    @get:NotBlank(message = "{usuario.email.blank}")
     @get:Email(message = "{usuario.email.blank}")
     @Column(unique = true)
     var email: String,

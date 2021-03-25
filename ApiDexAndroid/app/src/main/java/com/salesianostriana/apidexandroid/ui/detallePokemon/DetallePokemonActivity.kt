@@ -39,7 +39,6 @@ class DetallePokemonActivity : AppCompatActivity() {
     val context = this
     var pokemonFav: Boolean = false
     var pokemonCap: Boolean = false
-    var pokemonPC: Int = 0
 
     lateinit var idPokedexView: TextView
     lateinit var isFavView: ImageView

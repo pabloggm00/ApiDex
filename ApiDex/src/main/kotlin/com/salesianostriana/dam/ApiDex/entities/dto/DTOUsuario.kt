@@ -15,6 +15,7 @@ data class EditUsuarioDto(
         value = "Email"
     )
     @get:Email(message = "{usuario.email.blank}")
+    @get:NotBlank(message = "{usuario.email.blank}")
     @Column(unique = true)
     var email: String,
 
@@ -54,6 +55,9 @@ data class EditPerfilDto(
         dataType="String",
         value = "Email"
     )
+    @get:Email(message = "{usuario.email.blank}")
+    @get:NotBlank(message = "{usuario.email.blank}")
+    @Column(unique = true)
     var email: String
 )
 

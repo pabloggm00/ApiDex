@@ -51,7 +51,7 @@ class EditarPerfilActivity : AppCompatActivity() {
     lateinit var editEmail: EditText
     lateinit var textViewUsername: TextView
     lateinit var avatar: ImageView
-    /*var fotoPerfil: String? = ""*/
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,9 +86,6 @@ class EditarPerfilActivity : AppCompatActivity() {
 
 
         avatar.setOnClickListener(View.OnClickListener {
-//            val intent = Intent(Intent.ACTION_GET_CONTENT)
-//            intent.type = "image/*"
-//            startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE)
             var intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent, PICK_IMAGE)
@@ -133,12 +130,26 @@ class EditarPerfilActivity : AppCompatActivity() {
                 call: Call<UsuarioRegistroResponse>,
                 response: Response<UsuarioRegistroResponse>
             ) {
-                Toast.makeText(context, "Usuario editado", Toast.LENGTH_SHORT)
-                    .show()
+                if (response.code() == 200){
+                    Toast.makeText(context, "Usuario editado", Toast.LENGTH_SHORT)
+                            .show()
+                }else{
+
+                    Toast.makeText(context, "No se ha editado", Toast.LENGTH_SHORT)
+                            .show()
+
+                    if (editEmail.text.toString() == ""){
+                        Toast.makeText(context, "El email no puede estar en blanco", Toast.LENGTH_SHORT)
+                                .show()
+                    }
+
+
+                }
+
             }
 
             override fun onFailure(call: Call<UsuarioRegistroResponse>, t: Throwable) {
-
+                Log.e("Error", t.message.toString())
             }
 
         })
