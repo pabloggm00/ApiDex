@@ -184,9 +184,6 @@ class DetallePokemonActivity : AppCompatActivity() {
 
                     idPokedexView.text = _detallePokemon.value?.idPokedex
 
-                    Log.i("is fav",pokemonFav.toString())
-                    Log.i("is fav",pokemonCap.toString())
-
                     if (pokemonFav) {
                         isFavView.load(R.drawable.ic_isfav)
                     }else {
@@ -297,7 +294,7 @@ class DetallePokemonActivity : AppCompatActivity() {
                     else
                         tipo2View.text = _detallePokemon.value?.segundoTipo
 
-                    pCView.text = _detallePokemon.value?.pC.toString()
+                    pCView.text = _detallePokemon.value?.pc.toString()
                     if (_detallePokemon.value!!.estrellas == 1){
                         val1View.load(R.drawable.ic_val)
                         val2View.load(R.drawable.ic_nofav)

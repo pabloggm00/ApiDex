@@ -116,7 +116,7 @@ fun Pokemon.toGetPokemonDetalleDto(usuario: Usuario?): GetPokemonDetalleDto {
     var imagenPoke: GetImagenDetalleDto = GetImagenDetalleDto(imagen!!.id, "${url}${imagen!!.dataId}", imagen!!.deleteHash)
 
 
-   /* if (imagen != null) {
+    if (imagen != null) {
         return GetPokemonDetalleDto(
             id,
             nombre,
@@ -130,9 +130,11 @@ fun Pokemon.toGetPokemonDetalleDto(usuario: Usuario?): GetPokemonDetalleDto {
             primerTipo.nombreTipo,
             segundoTipo?.nombreTipo,
             favorito,
-            capturado
+            capturado ,
+            isOriginal,
+            isUltimo
         )
-    }else{*/
+    }else{
         return GetPokemonDetalleDto(
             id,
             nombre,
@@ -150,6 +152,6 @@ fun Pokemon.toGetPokemonDetalleDto(usuario: Usuario?): GetPokemonDetalleDto {
             isOriginal,
             isUltimo
         )
-    //}
+    }
 }
 
