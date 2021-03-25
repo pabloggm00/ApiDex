@@ -5,15 +5,16 @@ import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.OneToMany
 
+/**
+ * Esta clase sirve para crear un tipo
+ *@author Pablo González González
+ *
+ * @param nombreTipo Nombre del tipo
+ */
+
 @Entity
 class Tipo(
     var nombreTipo: String,
-
-    /*@OneToMany(mappedBy = "primerTipo")
-    var pokemonUno: Pokemon,*/
-
-    /*@OneToMany(mappedBy = "segundoTipo")
-    var pokemonDos: Pokemon?,*/
 
     @Id @GeneratedValue
     val id: Long? = null

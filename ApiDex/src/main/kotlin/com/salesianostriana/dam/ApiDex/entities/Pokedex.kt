@@ -5,6 +5,15 @@ import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.OneToMany
 
+/**
+ * Esta clase sirve para crear una Pokédex
+ * @author Pablo González González
+ *
+ * @param generacion Número de la generación
+ * @param nombre Región
+ * @param listaPokemon Listado de Pokémon
+ */
+
 @Entity
 class Pokedex(
     var generacion: Int,

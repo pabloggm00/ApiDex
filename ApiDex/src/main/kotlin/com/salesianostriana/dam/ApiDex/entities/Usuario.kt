@@ -8,6 +8,23 @@ import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Size
 
+/**
+ * Esta clase es para crear un usario
+ * @author Pablo González González
+ *
+ * @param email Correo del usuario
+ * @param username Nombre de usuario
+ * @param pass Contraseña
+ * @param roles Rol de Usuario
+ * @param nonExpired Saber si la cuenta está expirada
+ * @param nonLocked Saber si la cuenta está bloqueada
+ * @param activo Saber si la cuenta está acitvo
+ * @param pokemonsFavs Lista de Pokémon favoritos
+ * @param pokemonsCapturados Lista de Pokémon capturados
+ * @param avatar Foto de perfil
+ * @param listaEquipos Lista de los equipos
+ */
+
 @Entity
 class Usuario(
 

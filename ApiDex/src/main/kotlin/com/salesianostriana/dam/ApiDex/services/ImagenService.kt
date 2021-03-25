@@ -12,6 +12,11 @@ import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import java.util.*
 
+/**
+ * Esta clase contiene métodos propios de Imagen
+ * @author Pablo González González
+ */
+
 @Service
 class ImagenService(
     private val imageStorageService: ImgurStorageService
@@ -20,6 +25,14 @@ class ImagenService(
     val logger: Logger = LoggerFactory.getLogger(ImagenService::class.java)
 
 
+    /**
+     * Este método es para guardar la imagen del Pokémon
+     *
+     * @param file Imagen a guardar
+     * @param pokemon Pokémon al que quieres meterle la imagen
+     *
+     * @return Devuelve una imagen
+     */
     fun saveImagenPokemon(file: MultipartFile, pokemon: Pokemon) : Imagen {
         var imagen: Imagen
         var image : Optional<Imagen> = Optional.empty()
@@ -33,6 +46,14 @@ class ImagenService(
         return save(imagen)
     }
 
+    /**
+     * Este método es para guardar la foto de perfil del Usuario
+     *
+     * @param file Imagen a guardar
+     * @param usuario Usuario al que quieres meterle la imagen
+     *
+     * @return Devuelve una imagen
+     */
     fun saveImagenUsuario(file: MultipartFile, usuario: Usuario) : Imagen {
         var imagen: Imagen
         var image : Optional<Imagen> = Optional.empty()
