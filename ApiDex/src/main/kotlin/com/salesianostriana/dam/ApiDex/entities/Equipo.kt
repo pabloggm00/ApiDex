@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank
 /**
  *
  * Esta clase es para crear un Equipo
+ * @author Pablo González González
  *
  * @param nombre Nombre del equipo
  * @param liga Liga a la que pertenece

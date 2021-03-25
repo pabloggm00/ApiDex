@@ -5,6 +5,7 @@ import javax.validation.constraints.*
 
 /**
  * Esta clase es para crear un Pokémon
+ * @author Pablo González González
  *
  * @param nombre Nombre del Pokémon
  * @param estrellas Valoración del Pokémon según su fuerza

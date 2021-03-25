@@ -4,9 +4,10 @@ import javax.persistence.*
 
 /**
  * Esta clase es para crear una imagen
+ *@author Pablo González González
  *
  * @param dataId ID de la foto
- * @param 
+ * @param deleteHash Parámetro para borrar la imagen
  */
 
 @Entity
