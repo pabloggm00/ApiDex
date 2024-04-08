@@ -48,3 +48,5 @@ La aplicación está desplegada a la nube con Heroku. Si se quiere probar desde 
 
 https://apidex.herokuapp.com/
 
+[!CAUTION]
+Ya no funcinoa en heroku.
