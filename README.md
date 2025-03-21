@@ -1,6 +1,7 @@
 # ApiDex
 
-Estado: No funciona actualmente.
+> [!CAUTION]
+> Ya no funciona.
 
 Esta aplicación consiste en una gestión de Pokémon relacionado con el juego Pokémon GO.
 
@@ -51,4 +52,4 @@ La aplicación está desplegada a la nube con Heroku. Si se quiere probar desde 
 https://apidex.herokuapp.com/
 
 > [!CAUTION]
-> Ya no funcinoa en Heroku.
+> Ya no funciona en Heroku.
