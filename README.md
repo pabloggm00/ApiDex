@@ -1,5 +1,7 @@
 # ApiDex
 
+Actualización: No funciona actualmente.
+
 Esta aplicación consiste en una gestión de Pokémon relacionado con el juego Pokémon GO.
 
 Se basa en una API REST implementada con Spring Boot y Kotlin.
