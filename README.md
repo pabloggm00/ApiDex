@@ -1,6 +1,6 @@
 # ApiDex
 
-Actualización: No funciona actualmente.
+Estado: No funciona actualmente.
 
 Esta aplicación consiste en una gestión de Pokémon relacionado con el juego Pokémon GO.
 
